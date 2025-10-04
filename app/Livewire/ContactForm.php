@@ -32,7 +32,9 @@ class ContactForm extends Component
 
         $to = env('MAIL_TO_ADDRESS', config('mail.from.address'));
         if (! empty($to)) {
-            Mail::to($to)->send(new ContactSubmitted($contact));
+            Mail::to($to)
+                ->cc($this->email)
+                ->send((new ContactSubmitted($contact))->replyTo($this->email));
         }
 
         $this->reset(['name', 'email', 'message']);
