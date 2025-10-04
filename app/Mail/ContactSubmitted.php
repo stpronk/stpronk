@@ -19,7 +19,7 @@ class ContactSubmitted extends Mailable
 
     public function envelope(): Envelope
     {
-        $subject = 'New Contact Message';
+        $subject = 'StPronk | New contact message';
         if ($this->contact->email) {
             $subject .= ' from ' . $this->contact->email;
         }
