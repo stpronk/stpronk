@@ -2,7 +2,7 @@
     <form wire:submit.prevent="submit" class="contact-form space-y-6">
         <div>
             <label for="name" class="block mb-2 font-medium">Your Name</label>
-            <input id="name" type="text" wire:model.defer="name" class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-2 focus:ring-primary focus:outline-none bg-white dark:bg-gray-800" placeholder="Optional" />
+            <input id="name" type="text" wire:model.defer="name" class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-2 focus:ring-primary focus:outline-none bg-white dark:bg-gray-800" required />
             @error('name') <p class="text-red-500 text-sm mt-1">{{ $message }}</p> @enderror
         </div>
         <div>

@@ -15,7 +15,7 @@ class ContactForm extends Component
     public bool $sent = false;
 
     protected array $rules = [
-        'name' => 'nullable|string|max:255',
+        'name' => 'required|string|max:255',
         'email' => 'required|email',
         'message' => 'required|string|min:5|max:5000',
     ];
