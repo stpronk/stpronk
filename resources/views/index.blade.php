@@ -86,8 +86,8 @@
                 <a href="#contact" class="hover:text-primary transition">Contact</a>
             </nav>
             <div class="flex items-center space-x-4">
-                <button id="theme-toggle" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition">
-                    <i class="fas fa-sun h-4 text-yellow-400 hidden dark:block"></i>
+                <button id="theme-toggle" class="h-12 p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition">
+                    <i class="fas fa-sun h-4 p-y2 text-yellow-400 hidden dark:block"></i>
                     <i class="fas fa-moon h-4 text-gray-700 dark:hidden"></i>
                 </button>
                 <button id="mobile-menu-btn" class="md:hidden p-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700">
