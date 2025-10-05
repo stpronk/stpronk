@@ -256,7 +256,7 @@
 
                 <div class="experience-card bg-white dark:bg-gray-700 rounded-lg shadow p-6 border border-gray-200 dark:border-gray-600">
                     <h3 class="text-xl font-bold">Dev-ops & Support</h3>
-                    <p class="text-primary">StpPronk — Bagus stories</p>
+                    <p class="text-primary">StPronk — Bagus stories</p>
                     <p class="text-sm text-gray-500 dark:text-gray-400 mb-2">Jan 2021 – Present</p>
                     <p>
                         Management server & support for a wordpress websites, where uptime is the most important. When needed, I upgrade the Ubuntu
