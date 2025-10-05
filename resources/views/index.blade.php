@@ -260,7 +260,7 @@
                 <div class="experience-card bg-white dark:bg-gray-700 rounded-lg shadow p-6 border border-gray-200 dark:border-gray-600">
                     <h3 class="text-xl font-bold">Full-Stack Developer & Lead</h3>
                     <p class="text-primary">Competa IT — On project</p>
-                    <p class="text-sm text-gray-500 dark:text-gray-400 mb-2">Aug 2024 – Present</p>
+                    <p class="text-sm text-gray-500 dark:text-gray-400 mb-2">Aug 2025 – Present</p>
                     <p>Unfortunately I cannot disclose the name of the company, but I am working on a project that is made on NextCloud, Php.</p>
                 </div>
 
