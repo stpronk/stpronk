@@ -245,7 +245,10 @@
             <div class="space-y-6">
 
                 <div class="experience-card bg-white dark:bg-gray-700 rounded-lg shadow p-6 border border-gray-200 dark:border-gray-600">
-                    <h3 class="text-xl font-bold">Full-Stack Developer</h3>
+                    <div class="flex flex-row justify-between">
+                        <h3 class="text-xl font-bold">Full-Stack Developer</h3>
+                        <a href="https://competa.com/" target="_blank" class="text-sm text-gray-500 dark:text-gray-400 mb-2"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                    </div>
                     <p class="text-primary">Competa IT</p>
                     <p class="text-sm text-gray-500 dark:text-gray-400 mb-2">Sep 2019 – Present</p>
                     <p>
@@ -283,7 +286,11 @@
                 </div>
 
                 <div class="experience-card bg-white dark:bg-gray-700 rounded-lg shadow p-6 border border-gray-200 dark:border-gray-600">
-                    <h3 class="text-xl font-bold">Dev-ops & Full-Stack Developer</h3>
+                    <div class="flex flex-row justify-between">
+                        <h3 class="text-xl font-bold">Dev-ops & Full-Stack Developer</h3>
+                        <a href="https://www.sytatsu.nl/" target="_blank" class="text-sm text-gray-500 dark:text-gray-400 mb-2"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                    </div>
+
                     <p class="text-primary">StPronk — Sytatsu</p>
                     <p class="text-sm text-gray-500 dark:text-gray-400 mb-2">Jul 2024 – Present</p>
                     <p>
@@ -294,7 +301,11 @@
                 </div>
 
                 <div class="experience-card bg-white dark:bg-gray-700 rounded-lg shadow p-6 border border-gray-200 dark:border-gray-600">
-                    <h3 class="text-xl font-bold">Dev-ops & Full-Stack Developer</h3>
+                    <div class="flex flex-row justify-between">
+                        <h3 class="text-xl font-bold">Dev-ops & Full-Stack Developer</h3>
+                        <a href="https://www.antquipment.nl/" target="_blank" class="text-sm text-gray-500 dark:text-gray-400 mb-2"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                    </div>
+
                     <p class="text-primary">StPronk — Antquipment & Productions</p>
                     <p class="text-sm text-gray-500 dark:text-gray-400 mb-2">Jun 2022 – Present</p>
                     <p>
@@ -305,7 +316,11 @@
                 </div>
 
                 <div class="experience-card bg-white dark:bg-gray-700 rounded-lg shadow p-6 border border-gray-200 dark:border-gray-600">
-                    <h3 class="text-xl font-bold">Dev-ops & Support</h3>
+                    <div class="flex flex-row justify-between">
+                        <h3 class="text-xl font-bold">Dev-ops & Support</h3>
+                        <a href="https://www.bagusstories.nl/" target="_blank" class="text-sm text-gray-500 dark:text-gray-400 mb-2"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                    </div>
+
                     <p class="text-primary">StPronk — Bagus stories</p>
                     <p class="text-sm text-gray-500 dark:text-gray-400 mb-2">Jan 2021 – Present</p>
                     <p>
