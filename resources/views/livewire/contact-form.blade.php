@@ -23,7 +23,7 @@
         @endphp
         <div class="text-xs text-gray-600 dark:text-gray-400 space-y-1 flex flex-row justify-between items-center">
             @if(!empty($ownerEmail))
-                <p>Contact e-mail: <span class="font-medium">{{ $ownerEmail }}</span></p>
+                <p>E-mail: <span class="font-medium">{{ $ownerEmail }}</span></p>
             @endif
             @if(!empty($kvk))
                 <p>KVK: <span class="font-medium">{{ $kvk }}</span></p>
@@ -36,7 +36,7 @@
         </div>
 
         @if($sent)
-            <div class="my-2 px-4 py-2 rounded-lg shadow bg-primary text-white">Thank you for your message! There will be an copy send to your inbox as well!</div>
+            <div class="my-2 px-4 py-2 rounded-lg shadow bg-primary text-white">Thank you for your message, here will be an copy send to your inbox as well!</div>
         @endif
     </form>
 </div>
