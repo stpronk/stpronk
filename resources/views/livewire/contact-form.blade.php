@@ -31,11 +31,12 @@
         </div>
 
         <div class="flex space-x-4">
-            <button type="submit" class="px-6 py-3 bg-primary text-white rounded-md hover:bg-emerald-600 transition" wire:loading.attr="disabled">Submit</button>
-            <button type="button" wire:click="clear" class="px-6 py-3 border border-primary text-primary dark:text-white rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 transition">Clear</button>
+            <button type="submit" class="px-6 py-3 bg-primary text-white rounded-md hover:bg-emerald-600 transition cursor-pointer" wire:loading.attr="disabled">Submit</button>
+            <button type="button" wire:click="clear" class="px-6 py-3 border border-primary text-primary dark:text-white rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 transition cursor-pointer">Clear</button>
         </div>
+
         @if($sent)
-            <div class="mt-4 text-green-500">Thank you for your message! There will be an copy send to your inbox as well!</div>
+            <div class="my-2 px-4 py-2 rounded-lg shadow bg-primary text-white">Thank you for your message! There will be an copy send to your inbox as well!</div>
         @endif
     </form>
 </div>
