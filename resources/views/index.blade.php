@@ -161,70 +161,52 @@
             <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
                 <div class="skill-card p-4 bg-slate-50 dark:bg-slate-800 rounded-xl text-center border border-slate-200 dark:border-slate-700 shadow-sm">
                     <p class="font-semibold text-slate-800 dark:text-white">HTML5</p>
-                    <p class="text-xs text-slate-500 dark:text-slate-400">Excellent</p>
                 </div>
                 <div class="skill-card p-4 bg-slate-50 dark:bg-slate-800 rounded-xl text-center border border-slate-200 dark:border-slate-700 shadow-sm">
                     <p class="font-semibold text-slate-800 dark:text-white">CSS</p>
-                    <p class="text-xs text-slate-500 dark:text-slate-400">Excellent</p>
                 </div>
                 <div class="skill-card p-4 bg-slate-50 dark:bg-slate-800 rounded-xl text-center border border-slate-200 dark:border-slate-700 shadow-sm">
                     <p class="font-semibold text-slate-800 dark:text-white">JavaScript</p>
-                    <p class="text-xs text-slate-500 dark:text-slate-400">Excellent</p>
                 </div>
                 <div class="skill-card p-4 bg-slate-50 dark:bg-slate-800 rounded-xl text-center border border-slate-200 dark:border-slate-700 shadow-sm">
                     <p class="font-semibold text-slate-800 dark:text-white">TailwindCSS</p>
-                    <p class="text-xs text-slate-500 dark:text-slate-400">Excellent</p>
                 </div>
                 <div class="skill-card p-4 bg-slate-50 dark:bg-slate-800 rounded-xl text-center border border-slate-200 dark:border-slate-700 shadow-sm">
                     <p class="font-semibold text-slate-800 dark:text-white">Vue.js</p>
-                    <p class="text-xs text-slate-500 dark:text-slate-400">Good</p>
                 </div>
                 <div class="skill-card p-4 bg-slate-50 dark:bg-slate-800 rounded-xl text-center border border-slate-200 dark:border-slate-700 shadow-sm">
                     <p class="font-semibold text-slate-800 dark:text-white">React</p>
-                    <p class="text-xs text-slate-500 dark:text-slate-400">Good</p>
                 </div>
                 <div class="skill-card p-4 bg-slate-50 dark:bg-slate-800 rounded-xl text-center border border-slate-200 dark:border-slate-700 shadow-sm">
                     <p class="font-semibold text-slate-800 dark:text-white">Symfony</p>
-                    <p class="text-xs text-slate-500 dark:text-slate-400">Excellent</p>
                 </div>
                 <div class="skill-card p-4 bg-slate-50 dark:bg-slate-800 rounded-xl text-center border border-slate-200 dark:border-slate-700 shadow-sm">
                     <p class="font-semibold text-slate-800 dark:text-white">Laravel</p>
-                    <p class="text-xs text-slate-500 dark:text-slate-400">Excellent</p>
                 </div>
                 <div class="skill-card p-4 bg-slate-50 dark:bg-slate-800 rounded-xl text-center border border-slate-200 dark:border-slate-700 shadow-sm">
                     <p class="font-semibold text-slate-800 dark:text-white">Livewire</p>
-                    <p class="text-xs text-slate-500 dark:text-slate-400">Excellent</p>
                 </div>
                 <div class="skill-card p-4 bg-slate-50 dark:bg-slate-800 rounded-xl text-center border border-slate-200 dark:border-slate-700 shadow-sm">
                     <p class="font-semibold text-slate-800 dark:text-white">FilamentPHP</p>
-                    <p class="text-xs text-slate-500 dark:text-slate-400">Great</p>
                 </div>
                 <div class="skill-card p-4 bg-slate-50 dark:bg-slate-800 rounded-xl text-center border border-slate-200 dark:border-slate-700 shadow-sm">
                     <p class="font-semibold text-slate-800 dark:text-white">MySQL</p>
-                    <p class="text-xs text-slate-500 dark:text-slate-400">Excellent</p>
                 </div>
                 <div class="skill-card p-4 bg-slate-50 dark:bg-slate-800 rounded-xl text-center border border-slate-200 dark:border-slate-700 shadow-sm">
                     <p class="font-semibold text-slate-800 dark:text-white">Postgres</p>
-                    <p class="text-xs text-slate-500 dark:text-slate-400">Excellent</p>
                 </div>
                 <div class="skill-card p-4 bg-slate-50 dark:bg-slate-800 rounded-xl text-center border border-slate-200 dark:border-slate-700 shadow-sm">
                     <p class="font-semibold text-slate-800 dark:text-white">RabbitMQ</p>
-                    <p class="text-xs text-slate-500 dark:text-slate-400">Good</p>
                 </div>
                 <div class="skill-card p-4 bg-slate-50 dark:bg-slate-800 rounded-xl text-center border border-slate-200 dark:border-slate-700 shadow-sm">
                     <p class="font-semibold text-slate-800 dark:text-white">Docker</p>
-                    <p class="text-xs text-slate-500 dark:text-slate-400">Good</p>
                 </div>
                 <div class="skill-card p-4 bg-slate-50 dark:bg-slate-800 rounded-xl text-center border border-slate-200 dark:border-slate-700 shadow-sm">
                     <p class="font-semibold text-slate-800 dark:text-white">Python</p>
-                    <p class="text-xs text-slate-500 dark:text-slate-400">Learning</p>
                 </div>
                 <div class="skill-card p-4 bg-slate-50 dark:bg-slate-800 rounded-xl text-center border border-slate-200 dark:border-slate-700 shadow-sm">
                     <p class="font-semibold text-slate-800 dark:text-white">AI</p>
-                    <p class="text-xs text-slate-500 dark:text-slate-400">Learning</p>
                 </div>
-
-
             </div>
         </div>
     </section>
