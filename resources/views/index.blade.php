@@ -16,70 +16,11 @@
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('favicon/favicon-16x16.png') }}">
     <link rel="manifest" href="{{ asset('favicon/site.webmanifest') }}">
 
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
     <meta name="msapplication-TileColor" content="#000">
     <meta name="theme-color" content="#000">
     <title>StPronk | Developer</title>
 
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    colors: {
-                        primary: '#10b981',
-                        secondary: '#06b6d4',
-                        accent: '#059669'
-                    }
-                }
-            }
-        }
-    </script>
-    <style>
-        .gradient-text {
-            background: linear-gradient(90deg, #10b981, #06b6d4);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        .skill-card {
-            transition: all 0.3s ease;
-        }
-        .skill-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
-        }
-        .dark .skill-card {
-            background-color: #1f2937;
-        }
-
-        .experience-card {
-            transition: all 0.3s ease;
-        }
-        .experience-card:hover {
-            transform: translateX(5px);
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
-        }
-
-        .dark .experience-card {
-            background-color: #1f2937;
-        }
-        .sytatsu-section {
-            background: linear-gradient(135deg, #06b6d4, #10b981);
-        }
-        .dark .sytatsu-section {
-            background: linear-gradient(135deg, #0e7490, #059669);
-        }
-        .contact-form input,
-        .contact-form textarea {
-            transition: border-color 0.3s;
-        }
-        .contact-form input:focus,
-        .contact-form textarea:focus {
-            border-color: #10b981;
-        }
-    </style>
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
     @livewireStyles
 </head>
 <body class="bg-white text-slate-800 dark:bg-gray-900 dark:text-slate-100 min-h-screen">
@@ -95,9 +36,9 @@
                 <a href="#contact" class="hover:text-primary transition">Contact</a>
             </nav>
             <div class="flex items-center space-x-4">
-                <button id="theme-toggle" class="h-12 p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition">
-                    <i class="fas fa-sun h-4 p-y2 text-yellow-400 hidden dark:block"></i>
-                    <i class="fas fa-moon h-4 text-gray-700 dark:hidden"></i>
+                <button id="theme-toggle" class="h-12 p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition cursor-pointer">
+                    <span class="hidden dark:block"><i class="fas fa-sun h-4 p-y2 text-yellow-400"></i></span>
+                    <span class="block dark:hidden"><i class="fas fa-moon h-4 text-gray-700"></i></span>
                 </button>
                 <button id="mobile-menu-btn" class="md:hidden p-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700">
                     <i class="fas fa-bars"></i>
@@ -360,70 +301,6 @@
         </div>
     </footer>
 
-    <script>
-        // Theme Toggle
-        const themeToggle = document.getElementById('theme-toggle');
-        const htmlElement = document.documentElement;
-
-        function setTheme(theme) {
-            if (theme === 'dark') {
-                htmlElement.classList.add('dark');
-                localStorage.setItem('theme', 'dark');
-            } else {
-                htmlElement.classList.remove('dark');
-                localStorage.setItem('theme', 'light');
-            }
-        }
-
-        // Check for saved theme or prefer dark scheme
-        const savedTheme = localStorage.getItem('theme');
-        if (savedTheme) {
-            setTheme(savedTheme);
-        } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-            setTheme('dark');
-        }
-
-        // Toggle theme on click
-        themeToggle.addEventListener('click', () => {
-            const currentTheme = htmlElement.classList.contains('dark') ? 'dark' : 'light';
-            setTheme(currentTheme === 'dark' ? 'light' : 'dark');
-        });
-
-        // Mobile Menu Toggle
-        const mobileMenuButton = document.querySelector('[aria-label="Toggle menu"]');
-        const mobileMenu = document.getElementById('mobile-menu');
-
-        if (mobileMenuButton && mobileMenu) {
-            mobileMenuButton.addEventListener('click', () => {
-                mobileMenu.classList.toggle('hidden');
-            });
-        }
-
-        // Back to Top Button
-        document.getElementById('back-to-top').addEventListener('click', function() {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        })
-
-        // Smooth Scrolling
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    window.scrollTo({
-                        top: target.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
-                }
-            });
-        });
-
-        // Update Footer Year
-        document.getElementById('year').textContent = new Date().getFullYear();
-    </script>
     @livewireScripts
 </body>
 </html>
