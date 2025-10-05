@@ -193,6 +193,9 @@
                     <p class="font-semibold text-slate-800 dark:text-white">React</p>
                 </div>
                 <div class="skill-card p-4 bg-slate-50 dark:bg-slate-800 rounded-xl text-center border border-slate-200 dark:border-slate-700 shadow-sm">
+                    <p class="font-semibold text-slate-800 dark:text-white">TypeScript</p>
+                </div>
+                <div class="skill-card p-4 bg-slate-50 dark:bg-slate-800 rounded-xl text-center border border-slate-200 dark:border-slate-700 shadow-sm">
                     <p class="font-semibold text-slate-800 dark:text-white">Symfony</p>
                 </div>
                 <div class="skill-card p-4 bg-slate-50 dark:bg-slate-800 rounded-xl text-center border border-slate-200 dark:border-slate-700 shadow-sm">
@@ -203,6 +206,12 @@
                 </div>
                 <div class="skill-card p-4 bg-slate-50 dark:bg-slate-800 rounded-xl text-center border border-slate-200 dark:border-slate-700 shadow-sm">
                     <p class="font-semibold text-slate-800 dark:text-white">FilamentPHP</p>
+                </div>
+                <div class="skill-card p-4 bg-slate-50 dark:bg-slate-800 rounded-xl text-center border border-slate-200 dark:border-slate-700 shadow-sm">
+                    <p class="font-semibold text-slate-800 dark:text-white">LunarPHP</p>
+                </div>
+                <div class="skill-card p-4 bg-slate-50 dark:bg-slate-800 rounded-xl text-center border border-slate-200 dark:border-slate-700 shadow-sm">
+                    <p class="font-semibold text-slate-800 dark:text-white">Wordpress</p>
                 </div>
                 <div class="skill-card p-4 bg-slate-50 dark:bg-slate-800 rounded-xl text-center border border-slate-200 dark:border-slate-700 shadow-sm">
                     <p class="font-semibold text-slate-800 dark:text-white">MySQL</p>
@@ -221,6 +230,9 @@
                 </div>
                 <div class="skill-card p-4 bg-slate-50 dark:bg-slate-800 rounded-xl text-center border border-slate-200 dark:border-slate-700 shadow-sm">
                     <p class="font-semibold text-slate-800 dark:text-white">AI</p>
+                </div>
+                <div class="skill-card p-4 bg-slate-50 dark:bg-slate-800 rounded-xl text-center border border-slate-200 dark:border-slate-700 shadow-sm">
+                    <p class="font-semibold text-slate-800 dark:text-white">Linux</p>
                 </div>
             </div>
         </div>
@@ -245,7 +257,7 @@
                 <div class="experience-card bg-white dark:bg-gray-700 rounded-lg shadow p-6 border border-gray-200 dark:border-gray-600">
                     <h3 class="text-xl font-bold">Dev-ops & Support</h3>
                     <p class="text-primary">StpPronk — Bagus stories</p>
-                    <p class="text-sm text-gray-500 dark:text-gray-400 mb-2">Jan 2020 – Present</p>
+                    <p class="text-sm text-gray-500 dark:text-gray-400 mb-2">Jan 2021 – Present</p>
                     <p>
                         Management server & support for a wordpress websites, where uptime is the most important. When needed, I upgrade the Ubuntu
                         server that is running behind it and all required dependencies. Support for different type of changes is also included within
@@ -256,7 +268,7 @@
                 <div class="experience-card bg-white dark:bg-gray-700 rounded-lg shadow p-6 border border-gray-200 dark:border-gray-600">
                     <h3 class="text-xl font-bold">Dev-ops & Full-Stack Developer</h3>
                     <p class="text-primary">StPronk — Antquipment & Productions</p>
-                    <p class="text-sm text-gray-500 dark:text-gray-400 mb-2">Jun 2019 – Present</p>
+                    <p class="text-sm text-gray-500 dark:text-gray-400 mb-2">Jun 2022 – Present</p>
                     <p>
                         Management server & development website/webshop which is made on laravel in combination with LunarPHP, and there are still
                         ongoing development for the website. I also manage the server that is running on ubuntu and do the required upgrades and
