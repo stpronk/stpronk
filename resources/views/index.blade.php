@@ -53,6 +53,15 @@
         .dark .skill-card {
             background-color: #1f2937;
         }
+
+        .experience-card {
+            transition: all 0.3s ease;
+        }
+        .experience-card:hover {
+            transform: translateX(5px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
         .dark .experience-card {
             background-color: #1f2937;
         }
@@ -223,16 +232,75 @@
             <h2 class="text-3xl font-bold mb-8 gradient-text">Work Experience</h2>
             <div class="space-y-6">
                 <div class="experience-card bg-white dark:bg-gray-700 rounded-lg shadow p-6 border border-gray-200 dark:border-gray-600">
-                    <h3 class="text-xl font-bold">Frontend Developer</h3>
-                    <p class="text-primary">Tech Solutions Inc.</p>
-                    <p class="text-sm text-gray-500 dark:text-gray-400 mb-2">Jan 2021 – Present</p>
-                    <p>Developed responsive UI components using React and Tailwind CSS, improving performance by 30%.</p>
+                    <h3 class="text-xl font-bold">Back-End Developer</h3>
+                    <p class="text-primary">POS4</p>
+                    <p class="text-sm text-gray-500 dark:text-gray-400 mb-2">Sep 2018 – Aug 2019</p>
+                    <p>
+                        Modular cash register software with webshops for restaurant chains, primary focussed on the webshops with Legacy Laravel. It
+                        was also my first job experience with Laravel and VueJS in which I learned a lot of the back-end of Laravel as we needed to
+                        manual upgrade the Laravel framework.
+                    </p>
                 </div>
+
                 <div class="experience-card bg-white dark:bg-gray-700 rounded-lg shadow p-6 border border-gray-200 dark:border-gray-600">
-                    <h3 class="text-xl font-bold">Full Stack Developer</h3>
-                    <p class="text-primary">Web Innovations LLC</p>
-                    <p class="text-sm text-gray-500 dark:text-gray-400 mb-2">Jun 2019 – Dec 2020</p>
-                    <p>Built RESTful APIs with Node.js and Express, integrated MongoDB for data management.</p>
+                    <h3 class="text-xl font-bold">Dev-ops & Support</h3>
+                    <p class="text-primary">StpPronk — Bagus stories</p>
+                    <p class="text-sm text-gray-500 dark:text-gray-400 mb-2">Jan 2020 – Present</p>
+                    <p>
+                        Management server & support for a wordpress websites, where uptime is the most important. When needed, I upgrade the Ubuntu
+                        server that is running behind it and all required dependencies. Support for different type of changes is also included within
+                        this project.
+                    </p>
+                </div>
+
+                <div class="experience-card bg-white dark:bg-gray-700 rounded-lg shadow p-6 border border-gray-200 dark:border-gray-600">
+                    <h3 class="text-xl font-bold">Dev-ops & Full-Stack Developer</h3>
+                    <p class="text-primary">StPronk — Antquipment & Productions</p>
+                    <p class="text-sm text-gray-500 dark:text-gray-400 mb-2">Jun 2019 – Present</p>
+                    <p>
+                        Management server & development website/webshop which is made on laravel in combination with LunarPHP, and there are still
+                        ongoing development for the website. I also manage the server that is running on ubuntu and do the required upgrades and
+                        maintenance when needed.
+                    </p>
+                </div>
+
+                <div class="experience-card bg-white dark:bg-gray-700 rounded-lg shadow p-6 border border-gray-200 dark:border-gray-600">
+                    <h3 class="text-xl font-bold">Full-Stack Developer</h3>
+                    <p class="text-primary">Competa IT</p>
+                    <p class="text-sm text-gray-500 dark:text-gray-400 mb-2">Sep 2019 – Present</p>
+                    <p>
+                        IT agency where I have worked for multiple client ranging from all kind of projects and technologies. This includes some other
+                        little projects that aren't mentioned here, like the company website and wordpress websites for other clients.
+                    </p>
+                </div>
+
+                <div class="experience-card bg-white dark:bg-gray-700 rounded-lg shadow p-6 border border-gray-200 dark:border-gray-600">
+                    <h3 class="text-xl font-bold">Full-Stack Developer</h3>
+                    <p class="text-primary">Competa IT — Ministerie van Volksgezondheid, Welzijn en Sport</p>
+                    <p class="text-sm text-gray-500 dark:text-gray-400 mb-2">Juni 2021 – Mei 2024</p>
+                    <p>
+                        I contributed to the development of the GGD's Source and Contact Tracing platform, which was initially created for COVID-19
+                        contact tracing and later scaled up for broader public health applications. I worked in Agile teams using Laravel, with a
+                        strong focus on test coverage, maintainability, and performance.
+                    </p>
+                </div>
+
+                <div class="experience-card bg-white dark:bg-gray-700 rounded-lg shadow p-6 border border-gray-200 dark:border-gray-600">
+                    <h3 class="text-xl font-bold">Full-Stack Developer</h3>
+                    <p class="text-primary">Competa IT — DICTU</p>
+                    <p class="text-sm text-gray-500 dark:text-gray-400 mb-2">Jul 2024 – Jun 2025</p>
+                    <p>
+                        I contributed to the ongoing development and maintenance of Achilles, a PHP/Symfony-based application supporting international
+                        economic affairs and the Netherlands Enterprise Agency (RVO). I improved performance, reliability, and architecture in close
+                        collaboration with colleagues and stakeholders.
+                    </p>
+                </div>
+
+                <div class="experience-card bg-white dark:bg-gray-700 rounded-lg shadow p-6 border border-gray-200 dark:border-gray-600">
+                    <h3 class="text-xl font-bold">Full-Stack Developer & Lead</h3>
+                    <p class="text-primary">Competa IT — Classified</p>
+                    <p class="text-sm text-gray-500 dark:text-gray-400 mb-2">Aug 2024 – Present</p>
+                    <p>Classified</p>
                 </div>
             </div>
         </div>
