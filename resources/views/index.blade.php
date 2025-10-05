@@ -270,9 +270,20 @@
                     <p class="text-primary">StPronk — Antquipment & Productions</p>
                     <p class="text-sm text-gray-500 dark:text-gray-400 mb-2">Jun 2022 – Present</p>
                     <p>
-                        Management server & development website/webshop which is made on laravel in combination with LunarPHP, and there are still
+                        Management server & development website/webshop which is made on Laravel in combination with LunarPHP, and there are still
                         ongoing development for the website. I also manage the server that is running on ubuntu and do the required upgrades and
                         maintenance when needed.
+                    </p>
+                </div>
+
+                <div class="experience-card bg-white dark:bg-gray-700 rounded-lg shadow p-6 border border-gray-200 dark:border-gray-600">
+                    <h3 class="text-xl font-bold">Dev-ops & Full-Stack Developer</h3>
+                    <p class="text-primary">StPronk — Sytatsu</p>
+                    <p class="text-sm text-gray-500 dark:text-gray-400 mb-2">Jul 2024 – Present</p>
+                    <p>
+                        Proud owner of Sytatsu, a website that is made on laravel in combination with LunarPHP, and there are still ongoing
+                        development for the website. I also manage the server that is running on ubuntu and do the required upgrades and maintenance
+                        when needed.
                     </p>
                 </div>
 
