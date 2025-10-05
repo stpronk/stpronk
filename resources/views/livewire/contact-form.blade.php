@@ -1,17 +1,17 @@
 <div>
     <form wire:submit.prevent="submit" class="contact-form space-y-6">
         <div>
-            <label for="name" class="block mb-2 font-medium">Your Name</label>
+            <label for="name" class="block mb-2 font-medium">Name</label>
             <input id="name" type="text" wire:model.defer="name" class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-2 focus:ring-primary focus:outline-none bg-white dark:bg-gray-800" required />
             @error('name') <p class="text-red-500 text-sm mt-1">{{ $message }}</p> @enderror
         </div>
         <div>
-            <label for="email" class="block mb-2 font-medium">Your E-mail</label>
+            <label for="email" class="block mb-2 font-medium">E-mail</label>
             <input id="email" type="email" wire:model.defer="email" class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-2 focus:ring-primary focus:outline-none bg-white dark:bg-gray-800" required />
             @error('email') <p class="text-red-500 text-sm mt-1">{{ $message }}</p> @enderror
         </div>
         <div>
-            <label for="message" class="block mb-2 font-medium">Your Message</label>
+            <label for="message" class="block mb-2 font-medium">Message</label>
             <textarea id="message" rows="5" wire:model.defer="message" class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-2 focus:ring-primary focus:outline-none bg-white dark:bg-gray-800" required></textarea>
             @error('message') <p class="text-red-500 text-sm mt-1">{{ $message }}</p> @enderror
         </div>

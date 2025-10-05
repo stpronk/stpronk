@@ -128,7 +128,7 @@
                 </p>
                 <div class="flex flex-wrap gap-4">
                     <a href="#experience" class="px-6 py-3 bg-primary text-white rounded-md hover:bg-emerald-600 transition">My experience</a>
-                    <a href="#contact" class="px-6 py-3 border border-primary text-primary dark:text-white rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 transition">Contact Me</a>
+                    <a href="#contact" class="px-6 py-3 border border-primary text-primary dark:text-white rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 transition">Contact me</a>
                 </div>
             </div>
             <div class="flex justify-end">
@@ -149,14 +149,14 @@
             <p class="mb-8 max-w-2xl mx-auto">
                 My personal 3D-print studio & webshop, creating innovative and functional 3D models. Explore my work and collaborate with me.
             </p>
-            <a href="https://www.sytatsu.nl/?source=stpronk" target="_blank" class="inline-block px-6 py-3 bg-white text-primary rounded-md font-bold hover:bg-gray-100 transition">Visit Sytatsu.nl</a>
+            <a href="https://www.sytatsu.nl/?source=stpronk" target="_blank" class="inline-block px-6 py-3 bg-white text-primary rounded-md font-bold hover:bg-gray-100 transition">Visit Sytatsu</a>
         </div>
     </section>
 
     <!-- About Section -->
     <section id="about" class="py-16 bg-gray-50 dark:bg-gray-800">
         <div class="container mx-auto px-6 max-w-4xl">
-            <h2 class="text-3xl font-bold mb-8 gradient-text">About Me</h2>
+            <h2 class="text-3xl font-bold mb-8 gradient-text">About me</h2>
             <div class="bg-white dark:bg-gray-700 rounded-xl shadow-lg p-8">
                 <p class="mb-4">
                     I'm a dedicated full-stack developer with experience in creating scalable web solutions. My approach combines technical excellence with clean, user-focused design.
@@ -241,7 +241,7 @@
     <!-- Work Experience Section -->
     <section id="experience" class="py-16 bg-gray-50 dark:bg-gray-800">
         <div class="container mx-auto px-6 max-w-4xl">
-            <h2 class="text-3xl font-bold mb-8 gradient-text">Work Experience</h2>
+            <h2 class="text-3xl font-bold mb-8 gradient-text">Work experience</h2>
             <div class="space-y-6">
 
                 <div class="experience-card bg-white dark:bg-gray-700 rounded-lg shadow p-6 border border-gray-200 dark:border-gray-600">
@@ -347,7 +347,7 @@
     <!-- Contact Section -->
     <section id="contact" class="py-16">
         <div class="container mx-auto px-6 max-w-2xl">
-            <h2 class="text-3xl font-bold mb-8 gradient-text">Let’s Build Something Great</h2>
+            <h2 class="text-3xl font-bold mb-8 gradient-text">Let’s build something Amazing</h2>
             <livewire:contact-form />
         </div>
     </section>
