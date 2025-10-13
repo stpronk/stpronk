@@ -27,7 +27,7 @@
     <!-- Header / Navigation -->
     <header class="sticky top-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm border-b border-gray-200 dark:border-gray-800">
         <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="#" class="text-xl font-bold gradient-text">StPronk</a>
+            <a href="#" class="text-xl font-bold gradiant-text">StPronk</a>
             <nav class="hidden md:flex space-x-8">
                 <a href="#sytatsu" class="hover:text-primary transition">Sytatsu</a>
                 <a href="#about" class="hover:text-primary transition">About</a>
@@ -97,7 +97,7 @@
     <!-- About Section -->
     <section id="about" class="py-16 bg-gray-50 dark:bg-gray-800">
         <div class="container mx-auto px-6 max-w-4xl">
-            <h2 class="text-3xl font-bold mb-8 gradient-text">About me</h2>
+            <h2 class="text-3xl font-bold mb-8 text-primary">About me</h2>
             <div class="bg-white dark:bg-gray-700 rounded-xl shadow-lg p-8">
                 <p class="mb-4">
                     I'm a dedicated full-stack developer with experience in creating scalable web solutions. My approach combines technical excellence with clean, user-focused design.
@@ -112,7 +112,7 @@
     <!-- Skills Section -->
     <section id="skills" class="py-16">
         <div class="container mx-auto px-6 max-w-4xl">
-            <h2 class="text-3xl font-bold mb-8 gradient-text">Skills</h2>
+            <h2 class="text-3xl font-bold mb-8 text-primary">Skills</h2>
 
             <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
                 <div class="skill-card p-4 bg-slate-50 dark:bg-slate-800 rounded-xl text-center border border-slate-200 dark:border-slate-700 shadow-sm">
@@ -182,7 +182,7 @@
     <!-- Work Experience Section -->
     <section id="experience" class="py-16 bg-gray-50 dark:bg-gray-800">
         <div class="container mx-auto px-6 max-w-4xl">
-            <h2 class="text-3xl font-bold mb-8 gradient-text">Work experience</h2>
+            <h2 class="text-3xl font-bold mb-8 text-primary">Work experience</h2>
             <div class="space-y-6">
 
                 <div class="experience-card bg-white dark:bg-gray-700 rounded-lg shadow p-6 border border-gray-200 dark:border-gray-600">
@@ -288,7 +288,7 @@
     <!-- Contact Section -->
     <section id="contact" class="py-16">
         <div class="container mx-auto px-6 max-w-2xl">
-            <h2 class="text-3xl font-bold mb-8 gradient-text">Let’s build something Amazing</h2>
+            <h2 class="text-3xl font-bold mb-8 text-primary">Let’s build something Amazing</h2>
             <livewire:contact-form />
         </div>
     </section>
