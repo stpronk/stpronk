@@ -27,7 +27,7 @@
     <!-- Header / Navigation -->
     <header class="sticky top-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm border-b border-gray-200 dark:border-gray-800">
         <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="#" class="text-xl font-bold gradiant-text">StPronk</a>
+            <a href="#" class="text-xl font-bold gradient-text">StPronk</a>
             <nav class="hidden md:flex space-x-8">
                 <a href="#sytatsu" class="hover:text-primary transition">Sytatsu</a>
                 <a href="#about" class="hover:text-primary transition">About</a>
@@ -61,15 +61,16 @@
     <section id="hero" class="py-16 md:py-24">
         <div class="container mx-auto px-6 max-w-4xl flex flex-col-reverse md:flex-row items-center">
             <div class="mt-10 md:mt-0">
+                <?php /** @var \App\Models\HomepageContent|null $content */ $content = \App\Models\HomepageContent::query()->first(); ?>
                 <h1 class="text-4xl md:text-5xl font-bold mb-4">
-                    Hi, I’m Steve — Full-Stack Developer
+                    {{ $content->hero_title }}
                 </h1>
                 <p class="text-lg mb-8 max-w-lg">
-                    Passionate about building responsive and efficient web applications using modern technologies.
+                    {!! $content->hero_subtitle !!}
                 </p>
                 <div class="flex flex-wrap gap-4">
-                    <a href="#experience" class="px-6 py-3 bg-primary text-white rounded-md hover:bg-emerald-600 transition">My experience</a>
-                    <a href="#contact" class="px-6 py-3 border border-primary text-primary dark:text-white rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 transition">Contact me</a>
+                    <a href="#experience" class="px-6 py-3 bg-primary text-white rounded-md hover:bg-emerald-600 transition">{{ $content->hero_cta_experience ?? 'My experience' }}</a>
+                    <a href="#contact" class="px-6 py-3 border border-primary text-primary dark:text-white rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 transition">{{ $content->hero_cta_contact ?? 'Contact me' }}</a>
                 </div>
             </div>
             <div class="flex justify-end">
@@ -88,7 +89,7 @@
                 <img src="images/sytatsu_white_no_background_text_only.webp" alt="Sytatsu" class="inline-block h-24" />
             </h2>
             <p class="mb-8 max-w-2xl mx-auto">
-                My personal 3D-print studio & webshop, creating innovative and functional 3D models. Explore my work and collaborate with me.
+                {!! $content->sytatsu_text !!}
             </p>
             <a href="https://www.sytatsu.nl/?source=stpronk" target="_blank" class="inline-block px-6 py-3 bg-white text-primary rounded-md font-bold hover:bg-gray-100 transition">Visit Sytatsu</a>
         </div>
@@ -97,14 +98,11 @@
     <!-- About Section -->
     <section id="about" class="py-16 bg-gray-50 dark:bg-gray-800">
         <div class="container mx-auto px-6 max-w-4xl">
-            <h2 class="text-3xl font-bold mb-8 text-primary">About me</h2>
+            <h2 class="text-3xl font-bold mb-8 text-primary">{{ $content->about_title }}</h2>
             <div class="bg-white dark:bg-gray-700 rounded-xl shadow-lg p-8">
-                <p class="mb-4">
-                    I'm a dedicated full-stack developer with experience in creating scalable web solutions. My approach combines technical excellence with clean, user-focused design.
-                </p>
-                <p>
-                    With a strong foundation in both front-end and back-end development, I specialize in building modern applications using Laravel, Vue.js and various other technologies.
-                </p>
+                <div>
+                    {!! $content->about_paragraph !!}
+                </div>
             </div>
         </div>
     </section>
@@ -112,7 +110,7 @@
     <!-- Skills Section -->
     <section id="skills" class="py-16">
         <div class="container mx-auto px-6 max-w-4xl">
-            <h2 class="text-3xl font-bold mb-8 text-primary">Skills</h2>
+            <h2 class="text-3xl font-bold mb-8 text-primary">{{ $content->skills_title }}</h2>
 
             <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
                 @foreach(\App\Models\Skill::where('active', true)->orderBy('sort_order')->get() as $skill)
@@ -128,7 +126,7 @@
     <!-- Work Experience Section -->
     <section id="experience" class="py-16 bg-gray-50 dark:bg-gray-800">
         <div class="container mx-auto px-6 max-w-4xl">
-            <h2 class="text-3xl font-bold mb-8 text-primary">Work experience</h2>
+            <h2 class="text-3xl font-bold mb-8 text-primary">{{ $content->experience_title }}</h2>
             <div class="space-y-6">
                 @foreach(\App\Models\WorkExperience::orderBy('sort_order')->get() as /** @var \App\Models\WorkExperience $workExperience */ $workExperience)
                     <div class="experience-card bg-white dark:bg-gray-700 rounded-lg shadow p-6 border border-gray-200 dark:border-gray-600">
@@ -152,7 +150,7 @@
     <!-- Contact Section -->
     <section id="contact" class="py-16">
         <div class="container mx-auto px-6 max-w-2xl">
-            <h2 class="text-3xl font-bold mb-8 text-primary">Let’s build something Amazing</h2>
+            <h2 class="text-3xl font-bold mb-8 text-primary">{{ $content->contact_title }}</h2>
             <livewire:contact-form />
         </div>
     </section>
@@ -160,7 +158,7 @@
     <!-- Footer -->
     <footer class="py-8 border-t border-gray-200 dark:border-gray-800">
         <div class="container mx-auto px-6 text-center max-w-4xl flex justify-between items-center">
-            <p class="text-gray-500 dark:text-gray-400">Made with ❤️ by StPronk · © <span id="year"></span></p>
+            <p class="text-gray-500 dark:text-gray-400">{{ $content->footer_text }} · © <span id="year"></span></p>
             <p id="back-to-top" class="text-sm text-gray-500 dark:text-gray-400 underline cursor-pointer">Back to top</p>
         </div>
     </footer>

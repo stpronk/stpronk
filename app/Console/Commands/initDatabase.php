@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Models\HomepageContent;
 use App\Models\Skill;
 use App\Models\WorkExperience;
 use Illuminate\Console\Command;
@@ -27,8 +28,25 @@ class initDatabase extends Command
      */
     public function handle(): void
     {
+        $this->insertHomepageContent();
         $this->insertWorkExperiences();
         $this->insertSkills();
+    }
+
+    private function insertHomepageContent(): void {
+        HomepageContent::create([
+            'hero_title'          => 'Hi, I’m Steve — Full-Stack Developer',
+            'hero_subtitle'       => 'Passionate about building responsive and efficient web applications using modern technologies.',
+            'hero_cta_experience' => 'My experience',
+            'hero_cta_contact'    => 'Contact me',
+            'sytatsu_text'        => 'My personal 3D-print studio & webshop, creating innovative and functional 3D models. Explore my work and collaborate with me.',
+            'about_title'         => 'About me',
+            'about_paragraph'     => "I'm a dedicated full-stack developer with experience in creating scalable web solutions. My approach combines technical excellence with clean, user-focused design. With a strong foundation in both front-end and back-end development, I specialize in building modern applications using Laravel, Vue.js and various other technologies.",
+            'skills_title'        => 'Skills',
+            'experience_title'    => 'Work experience',
+            'contact_title'       => 'Let’s build something Amazing',
+            'footer_text'         => 'Made with ❤️ by StPronk',
+        ]);
     }
 
     private function insertWorkExperiences(): void
