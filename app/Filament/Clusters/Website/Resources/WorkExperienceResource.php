@@ -102,13 +102,13 @@ class WorkExperienceResource extends Resource
             ->filters([
                 Tables\Filters\TrashedFilter::make(),
             ])
-            ->actions([
+            ->recordActions([
                 \Filament\Actions\EditAction::make(),
                 \Filament\Actions\DeleteAction::make(),
                 \Filament\Actions\RestoreAction::make(),
                 \Filament\Actions\ForceDeleteAction::make(),
             ])
-            ->bulkActions([
+            ->toolbarActions([
                 \Filament\Actions\BulkActionGroup::make([
                     \Filament\Actions\DeleteBulkAction::make(),
                     \Filament\Actions\RestoreBulkAction::make(),
