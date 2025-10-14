@@ -53,7 +53,8 @@
             "@php artisan migrate --graceful --ansi",
             "@php artisan make:filament-user",
             "@php artisan shield:setup",
-            "@php artisan shield:super-admin"
+            "@php artisan shield:super-admin",
+            "@php artisan app:init-database"
         ],
         "pre-package-uninstall": [
             "Illuminate\\Foundation\\ComposerScripts::prePackageUninstall"
