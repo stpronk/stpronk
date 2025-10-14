@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Filament\Resources\WorkExperienceResource\Pages;
+namespace App\Filament\Clusters\Website\Resources\WorkExperienceResource\Pages;
 
-use App\Filament\Resources\WorkExperienceResource;
+use App\Filament\Clusters\Website\Resources\WorkExperienceResource;
 use Filament\Resources\Pages\CreateRecord;
 
 class CreateWorkExperience extends CreateRecord

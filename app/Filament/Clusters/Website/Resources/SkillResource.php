@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Filament\Resources;
+namespace App\Filament\Clusters\Website\Resources;
 
-use App\Filament\Resources\SkillResource\Pages;
+use App\Filament\Clusters\Website\WebsiteCluster;
 use App\Models\Skill;
 use Filament\Forms;
 use Filament\Resources\Resource;
@@ -20,6 +20,10 @@ class SkillResource extends Resource
     protected static ?string $pluralModelLabel = 'Skills';
 
     protected static ?string $modelLabel = 'Skill';
+
+    protected static ?string $cluster = WebsiteCluster::class;
+
+    protected static ?int $navigationSort = 2;
 
     public static function form(\Filament\Schemas\Schema $schema): \Filament\Schemas\Schema
     {
@@ -59,14 +63,19 @@ class SkillResource extends Resource
                     ->trueLabel('Active')
                     ->falseLabel('Inactive')
                     ->placeholder('All'),
+                Tables\Filters\TrashedFilter::make(),
             ])
             ->actions([
                 \Filament\Actions\EditAction::make(),
                 \Filament\Actions\DeleteAction::make(),
+                \Filament\Actions\RestoreAction::make(),
+                \Filament\Actions\ForceDeleteAction::make(),
             ])
             ->bulkActions([
                 \Filament\Actions\BulkActionGroup::make([
                     \Filament\Actions\DeleteBulkAction::make(),
+                    \Filament\Actions\RestoreBulkAction::make(),
+                    \Filament\Actions\ForceDeleteBulkAction::make(),
                 ]),
             ]);
     }
@@ -74,9 +83,9 @@ class SkillResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListSkills::route('/'),
-            'create' => Pages\CreateSkill::route('/create'),
-            'edit' => Pages\EditSkill::route('/{record}/edit'),
+            'index' => \App\Filament\Clusters\Website\Resources\SkillResource\Pages\ListSkills::route('/'),
+            'create' => \App\Filament\Clusters\Website\Resources\SkillResource\Pages\CreateSkill::route('/create'),
+            'edit' => \App\Filament\Clusters\Website\Resources\SkillResource\Pages\EditSkill::route('/{record}/edit'),
         ];
     }
 }

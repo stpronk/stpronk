@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Filament\Resources\SkillResource\Pages;
+namespace App\Filament\Clusters\Website\Resources\SkillResource\Pages;
 
-use App\Filament\Resources\SkillResource;
+use App\Filament\Clusters\Website\Resources\SkillResource;
 use Filament\Resources\Pages\EditRecord;
 
 class EditSkill extends EditRecord

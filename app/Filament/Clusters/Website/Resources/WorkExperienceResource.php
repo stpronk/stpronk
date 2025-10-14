@@ -1,14 +1,13 @@
 <?php
 
-namespace App\Filament\Resources;
+namespace App\Filament\Clusters\Website\Resources;
 
-use App\Filament\Resources\WorkExperienceResource\Pages;
+use App\Filament\Clusters\Website\WebsiteCluster;
 use App\Models\WorkExperience;
 use Filament\Forms;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
 
 class WorkExperienceResource extends Resource
 {
@@ -21,6 +20,10 @@ class WorkExperienceResource extends Resource
     protected static ?string $pluralModelLabel = 'Work Experiences';
 
     protected static ?string $modelLabel = 'Work Experience';
+
+    protected static ?string $cluster = WebsiteCluster::class;
+
+    protected static ?int $navigationSort = 1;
 
     public static function form(\Filament\Schemas\Schema $schema): \Filament\Schemas\Schema
     {
@@ -79,31 +82,37 @@ class WorkExperienceResource extends Resource
                     ->sortable(),
                 Tables\Columns\TextColumn::make('organisation_website')
                     ->label('Website')
-                    ->url(fn ($record) => $record->organisation_website ?: null, shouldOpenInNewTab: true)
+                    ->url(fn($record) => $record->organisation_website ?: null, shouldOpenInNewTab: true)
                     ->toggleable(isToggledHiddenByDefault: true)
                     ->wrap(),
                 Tables\Columns\TextColumn::make('start_date')
                     ->label('Start')
                     ->date('F Y')
-                    ->sortable(),
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('end_date')
                     ->label('End')
                     ->formatStateUsing(fn ($state) => $state ? $state->translatedFormat('F Y') : 'Present')
-                    ->sortable(),
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('description')
                     ->limit(60)
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                //
+                Tables\Filters\TrashedFilter::make(),
             ])
             ->actions([
                 \Filament\Actions\EditAction::make(),
                 \Filament\Actions\DeleteAction::make(),
+                \Filament\Actions\RestoreAction::make(),
+                \Filament\Actions\ForceDeleteAction::make(),
             ])
             ->bulkActions([
                 \Filament\Actions\BulkActionGroup::make([
                     \Filament\Actions\DeleteBulkAction::make(),
+                    \Filament\Actions\RestoreBulkAction::make(),
+                    \Filament\Actions\ForceDeleteBulkAction::make(),
                 ]),
             ]);
     }
@@ -111,9 +120,9 @@ class WorkExperienceResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListWorkExperiences::route('/'),
-            'create' => Pages\CreateWorkExperience::route('/create'),
-            'edit' => Pages\EditWorkExperience::route('/{record}/edit'),
+            'index' => \App\Filament\Clusters\Website\Resources\WorkExperienceResource\Pages\ListWorkExperiences::route('/'),
+            'create' => \App\Filament\Clusters\Website\Resources\WorkExperienceResource\Pages\CreateWorkExperience::route('/create'),
+            'edit' => \App\Filament\Clusters\Website\Resources\WorkExperienceResource\Pages\EditWorkExperience::route('/{record}/edit'),
         ];
     }
 }
