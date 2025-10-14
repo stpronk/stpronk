@@ -2,6 +2,7 @@
 
 namespace App\Providers\Filament;
 
+use App\Filament\Resources\SkillResource;
 use App\Filament\Resources\WorkExperienceResource;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
@@ -57,7 +58,8 @@ class AdminPanelProvider extends PanelProvider
                 Authenticate::class,
             ])
             ->resources([
-                WorkExperienceResource::class
+                WorkExperienceResource::class,
+                SkillResource::class,
             ])
             ->plugins([
                 \BezhanSalleh\FilamentShield\FilamentShieldPlugin::make(),

@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Models\Skill;
 use App\Models\WorkExperience;
 use Illuminate\Console\Command;
 
@@ -27,6 +28,7 @@ class initDatabase extends Command
     public function handle(): void
     {
         $this->insertWorkExperiences();
+        $this->insertSkills();
     }
 
     private function insertWorkExperiences(): void
@@ -120,6 +122,32 @@ class initDatabase extends Command
                 'created_at'           => now(),
                 'updated_at'           => now(),
             ],
+        ], 'id');
+    }
+
+    private function insertSkills(): void
+    {
+        Skill::query()->upsert([
+            ['name' => 'HTML5', 'sort_order' => 1],
+            ['name' => 'CSS', 'sort_order' => 2],
+            ['name' => 'JavaScript', 'sort_order' => 3],
+            ['name' => 'TailwindCSS', 'sort_order' => 4],
+            ['name' => 'Vue.js', 'sort_order' => 5],
+            ['name' => 'React.js', 'sort_order' => 6],
+            ['name' => 'TypeScript', 'sort_order' => 7],
+            ['name' => 'Php', 'sort_order' => 8],
+            ['name' => 'Symfony', 'sort_order' => 9],
+            ['name' => 'Laravel', 'sort_order' => 10],
+            ['name' => 'Livewire', 'sort_order' => 11],
+            ['name' => 'FilamentPHP', 'sort_order' => 12],
+            ['name' => 'LunarPHP', 'sort_order' => 13],
+            ['name' => 'Wordpress', 'sort_order' => 14],
+            ['name' => 'MySQL', 'sort_order' => 15],
+            ['name' => 'Postgres', 'sort_order' => 16],
+            ['name' => 'RabbitMQ', 'sort_order' => 17],
+            ['name' => 'Docker', 'sort_order' => 18],
+            ['name' => 'Python', 'sort_order' => 19],
+            ['name' => 'AI', 'sort_order' => 20],
         ], 'id');
     }
 }

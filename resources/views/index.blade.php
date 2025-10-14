@@ -115,66 +115,12 @@
             <h2 class="text-3xl font-bold mb-8 text-primary">Skills</h2>
 
             <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-                <div class="skill-card p-4 bg-slate-50 dark:bg-slate-800 rounded-xl text-center border border-slate-200 dark:border-slate-700 shadow-sm">
-                    <p class="font-semibold text-slate-800 dark:text-white">HTML5</p>
-                </div>
-                <div class="skill-card p-4 bg-slate-50 dark:bg-slate-800 rounded-xl text-center border border-slate-200 dark:border-slate-700 shadow-sm">
-                    <p class="font-semibold text-slate-800 dark:text-white">CSS</p>
-                </div>
-                <div class="skill-card p-4 bg-slate-50 dark:bg-slate-800 rounded-xl text-center border border-slate-200 dark:border-slate-700 shadow-sm">
-                    <p class="font-semibold text-slate-800 dark:text-white">JavaScript</p>
-                </div>
-                <div class="skill-card p-4 bg-slate-50 dark:bg-slate-800 rounded-xl text-center border border-slate-200 dark:border-slate-700 shadow-sm">
-                    <p class="font-semibold text-slate-800 dark:text-white">TailwindCSS</p>
-                </div>
-                <div class="skill-card p-4 bg-slate-50 dark:bg-slate-800 rounded-xl text-center border border-slate-200 dark:border-slate-700 shadow-sm">
-                    <p class="font-semibold text-slate-800 dark:text-white">Vue.js</p>
-                </div>
-                <div class="skill-card p-4 bg-slate-50 dark:bg-slate-800 rounded-xl text-center border border-slate-200 dark:border-slate-700 shadow-sm">
-                    <p class="font-semibold text-slate-800 dark:text-white">React</p>
-                </div>
-                <div class="skill-card p-4 bg-slate-50 dark:bg-slate-800 rounded-xl text-center border border-slate-200 dark:border-slate-700 shadow-sm">
-                    <p class="font-semibold text-slate-800 dark:text-white">TypeScript</p>
-                </div>
-                <div class="skill-card p-4 bg-slate-50 dark:bg-slate-800 rounded-xl text-center border border-slate-200 dark:border-slate-700 shadow-sm">
-                    <p class="font-semibold text-slate-800 dark:text-white">Symfony</p>
-                </div>
-                <div class="skill-card p-4 bg-slate-50 dark:bg-slate-800 rounded-xl text-center border border-slate-200 dark:border-slate-700 shadow-sm">
-                    <p class="font-semibold text-slate-800 dark:text-white">Laravel</p>
-                </div>
-                <div class="skill-card p-4 bg-slate-50 dark:bg-slate-800 rounded-xl text-center border border-slate-200 dark:border-slate-700 shadow-sm">
-                    <p class="font-semibold text-slate-800 dark:text-white">Livewire</p>
-                </div>
-                <div class="skill-card p-4 bg-slate-50 dark:bg-slate-800 rounded-xl text-center border border-slate-200 dark:border-slate-700 shadow-sm">
-                    <p class="font-semibold text-slate-800 dark:text-white">FilamentPHP</p>
-                </div>
-                <div class="skill-card p-4 bg-slate-50 dark:bg-slate-800 rounded-xl text-center border border-slate-200 dark:border-slate-700 shadow-sm">
-                    <p class="font-semibold text-slate-800 dark:text-white">LunarPHP</p>
-                </div>
-                <div class="skill-card p-4 bg-slate-50 dark:bg-slate-800 rounded-xl text-center border border-slate-200 dark:border-slate-700 shadow-sm">
-                    <p class="font-semibold text-slate-800 dark:text-white">Wordpress</p>
-                </div>
-                <div class="skill-card p-4 bg-slate-50 dark:bg-slate-800 rounded-xl text-center border border-slate-200 dark:border-slate-700 shadow-sm">
-                    <p class="font-semibold text-slate-800 dark:text-white">MySQL</p>
-                </div>
-                <div class="skill-card p-4 bg-slate-50 dark:bg-slate-800 rounded-xl text-center border border-slate-200 dark:border-slate-700 shadow-sm">
-                    <p class="font-semibold text-slate-800 dark:text-white">Postgres</p>
-                </div>
-                <div class="skill-card p-4 bg-slate-50 dark:bg-slate-800 rounded-xl text-center border border-slate-200 dark:border-slate-700 shadow-sm">
-                    <p class="font-semibold text-slate-800 dark:text-white">RabbitMQ</p>
-                </div>
-                <div class="skill-card p-4 bg-slate-50 dark:bg-slate-800 rounded-xl text-center border border-slate-200 dark:border-slate-700 shadow-sm">
-                    <p class="font-semibold text-slate-800 dark:text-white">Docker</p>
-                </div>
-                <div class="skill-card p-4 bg-slate-50 dark:bg-slate-800 rounded-xl text-center border border-slate-200 dark:border-slate-700 shadow-sm">
-                    <p class="font-semibold text-slate-800 dark:text-white">Python</p>
-                </div>
-                <div class="skill-card p-4 bg-slate-50 dark:bg-slate-800 rounded-xl text-center border border-slate-200 dark:border-slate-700 shadow-sm">
-                    <p class="font-semibold text-slate-800 dark:text-white">AI</p>
-                </div>
-                <div class="skill-card p-4 bg-slate-50 dark:bg-slate-800 rounded-xl text-center border border-slate-200 dark:border-slate-700 shadow-sm">
-                    <p class="font-semibold text-slate-800 dark:text-white">Linux</p>
-                </div>
+                @foreach(\App\Models\Skill::where('active', true)->orderBy('sort_order')->get() as $skill)
+                    <div class="skill-card p-4 bg-slate-50 dark:bg-slate-800 rounded-xl text-center border border-slate-200 dark:border-slate-700 shadow-sm">
+                        <p class="font-semibold text-slate-800 dark:text-white">{{ $skill->name }}</p>
+                    </div>
+                @endforeach
+
             </div>
         </div>
     </section>
