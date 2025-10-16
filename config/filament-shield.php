@@ -192,6 +192,7 @@ return [
         'prefix' => 'view',
         'exclude' => [
             \Filament\Pages\Dashboard::class,
+            \Joaopaulolndev\FilamentEditProfile\Pages\EditProfilePage::class,
         ],
     ],
 
