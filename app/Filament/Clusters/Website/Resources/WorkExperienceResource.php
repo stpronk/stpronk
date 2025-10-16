@@ -71,6 +71,8 @@ class WorkExperienceResource extends Resource
         return $table
             ->reorderable('sort_order')
             ->defaultSort('sort_order')
+            ->recordAction('view')
+            ->recordUrl(null)
             ->columns([
                 Tables\Columns\TextColumn::make('job_title')
                     ->label('Job title')
@@ -103,10 +105,10 @@ class WorkExperienceResource extends Resource
                 Tables\Filters\TrashedFilter::make(),
             ])
             ->recordActions([
+                \Filament\Actions\ViewAction::make()
+                    ->modalHeading(fn ($record) => $record->job_title . ' at ' . $record->organisation)
+                    ->modalWidth('3xl'),
                 \Filament\Actions\EditAction::make(),
-                \Filament\Actions\DeleteAction::make(),
-                \Filament\Actions\RestoreAction::make(),
-                \Filament\Actions\ForceDeleteAction::make(),
             ])
             ->toolbarActions([
                 \Filament\Actions\BulkActionGroup::make([
@@ -117,11 +119,42 @@ class WorkExperienceResource extends Resource
             ]);
     }
 
+    public static function infolist(\Filament\Schemas\Schema $schema): \Filament\Schemas\Schema
+    {
+        return $schema->schema([
+                \Filament\Infolists\Components\TextEntry::make('job_title')
+                    ->label('Job title')
+                    ->weight('bold'),
+                \Filament\Infolists\Components\TextEntry::make('organisation')
+                    ->label('Organisation')
+                    ->url(fn ($record) => $record->organisation_website ?: null, shouldOpenInNewTab: true),
+                \Filament\Infolists\Components\TextEntry::make('date_range')
+                    ->label('Dates')
+                    ->state(function ($record) {
+                        $start = $record->start_date?->translatedFormat('F Y');
+                        $end = $record->end_date?->translatedFormat('F Y') ?? 'Present';
+                        return trim(($start ?: '—') . ' — ' . $end);
+                    }),
+                \Filament\Infolists\Components\TextEntry::make('description')
+                    ->label('Description')
+                    ->markdown(),
+        ])->inlineLabel()->columns(1);
+    }
+
+    public static function getEloquentQuery(): \Illuminate\Database\Eloquent\Builder
+    {
+        return parent::getEloquentQuery()
+            ->withoutGlobalScopes([
+                \Illuminate\Database\Eloquent\SoftDeletingScope::class,
+            ]);
+    }
+
     public static function getPages(): array
     {
         return [
             'index' => \App\Filament\Clusters\Website\Resources\WorkExperienceResource\Pages\ListWorkExperiences::route('/'),
             'create' => \App\Filament\Clusters\Website\Resources\WorkExperienceResource\Pages\CreateWorkExperience::route('/create'),
+            'view' => \App\Filament\Clusters\Website\Resources\WorkExperienceResource\Pages\ViewWorkExperience::route('/{record}'),
             'edit' => \App\Filament\Clusters\Website\Resources\WorkExperienceResource\Pages\EditWorkExperience::route('/{record}/edit'),
         ];
     }
