@@ -4,6 +4,7 @@ namespace App\Filament\Clusters\Website\Pages;
 
 use App\Filament\Clusters\Website\WebsiteCluster;
 use App\Models\HomepageContent;
+use BezhanSalleh\FilamentShield\Traits\HasPageShield;
 use Filament\Actions\Action;
 use Filament\Actions\ButtonAction;
 use Filament\Forms;
@@ -20,7 +21,7 @@ use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
 
 class HomepageContentPage extends Page implements HasForms
 {
-    use InteractsWithForms;
+    use InteractsWithForms, HasPageShield;
 
     protected static ?string $cluster = WebsiteCluster::class;
 
