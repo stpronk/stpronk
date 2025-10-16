@@ -61,6 +61,10 @@ class WorkExperienceResource extends Resource
                     ->required()
                     ->fileAttachmentsDirectory('work-experience')
                     ->placeholder('Describe your role, responsibilities, achievements, and technologies used.'),
+                Forms\Components\Toggle::make('active')
+                    ->label('Active')
+                    ->default(true)
+                    ->helperText('Inactive items won\'t be shown on the website.'),
                 Forms\Components\Hidden::make('sort_order')->default(0),
             ])
             ->columns(2);
@@ -97,11 +101,18 @@ class WorkExperienceResource extends Resource
                     ->formatStateUsing(fn ($state) => $state ? $state->translatedFormat('F Y') : 'Present')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\IconColumn::make('is_active')
+                    ->label('Active')
+                    ->boolean()
+                    ->alignCenter(),
                 Tables\Columns\TextColumn::make('description')
                     ->limit(60)
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
+                Tables\Filters\TernaryFilter::make('active')
+                    ->label('Active')
+                    ->boolean(),
                 Tables\Filters\TrashedFilter::make(),
             ])
             ->recordActions([

@@ -128,7 +128,7 @@
         <div class="container mx-auto px-6 max-w-4xl">
             <h2 class="text-3xl font-bold mb-8 text-primary">{{ $content->experience_title }}</h2>
             <div class="space-y-6">
-                @foreach(\App\Models\WorkExperience::orderBy('sort_order')->get() as /** @var \App\Models\WorkExperience $workExperience */ $workExperience)
+                @foreach(\App\Models\WorkExperience::where('active', true)->orderBy('sort_order')->get() as /** @var \App\Models\WorkExperience $workExperience */ $workExperience)
                     <div class="experience-card bg-white dark:bg-gray-700 rounded-lg shadow p-6 border border-gray-200 dark:border-gray-600">
                         <div class="flex flex-row justify-between">
                             <h3 class="text-xl font-bold">{{ $workExperience->job_title }}</h3>

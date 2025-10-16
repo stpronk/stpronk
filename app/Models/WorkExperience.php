@@ -18,10 +18,12 @@ class WorkExperience extends Model
         'end_date',
         'description',
         'sort_order',
+        'active',
     ];
 
     protected $casts = [
         'start_date' => 'date',
         'end_date' => 'date',
+        'active' => 'boolean',
     ];
 }
