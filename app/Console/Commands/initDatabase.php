@@ -5,7 +5,9 @@ namespace App\Console\Commands;
 use App\Models\HomepageContent;
 use App\Models\Skill;
 use App\Models\WorkExperience;
+use BezhanSalleh\FilamentShield\Support\Utils;
 use Illuminate\Console\Command;
+use Spatie\Permission\PermissionRegistrar;
 
 class initDatabase extends Command
 {
@@ -28,13 +30,72 @@ class initDatabase extends Command
      */
     public function handle(): void
     {
+        $this->insertShieldPermissions();
         $this->insertHomepageContent();
         $this->insertWorkExperiences();
         $this->insertSkills();
     }
 
-    private function insertHomepageContent(): void {
-        HomepageContent::create([
+    protected function insertShieldPermissions(): void
+    {
+        app()[PermissionRegistrar::class]->forgetCachedPermissions();
+
+        $rolesWithPermissions = '[{"name":"super_admin","guard_name":"web","permissions":["ViewAny:Skill","View:Skill","Create:Skill","Update:Skill","Delete:Skill","Restore:Skill","ForceDelete:Skill","ForceDeleteAny:Skill","RestoreAny:Skill","Replicate:Skill","Reorder:Skill","ViewAny:WorkExperience","View:WorkExperience","Create:WorkExperience","Update:WorkExperience","Delete:WorkExperience","Restore:WorkExperience","ForceDelete:WorkExperience","ForceDeleteAny:WorkExperience","RestoreAny:WorkExperience","Replicate:WorkExperience","Reorder:WorkExperience","ViewAny:Role","View:Role","Create:Role","Update:Role","Delete:Role","Restore:Role","ForceDelete:Role","ForceDeleteAny:Role","RestoreAny:Role","Replicate:Role","Reorder:Role","ViewAny:User","View:User","Create:User","Update:User","Delete:User","Restore:User","ForceDelete:User","ForceDeleteAny:User","RestoreAny:User","Replicate:User","Reorder:User","View:WebsiteCluster","View:HomepageContentPage"]},{"name":"User","guard_name":"web","permissions":["ViewAny:User","View:User","Create:User","Update:User","Delete:User","Restore:User","ForceDelete:User","ForceDeleteAny:User","RestoreAny:User","Replicate:User","Reorder:User"]}]';
+        $directPermissions = '{"22":{"name":"ViewAny:FeatureSegment","guard_name":"web"},"23":{"name":"View:FeatureSegment","guard_name":"web"},"24":{"name":"Create:FeatureSegment","guard_name":"web"},"25":{"name":"Update:FeatureSegment","guard_name":"web"},"26":{"name":"Delete:FeatureSegment","guard_name":"web"},"27":{"name":"Restore:FeatureSegment","guard_name":"web"},"28":{"name":"ForceDelete:FeatureSegment","guard_name":"web"},"29":{"name":"ForceDeleteAny:FeatureSegment","guard_name":"web"},"30":{"name":"RestoreAny:FeatureSegment","guard_name":"web"},"31":{"name":"Replicate:FeatureSegment","guard_name":"web"},"32":{"name":"Reorder:FeatureSegment","guard_name":"web"},"33":{"name":"ViewAny:Author","guard_name":"web"},"34":{"name":"View:Author","guard_name":"web"},"35":{"name":"Create:Author","guard_name":"web"},"36":{"name":"Update:Author","guard_name":"web"},"37":{"name":"Delete:Author","guard_name":"web"},"38":{"name":"Restore:Author","guard_name":"web"},"39":{"name":"ForceDelete:Author","guard_name":"web"},"40":{"name":"ForceDeleteAny:Author","guard_name":"web"},"41":{"name":"RestoreAny:Author","guard_name":"web"},"42":{"name":"Replicate:Author","guard_name":"web"},"43":{"name":"Reorder:Author","guard_name":"web"},"44":{"name":"ViewAny:Category","guard_name":"web"},"45":{"name":"View:Category","guard_name":"web"},"46":{"name":"Create:Category","guard_name":"web"},"47":{"name":"Update:Category","guard_name":"web"},"48":{"name":"Delete:Category","guard_name":"web"},"49":{"name":"Restore:Category","guard_name":"web"},"50":{"name":"ForceDelete:Category","guard_name":"web"},"51":{"name":"ForceDeleteAny:Category","guard_name":"web"},"52":{"name":"RestoreAny:Category","guard_name":"web"},"53":{"name":"Replicate:Category","guard_name":"web"},"54":{"name":"Reorder:Category","guard_name":"web"},"55":{"name":"ViewAny:Post","guard_name":"web"},"56":{"name":"View:Post","guard_name":"web"},"57":{"name":"Create:Post","guard_name":"web"},"58":{"name":"Update:Post","guard_name":"web"},"59":{"name":"Delete:Post","guard_name":"web"},"60":{"name":"Restore:Post","guard_name":"web"},"61":{"name":"ForceDelete:Post","guard_name":"web"},"62":{"name":"ForceDeleteAny:Post","guard_name":"web"},"63":{"name":"RestoreAny:Post","guard_name":"web"},"64":{"name":"Replicate:Post","guard_name":"web"},"65":{"name":"Reorder:Post","guard_name":"web"}}';
+
+        $this->makeRolesWithPermissions($rolesWithPermissions);
+        $this->makeDirectPermissions($directPermissions);
+
+        $this->info('Shield inserted successfully.');
+    }
+
+    private function makeRolesWithPermissions(string $rolesWithPermissions): void
+    {
+        if (! blank($rolePlusPermissions = json_decode($rolesWithPermissions, true))) {
+            /** @var Model $roleModel */
+            $roleModel = Utils::getRoleModel();
+            /** @var Model $permissionModel */
+            $permissionModel = Utils::getPermissionModel();
+
+            foreach ($rolePlusPermissions as $rolePlusPermission) {
+                $role = $roleModel::firstOrCreate([
+                    'name' => $rolePlusPermission['name'],
+                    'guard_name' => $rolePlusPermission['guard_name'],
+                ]);
+
+                if (! blank($rolePlusPermission['permissions'])) {
+                    $permissionModels = collect($rolePlusPermission['permissions'])
+                        ->map(fn ($permission) => $permissionModel::firstOrCreate([
+                            'name' => $permission,
+                            'guard_name' => $rolePlusPermission['guard_name'],
+                        ]))
+                        ->all();
+
+                    $role->syncPermissions($permissionModels);
+                }
+            }
+        }
+    }
+
+    private function makeDirectPermissions(string $directPermissions): void
+    {
+        if (! blank($permissions = json_decode($directPermissions, true))) {
+            /** @var Model $permissionModel */
+            $permissionModel = Utils::getPermissionModel();
+
+            foreach ($permissions as $permission) {
+                if ($permissionModel::whereName($permission)->doesntExist()) {
+                    $permissionModel::create([
+                        'name' => $permission['name'],
+                        'guard_name' => $permission['guard_name'],
+                    ]);
+                }
+            }
+        }
+    }
+
+    protected function insertHomepageContent(): void {
+        HomepageContent::firstOrCreate([
             'hero_title'          => 'Hi, I’m Steve — Full-Stack Developer',
             'hero_subtitle'       => 'Passionate about building responsive and efficient web applications using modern technologies.',
             'hero_cta_experience' => 'My experience',
@@ -47,9 +108,11 @@ class initDatabase extends Command
             'contact_title'       => 'Let’s build something Amazing',
             'footer_text'         => 'Made with ❤️ by StPronk',
         ]);
+
+        $this->info('Homepage Content inserted successfully.');
     }
 
-    private function insertWorkExperiences(): void
+    protected function insertWorkExperiences(): void
     {
         WorkExperience::query()->upsert([
             [
@@ -140,10 +203,12 @@ class initDatabase extends Command
                 'created_at'           => now(),
                 'updated_at'           => now(),
             ],
-        ], 'id');
+        ], 'organisation');
+
+        $this->info('Work Experiences inserted successfully.');
     }
 
-    private function insertSkills(): void
+    protected function insertSkills(): void
     {
         Skill::query()->upsert([
             ['name' => 'HTML5', 'sort_order' => 1],
@@ -166,6 +231,8 @@ class initDatabase extends Command
             ['name' => 'Docker', 'sort_order' => 18],
             ['name' => 'Python', 'sort_order' => 19],
             ['name' => 'AI', 'sort_order' => 20],
-        ], 'id');
+        ], 'name');
+
+        $this->info('Skills inserted successfully.');
     }
 }
