@@ -34,9 +34,6 @@ class SkillResource extends Resource
                     ->required()
                     ->unique(ignoreRecord: true)
                     ->maxLength(255),
-                Forms\Components\Toggle::make('active')
-                    ->label('Active')
-                    ->default(true),
                 Forms\Components\Hidden::make('sort_order')->default(0),
             ])
             ->columns(2);
@@ -53,8 +50,8 @@ class SkillResource extends Resource
                     ->searchable()
                     ->sortable(),
                 Tables\Columns\IconColumn::make('active')
-                    ->boolean()
                     ->label('Active')
+                    ->boolean()
                     ->sortable(),
             ])
             ->filters([
@@ -67,12 +64,13 @@ class SkillResource extends Resource
             ])
             ->recordActions([
                 \Filament\Actions\EditAction::make(),
-                \Filament\Actions\DeleteAction::make(),
-                \Filament\Actions\RestoreAction::make(),
-                \Filament\Actions\ForceDeleteAction::make(),
+                \App\Filament\Actions\ActivateRecord::make(),
+                \App\Filament\Actions\DeactivateRecord::make(),
             ])
             ->toolbarActions([
                 \Filament\Actions\BulkActionGroup::make([
+                    \App\Filament\Actions\ActivateBulk::make(),
+                    \App\Filament\Actions\DeactivateBulk::make(),
                     \Filament\Actions\DeleteBulkAction::make(),
                     \Filament\Actions\RestoreBulkAction::make(),
                     \Filament\Actions\ForceDeleteBulkAction::make(),

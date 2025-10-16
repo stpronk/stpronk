@@ -13,6 +13,8 @@ class EditWorkExperience extends EditRecord
     protected function getHeaderActions(): array
     {
         return [
+            \App\Filament\Actions\ActivateRecord::make(),
+            \App\Filament\Actions\DeactivateRecord::make(),
             Actions\DeleteAction::make(),
             Actions\RestoreAction::make(),
             Actions\ForceDeleteAction::make(),
