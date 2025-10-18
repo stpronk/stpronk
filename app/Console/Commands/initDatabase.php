@@ -203,7 +203,7 @@ class initDatabase extends Command
                 'created_at'           => now(),
                 'updated_at'           => now(),
             ],
-        ], 'organisation');
+        ], 'id');
 
         $this->info('Work Experiences inserted successfully.');
     }
@@ -231,7 +231,7 @@ class initDatabase extends Command
             ['name' => 'Docker', 'sort_order' => 18],
             ['name' => 'Python', 'sort_order' => 19],
             ['name' => 'AI', 'sort_order' => 20],
-        ], 'name');
+        ], 'id');
 
         $this->info('Skills inserted successfully.');
     }
