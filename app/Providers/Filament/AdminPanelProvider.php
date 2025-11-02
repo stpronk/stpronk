@@ -30,6 +30,7 @@ class AdminPanelProvider extends PanelProvider
             ->id('admin')
             ->path('admin')
             ->login()
+            ->viteTheme('resources/css/filament/admin/theme.css')
             ->colors([
                 'primary' => Color::Orange,
             ])
@@ -83,7 +84,8 @@ class AdminPanelProvider extends PanelProvider
                     ->setSort(21)
                     ->shouldShowEmailForm()
                     ->shouldShowDeleteAccountForm(false)
-                    ->shouldShowBrowserSessionsForm()
+                    ->shouldShowBrowserSessionsForm(),
+                \Stpronk\Assets\Filament\AssetsPlugin::make(),
             ]);
     }
 }
