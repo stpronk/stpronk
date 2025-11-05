@@ -1,5 +1,7 @@
 <div>
     <form wire:submit.prevent="submit" class="contact-form space-y-6">
+        <x-honeypot livewire-model="extraFields" />
+
         <div>
             <label for="name" class="block mb-2 font-medium">Name</label>
             <input id="name" type="text" wire:model.defer="name" class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-2 focus:ring-primary focus:outline-none bg-white dark:bg-gray-800" required />
