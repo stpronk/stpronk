@@ -10,7 +10,7 @@ use UnitEnum;
 class WebsiteCluster extends Cluster
 {
     protected static string | UnitEnum | null $navigationGroup = 'Settings';
-    protected static ?int $navigationSort = 20;
+    protected static ?int $navigationSort = 21;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedSquares2x2;
 }

@@ -13,5 +13,5 @@ class AssetsCluster extends Cluster
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedCube;
 
-    protected static ?int $navigationSort = 30;
+    protected static ?int $navigationSort = 20;
 }

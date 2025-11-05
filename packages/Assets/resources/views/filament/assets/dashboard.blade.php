@@ -26,7 +26,33 @@
         </div>
 
         {{-- Tables --}}
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="grid grid-cols-1 gap-6">
+
+            {{-- Realized Results --}}
+            <div class="fi-panel">
+                <h3 class="fi-panel-heading">Realized Results</h3>
+
+                <div class="grid grid-cols-3 gap-4">
+                    <div>
+                        <p class="fi-stat-label">Earned</p>
+                        <p class="fi-stat-value fi-text-success">
+                            € {{ number_format(($earnedCents ?? 0) / 100, 2, ',', '.') }}
+                        </p>
+                    </div>
+                    <div>
+                        <p class="fi-stat-label">Lost</p>
+                        <p class="fi-stat-value fi-text-danger">
+                            € {{ number_format(abs($lostCents ?? 0) / 100, 2, ',', '.') }}
+                        </p>
+                    </div>
+                    <div>
+                        <p class="fi-stat-label">Net</p>
+                        <p class="fi-stat-value {{ ($netCents ?? 0) >= 0 ? 'fi-text-success' : 'fi-text-danger' }}">
+                            € {{ number_format(($netCents ?? 0) / 100, 2, ',', '.') }}
+                        </p>
+                    </div>
+                </div>
+            </div>
 
             {{-- Active Assets --}}
             <div class="fi-panel">
@@ -59,28 +85,7 @@
 
             {{-- Realized Results --}}
             <div class="fi-panel">
-                <h3 class="fi-panel-heading">Realized Results</h3>
-
-                <div class="grid grid-cols-3 gap-4 mb-4">
-                    <div>
-                        <p class="fi-stat-label">Earned</p>
-                        <p class="fi-stat-value fi-text-success">
-                            € {{ number_format(($earnedCents ?? 0) / 100, 2, ',', '.') }}
-                        </p>
-                    </div>
-                    <div>
-                        <p class="fi-stat-label">Lost</p>
-                        <p class="fi-stat-value fi-text-danger">
-                            € {{ number_format(abs($lostCents ?? 0) / 100, 2, ',', '.') }}
-                        </p>
-                    </div>
-                    <div>
-                        <p class="fi-stat-label">Net</p>
-                        <p class="fi-stat-value {{ ($netCents ?? 0) >= 0 ? 'fi-text-success' : 'fi-text-danger' }}">
-                            € {{ number_format(($netCents ?? 0) / 100, 2, ',', '.') }}
-                        </p>
-                    </div>
-                </div>
+                <h3 class="fi-panel-heading">Realized Assets</h3>
 
                 <div class="overflow-x-auto">
                     <table class="fi-table">
@@ -88,9 +93,9 @@
                         <tr>
                             <th>Name</th>
                             <th>Category</th>
-                            <th class="fi-text-right">Buy</th>
-                            <th class="fi-text-right">Sold</th>
-                            <th class="fi-text-right">P/L</th>
+                            <th>Buy</th>
+                            <th>Sold</th>
+                            <th>P/L</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -99,9 +104,9 @@
                             <tr>
                                 <td>{{ $row['asset']->name }}</td>
                                 <td>{{ optional($row['asset']->category)->name ?: '—' }}</td>
-                                <td class="fi-text-right">€ {{ number_format(($row['asset']->price_cents ?? 0) / 100, 2, ',', '.') }}</td>
-                                <td class="fi-text-right">€ {{ number_format(($row['asset']->take_profit_cents ?? 0) / 100, 2, ',', '.') }}</td>
-                                <td class="fi-text-right {{ $profit >= 0 ? 'fi-text-success' : 'fi-text-danger' }}">
+                                <td>€ {{ number_format(($row['asset']->price_cents ?? 0) / 100, 2, ',', '.') }}</td>
+                                <td>€ {{ number_format(($row['asset']->take_profit_cents ?? 0) / 100, 2, ',', '.') }}</td>
+                                <td class="{{ $profit >= 0 ? 'fi-text-success' : 'fi-text-danger' }}">
                                     € {{ number_format($profit / 100, 2, ',', '.') }}
                                 </td>
                             </tr>

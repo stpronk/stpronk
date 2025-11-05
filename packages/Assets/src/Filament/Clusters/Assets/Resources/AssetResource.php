@@ -6,6 +6,7 @@ use Filament\Forms;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
 use Stpronk\Assets\Filament\Clusters\Assets\AssetsCluster;
 use Stpronk\Assets\Models\Asset;
 
@@ -140,5 +141,18 @@ class AssetResource extends Resource
             'create' => AssetResource\Pages\CreateAsset::route('/create'),
             'edit' => AssetResource\Pages\EditAsset::route('/{record}/edit'),
         ];
+    }
+
+    public static function getEloquentQuery(): Builder
+    {
+        $query = parent::getEloquentQuery();
+        $userId = auth()->id();
+        if ($userId) {
+            $query->where('user_id', $userId);
+        } else {
+            // If no authenticated user, return empty result
+            $query->whereRaw('1 = 0');
+        }
+        return $query;
     }
 }

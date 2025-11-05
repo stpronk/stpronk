@@ -27,11 +27,20 @@ class AssetsDashboard extends Page
 
     public function getViewData(): array
     {
-        $activeAssets = Asset::with('category')->where('status', 'active')->get();
+        $userId = auth()->id();
+
+        $activeAssets = Asset::with('category')
+            ->when($userId, fn($q) => $q->where('user_id', $userId))
+            ->where('status', 'active')
+            ->get();
         $activeCount = $activeAssets->count();
         $activeInvestedCents = (int) $activeAssets->sum('price_cents');
 
-        $closedAssets = Asset::with('category')->where('status', 'closed')->orderBy('closed_at')->get();
+        $closedAssets = Asset::with('category')
+            ->when($userId, fn($q) => $q->where('user_id', $userId))
+            ->where('status', 'closed')
+            ->orderBy('closed_at')
+            ->get();
         $closedCount = $closedAssets->count();
         $realized = $closedAssets->map(function (Asset $asset) {
             $profit = (int) ($asset->take_profit_cents ?? 0) - (int) ($asset->price_cents ?? 0);
