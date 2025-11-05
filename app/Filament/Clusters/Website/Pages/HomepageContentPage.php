@@ -15,6 +15,7 @@ use Filament\Pages\Page;
 use Filament\Schemas\Schema;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Components\Grid;
+use Filament\Support\Icons\Heroicon;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
@@ -25,7 +26,8 @@ class HomepageContentPage extends Page implements HasForms
 
     protected static ?string $cluster = WebsiteCluster::class;
 
-    protected static \BackedEnum|string|null $navigationIcon = 'heroicon-o-home';
+    protected static \BackedEnum|string|null $navigationIcon = Heroicon::OutlinedHome;
+    protected static \BackedEnum|string|null $activeNavigationIcon = Heroicon::Home;
 
     protected static ?string $navigationLabel = 'Homepage Text';
 

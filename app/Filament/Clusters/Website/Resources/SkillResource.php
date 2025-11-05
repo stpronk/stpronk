@@ -6,14 +6,17 @@ use App\Filament\Clusters\Website\WebsiteCluster;
 use App\Models\Skill;
 use Filament\Forms;
 use Filament\Resources\Resource;
+use Filament\Support\Icons\Heroicon;
 use Filament\Tables;
 use Filament\Tables\Table;
+use BackedEnum;
 
 class SkillResource extends Resource
 {
     protected static ?string $model = Skill::class;
 
-    protected static \BackedEnum|string|null $navigationIcon = 'heroicon-o-check-badge';
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedCheckBadge;
+    protected static string|BackedEnum|null $activeNavigationIcon = Heroicon::CheckBadge;
 
     protected static ?string $navigationLabel = 'Skills';
 

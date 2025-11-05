@@ -64,19 +64,19 @@ class AssetsDashboard extends Page
         $categoryIndexUrl = CategoryResource::getUrl();
 
         return [
-            'activeAssets' => $activeAssets,
-            'activeCount' => $activeCount,
+            'activeAssets'        => $activeAssets,
+            'activeCount'         => $activeCount,
             'activeInvestedCents' => $activeInvestedCents,
-            'closedAssets' => $closedAssets,
-            'closedCount' => $closedCount,
-            'realized' => $realized,
-            'earnedCents' => $earnedCents,
-            'lostCents' => $lostCents,
-            'netCents' => $netCents,
-            'percentEarned' => $percentEarned,
-            'assetIndexUrl' => $assetIndexUrl,
-            'assetCreateUrl' => $assetCreateUrl,
-            'categoryIndexUrl' => $categoryIndexUrl,
+            'closedAssets'        => $closedAssets,
+            'closedCount'         => $closedCount,
+            'realized'            => $realized,
+            'earnedCents'         => $earnedCents,
+            'lostCents'           => $lostCents,
+            'netCents'            => $netCents,
+            'percentEarned'       => $percentEarned,
+            'assetIndexUrl'       => $assetIndexUrl,
+            'assetCreateUrl'      => $assetCreateUrl,
+            'categoryIndexUrl'    => $categoryIndexUrl,
         ];
     }
 }

@@ -4,8 +4,10 @@ namespace App\Filament\Clusters\Website\Resources;
 
 use App\Filament\Clusters\Website\WebsiteCluster;
 use App\Models\WorkExperience;
+use BackedEnum;
 use Filament\Forms;
 use Filament\Resources\Resource;
+use Filament\Support\Icons\Heroicon;
 use Filament\Tables;
 use Filament\Tables\Table;
 
@@ -13,7 +15,8 @@ class WorkExperienceResource extends Resource
 {
     protected static ?string $model = WorkExperience::class;
 
-    protected static \BackedEnum|string|null $navigationIcon = 'heroicon-o-briefcase';
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedBriefcase;
+    protected static string|BackedEnum|null $activeNavigationIcon = Heroicon::Briefcase;
 
     protected static ?string $navigationLabel = 'Work Experiences';
 

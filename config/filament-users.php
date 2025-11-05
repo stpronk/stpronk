@@ -33,7 +33,7 @@ return [
      * ---------------------------------------------
      * The navigation icon of the resource.
      */
-    'navigation_icon' => 'heroicon-o-user',
+    'navigation_icon' => 'heroicon-o-users',
 
     /**
      * ---------------------------------------------

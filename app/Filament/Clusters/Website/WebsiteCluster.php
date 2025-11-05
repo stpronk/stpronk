@@ -13,4 +13,5 @@ class WebsiteCluster extends Cluster
     protected static ?int $navigationSort = 21;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedSquares2x2;
+    protected static string|BackedEnum|null $activeNavigationIcon = Heroicon::Squares2x2;
 }

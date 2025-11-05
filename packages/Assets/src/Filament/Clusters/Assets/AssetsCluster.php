@@ -12,4 +12,7 @@ class AssetsCluster extends Cluster
     protected static string|UnitEnum|null $navigationGroup = 'Resources';
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedCube;
+    protected static string|BackedEnum|null $activeNavigationIcon = Heroicon::Cube;
+
+    protected static ?int $navigationSort = 20;
 }
