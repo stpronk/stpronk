@@ -9,9 +9,7 @@ use UnitEnum;
 
 class AssetsCluster extends Cluster
 {
-    protected static string|UnitEnum|null $navigationGroup = 'Assets';
+    protected static string|UnitEnum|null $navigationGroup = 'Resources';
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedCube;
-
-    protected static ?int $navigationSort = 20;
 }

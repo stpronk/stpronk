@@ -13,6 +13,7 @@ class AssetsDashboard extends Page
     protected static \BackedEnum|null|string $navigationIcon = 'heroicon-o-presentation-chart-line';
 
     protected static ?string $navigationLabel = 'Dashboard';
+    protected static ?string $title = 'Dashboard';
 
     protected static ?string $cluster = AssetsCluster::class;
 

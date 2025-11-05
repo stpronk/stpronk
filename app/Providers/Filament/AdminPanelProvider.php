@@ -59,6 +59,7 @@ class AdminPanelProvider extends PanelProvider
             ->discoverClusters(in: app_path('Filament/Clusters'), for: 'App\\Filament\\Clusters')
             ->plugins([
                 \BezhanSalleh\FilamentShield\FilamentShieldPlugin::make()
+                    ->navigationSort(200)
                     ->gridColumns([
                         'default' => 1,
                         'sm' => 1,

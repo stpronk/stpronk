@@ -19,7 +19,7 @@ class AssetsPlugin implements Plugin
 
     public function register(Panel $panel): void
     {
-        // Discover clusters and resources within this package
+        // Discover clusters with resources within this package
         $panel->discoverClusters(
             in: base_path('packages/Assets/src/Filament/Clusters'),
             for: 'Stpronk\\Assets\\Filament\\Clusters'
