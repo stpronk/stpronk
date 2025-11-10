@@ -5,12 +5,11 @@ namespace Stpronk\Assets\Models;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Facades\Auth;
 
 class Asset extends Model
 {
-
-    use HasFactory;
 
     protected $table = 'assets';
 
@@ -22,6 +21,7 @@ class Asset extends Model
             'status',
             'take_profit_cents',
             'closed_at',
+            'user_id'
         ];
 
     protected $casts
@@ -31,21 +31,27 @@ class Asset extends Model
             'closed_at'         => 'datetime',
         ];
 
-    protected static function boot()
+    protected static function boot(): void
     {
         parent::boot();
+
+        static::creating(function (self $model) {
+            if (empty($model->user_id) && Auth::id()) {
+                $model->user_id = Auth::id();
+            }
+        });
 
         static::addGlobalScope('user_id', function (Builder $builder) {
             $builder->where('user_id', Auth::id());
         });
     }
 
-    public function category()
+    public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class);
     }
 
-    public function user()
+    public function user(): BelongsTo
     {
         return $this->belongsTo(\App\Models\User::class);
     }
