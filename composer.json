@@ -31,7 +31,8 @@
             "App\\": "app/",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/",
-            "Stpronk\\Assets\\": "packages/Assets/src/"
+            "Stpronk\\Assets\\": "packages/Assets/src/",
+            "Stpronk\\Todos\\": "packages/Todos/src/"
         }
     },
     "autoload-dev": {
@@ -76,7 +77,8 @@
         "laravel": {
             "dont-discover": [],
             "providers": [
-                "Stpronk\\Assets\\AssetsServiceProvider"
+                "Stpronk\\Assets\\AssetsServiceProvider",
+                "Stpronk\\Todos\\TodosServiceProvider"
             ]
         }
     },

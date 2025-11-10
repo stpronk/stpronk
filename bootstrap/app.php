@@ -12,6 +12,7 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withProviders([
         \Stpronk\Assets\AssetsServiceProvider::class,
+        \Stpronk\Todos\TodosServiceProvider::class,
     ])
     ->withMiddleware(function (Middleware $middleware): void {
         //
