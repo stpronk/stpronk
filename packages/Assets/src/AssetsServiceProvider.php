@@ -10,5 +10,13 @@ class AssetsServiceProvider extends ServiceProvider
     {
         $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
         $this->loadViewsFrom(__DIR__ . '/../resources/views', 'assets');
+
+        $this->publishes([
+            __DIR__.'/../config/filament-assets.php' => config_path('filament-assets.php'),
+        ]);
+
+        $this->mergeConfigFrom(
+            __DIR__.'/../config/filament-assets.php', 'filament-assets'
+        );
     }
 }
