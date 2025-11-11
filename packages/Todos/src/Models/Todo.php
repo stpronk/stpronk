@@ -17,6 +17,7 @@ class Todo extends Model
         'priority',
         'notes',
         'todo_category_id',
+        'due_date',
         'completed_at',
         'completed_comment',
         'user_id',
@@ -24,6 +25,7 @@ class Todo extends Model
 
     protected $casts = [
         'completed_at' => 'datetime',
+        'due_date' => 'date',
     ];
 
     protected static function boot(): void

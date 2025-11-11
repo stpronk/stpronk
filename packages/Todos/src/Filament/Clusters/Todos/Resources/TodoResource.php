@@ -44,6 +44,14 @@ class TodoResource extends Resource
                     ->default('low')
                     ->required()
                     ->native(false),
+                Forms\Components\DatePicker::make('due_date')
+                    ->label('Due date')
+                    ->native(false)
+                    ->displayFormat('Y-m-d')
+                    ->firstDayOfWeek(1)
+                    ->closeOnDateSelection()
+                    ->helperText('Optional. Year–month–day.')
+                    ->nullable(),
                 Forms\Components\Select::make('todo_category_id')
                     ->label('Category')
                     ->relationship('category', 'name')
@@ -89,6 +97,15 @@ class TodoResource extends Resource
                         'danger' => 'extreme',
                     ])
                     ->sortable(),
+                Tables\Columns\TextColumn::make('due_date')
+                    ->label('Due')
+                    ->date()
+                    ->toggleable()
+                    ->sortable(query: function (Builder $query, string $direction): Builder {
+                        return $query
+                            ->orderByRaw('(due_date IS NULL) ASC')
+                            ->orderBy('due_date', $direction);
+                    }),
                 Tables\Columns\TextColumn::make('category.name')
                     ->label('Category')
                     ->badge()
