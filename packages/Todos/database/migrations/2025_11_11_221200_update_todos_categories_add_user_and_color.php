@@ -10,7 +10,7 @@ return new class extends Migration {
     {
         Schema::table('todos_categories', function (Blueprint $table) {
             // Add columns
-            $table->string('color')->default('primary')->after('name');
+            $table->string('color')->default('Amber')->after('name');
             $table->foreignId('user_id')->nullable()->after('color')->constrained('users');
         });
 

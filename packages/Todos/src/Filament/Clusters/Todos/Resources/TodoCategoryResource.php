@@ -4,6 +4,7 @@ namespace Stpronk\Todos\Filament\Clusters\Todos\Resources;
 
 use Filament\Forms;
 use Filament\Resources\Resource;
+use Filament\Support\Colors\Color;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
@@ -40,14 +41,14 @@ class TodoCategoryResource extends Resource
                 Forms\Components\Select::make('color')
                     ->label('Badge color')
                     ->options([
-                        'primary' => 'Primary',
-                        'gray' => 'Gray',
-                        'info' => 'Info',
-                        'success' => 'Success',
-                        'warning' => 'Warning',
-                        'danger' => 'Danger',
+                        'Red' => 'Red',
+                        'Blue' => 'Blue',
+                        'Yellow' => 'Yellow',
+                        'Emerald' => 'Emerald',
+                        'Amber' => 'Amber',
+                        'Zinc' => 'Zinc',
                     ])
-                    ->default('primary')
+                    ->default('Amber')
                     ->required()
                     ->native(false),
             ])
@@ -61,7 +62,7 @@ class TodoCategoryResource extends Resource
                 Tables\Columns\TextColumn::make('name')
                     ->label('Name')
                     ->badge()
-                    ->color(fn ($state, $record) => $record->color ?? 'primary')
+                    ->color(fn ($state, $record) => Color::{$record->color ?? 'primary'})
                     ->searchable()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('open_todos_count')
