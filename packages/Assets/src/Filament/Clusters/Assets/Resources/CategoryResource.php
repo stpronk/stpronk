@@ -7,17 +7,18 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Stpronk\Assets\Filament\Clusters\Assets\AssetsCluster;
+use Stpronk\Assets\Models\AssetCategory;
 use Stpronk\Assets\Models\Category;
 
 class CategoryResource extends Resource
 {
-    protected static ?string $model = Category::class;
+    protected static ?string $model = AssetCategory::class;
 
     protected static ?string $navigationLabel = 'Categories';
 
     protected static ?string $pluralModelLabel = 'Categories';
 
-    protected static ?string $modelLabel = 'Category';
+    protected static ?string $modelLabel = 'Asset Category';
 
     protected static ?string $cluster = AssetsCluster::class;
 

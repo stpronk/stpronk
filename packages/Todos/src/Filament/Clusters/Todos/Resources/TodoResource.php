@@ -4,15 +4,12 @@ namespace Stpronk\Todos\Filament\Clusters\Todos\Resources;
 
 use Filament\Forms;
 use Filament\Resources\Resource;
-use Filament\Support\Colors\Color;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
-use Stpronk\Todos\Filament\Clusters\Todos\Resources\CompletedTodoResource\Pages\ListCompletedTodos;
-use Stpronk\Todos\Filament\Clusters\Todos\Resources\OpenTodoResource\Pages\ListOpenTodos;
 use Stpronk\Todos\Filament\Clusters\Todos\TodosCluster;
-use Stpronk\Todos\Models\Todo;
 use Stpronk\Todos\Models\Category;
+use Stpronk\Todos\Models\Todo;
 
 class TodoResource extends Resource
 {
@@ -170,6 +167,8 @@ class TodoResource extends Resource
     public static function getPages(): array
     {
         return [
+//            'index' => TodoResource\Pages\ListOpenTodos::route('/open'),
+//            'index_completed' => TodoResource\Pages\ListCompletedTodos::route('/completed'),
             'create' => TodoResource\Pages\CreateTodo::route('/create'),
             'edit' => TodoResource\Pages\EditTodo::route('/{record}/edit'),
         ];

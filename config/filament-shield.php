@@ -172,7 +172,8 @@ return [
             ],
         ],
         'exclude' => [
-            //
+            \Stpronk\Todos\Filament\Clusters\Todos\Resources\OpenTodoResource::class,
+            \Stpronk\Todos\Filament\Clusters\Todos\Resources\CompletedTodoResource::class,
         ],
     ],
 
@@ -191,7 +192,8 @@ return [
         'subject' => 'class',
         'prefix' => 'view',
         'exclude' => [
-            \Filament\Pages\Dashboard::class,
+            \App\Filament\Pages\Dashboard::class,
+            \Stpronk\Todos\Filament\Clusters\Todos\TodosCluster::class,
             \Joaopaulolndev\FilamentEditProfile\Pages\EditProfilePage::class,
         ],
     ],
@@ -213,6 +215,7 @@ return [
         'exclude' => [
             \Filament\Widgets\AccountWidget::class,
             \Filament\Widgets\FilamentInfoWidget::class,
+            \TomatoPHP\FilamentUsers\Filament\Resources\Users\UserResource::class,
         ],
     ],
 

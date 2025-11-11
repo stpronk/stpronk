@@ -2,6 +2,7 @@
 
 namespace Stpronk\Assets\Filament\Clusters\Assets\Pages;
 
+use BezhanSalleh\FilamentShield\Traits\HasPageShield;
 use Filament\Pages\Page;
 use Stpronk\Assets\Filament\Clusters\Assets\AssetsCluster;
 use Stpronk\Assets\Filament\Clusters\Assets\Resources\AssetResource;
@@ -10,10 +11,12 @@ use Stpronk\Assets\Models\Asset;
 
 class AssetsDashboard extends Page
 {
+    use HasPageShield;
+
     protected static \BackedEnum|null|string $navigationIcon = 'heroicon-o-presentation-chart-line';
 
     protected static ?string $navigationLabel = 'Dashboard';
-    protected static ?string $title = 'Dashboard';
+    protected static ?string $title = 'Asset Dashboard';
 
     protected static ?string $cluster = AssetsCluster::class;
 

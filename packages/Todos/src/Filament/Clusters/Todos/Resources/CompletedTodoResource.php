@@ -23,7 +23,7 @@ class CompletedTodoResource extends TodoResource
     public static function getPages(): array
     {
         return [
-            'index' => CompletedTodoResource\Pages\ListCompletedTodos::route('/'),
+            'index' => TodoResource\Pages\ListCompletedTodos::route('/'),
         ];
     }
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Stpronk\Todos\Filament\Clusters\Todos\Resources\OpenTodoResource\Pages;
+namespace Stpronk\Todos\Filament\Clusters\Todos\Resources\TodoResource\Pages;
 
 use Filament\Resources\Pages\ListRecords;
 use Stpronk\Todos\Filament\Clusters\Todos\Resources\OpenTodoResource;

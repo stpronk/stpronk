@@ -48,7 +48,7 @@ class Asset extends Model
 
     public function category(): BelongsTo
     {
-        return $this->belongsTo(Category::class);
+        return $this->belongsTo(AssetCategory::class);
     }
 
     public function user(): BelongsTo

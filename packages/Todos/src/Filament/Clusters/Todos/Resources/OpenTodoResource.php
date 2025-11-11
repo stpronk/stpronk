@@ -39,7 +39,7 @@ class OpenTodoResource extends TodoResource
     public static function getPages(): array
     {
         return [
-            'index' => OpenTodoResource\Pages\ListOpenTodos::route('/'),
+            'index' => TodoResource\Pages\ListOpenTodos::route('/'),
         ];
     }
 
