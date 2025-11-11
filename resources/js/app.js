@@ -1,4 +1,5 @@
 import './bootstrap';
+import '@preline/overlay'
 
 // Page-specific behavior moved from inline <script> in index.blade.php
 window.addEventListener('DOMContentLoaded', () => {

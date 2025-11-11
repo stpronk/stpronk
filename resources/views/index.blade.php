@@ -21,6 +21,7 @@
     <title>StPronk | Developer</title>
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+{{--    <script src="https://unpkg.com/@material-tailwind/html@latest/scripts/dialog.js"></script>--}}
     @livewireStyles
 </head>
 <body class="bg-white text-slate-800 dark:bg-gray-900 dark:text-slate-100 min-h-screen">
@@ -162,6 +163,8 @@
             <p id="back-to-top" class="text-sm text-gray-500 dark:text-gray-400 underline cursor-pointer">Back to top</p>
         </div>
     </footer>
+
+    <x-cookie-policy-popup />
 
     @livewireScripts
 </body>
