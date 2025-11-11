@@ -7,8 +7,9 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Validation\Rule;
 use Stpronk\Todos\Filament\Clusters\Todos\TodosCluster;
-use Stpronk\Todos\Models\Category;
+use Stpronk\Todos\Models\TodoCategory;
 use Stpronk\Todos\Models\Todo;
 
 class TodoResource extends Resource
@@ -65,11 +66,14 @@ class TodoResource extends Resource
                             ->label('Name')
                             ->required()
                             ->maxLength(120)
-                            ->unique(table: 'todos_categories', column: 'name'),
+                            ->rule(fn () => Rule::unique('todos_categories', 'name')->where('user_id', auth()->id())),
                     ])
                     ->createOptionUsing(function (array $data) {
-                        return Category::query()
-                            ->firstOrCreate(['name' => $data['name']])
+                        return TodoCategory::query()
+                            ->firstOrCreate(
+                                ['name' => $data['name'], 'user_id' => auth()->id()],
+                                ['color' => 'primary']
+                            )
                             ->getKey();
                     }),
                 Forms\Components\Textarea::make('notes')
@@ -109,6 +113,7 @@ class TodoResource extends Resource
                 Tables\Columns\TextColumn::make('category.name')
                     ->label('Category')
                     ->badge()
+                    ->color(fn ($state, $record) => $record->category?->color ?? 'gray')
                     ->toggleable(),
                 Tables\Columns\TextColumn::make('completed_at')
                     ->label('Completed')

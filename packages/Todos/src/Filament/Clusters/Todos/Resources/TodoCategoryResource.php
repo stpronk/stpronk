@@ -8,11 +8,11 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Validation\Rule;
+use Illuminate\Validation\Rules\Unique;
 use Stpronk\Todos\Filament\Clusters\Todos\TodosCluster;
-use Stpronk\Todos\Models\Category;
 use Stpronk\Todos\Models\TodoCategory;
 
-class CategoryResource extends Resource
+class TodoCategoryResource extends Resource
 {
     protected static ?string $model = TodoCategory::class;
 
@@ -34,7 +34,22 @@ class CategoryResource extends Resource
                     ->label('Name')
                     ->required()
                     ->maxLength(120)
-                    ->unique(ignoreRecord: true)
+                    ->unique(ignoreRecord: true, modifyRuleUsing: function (Unique $rule) {
+                        return $rule->where('user_id', auth()->id());
+                    }),
+                Forms\Components\Select::make('color')
+                    ->label('Badge color')
+                    ->options([
+                        'primary' => 'Primary',
+                        'gray' => 'Gray',
+                        'info' => 'Info',
+                        'success' => 'Success',
+                        'warning' => 'Warning',
+                        'danger' => 'Danger',
+                    ])
+                    ->default('primary')
+                    ->required()
+                    ->native(false),
             ])
             ->columns(1);
     }
@@ -45,8 +60,18 @@ class CategoryResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('name')
                     ->label('Name')
+                    ->badge()
+                    ->color(fn ($state, $record) => $record->color ?? 'primary')
                     ->searchable()
                     ->sortable(),
+                Tables\Columns\TextColumn::make('open_todos_count')
+                    ->counts('todos as open_todos_count', fn ($query) => $query->whereNull('completed_at'))
+                    ->label('Open')
+                    ->alignRight(),
+                Tables\Columns\TextColumn::make('completed_todos_count')
+                    ->counts('todos as completed_todos_count', fn ($query) => $query->whereNotNull('completed_at'))
+                    ->label('Completed')
+                    ->alignRight(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->label('Created')
                     ->dateTime()
@@ -80,6 +105,7 @@ class CategoryResource extends Resource
 
     public static function getEloquentQuery(): Builder
     {
-        return parent::getEloquentQuery();
+        return parent::getEloquentQuery()
+            ->where('user_id', auth()->id());
     }
 }
