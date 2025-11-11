@@ -6,11 +6,12 @@ use Filament\Forms;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Illuminate\Validation\Rule;
+use Illuminate\Validation\Rules\Unique;
 use Stpronk\Assets\Filament\Clusters\Assets\AssetsCluster;
 use Stpronk\Assets\Models\AssetCategory;
-use Stpronk\Assets\Models\Category;
 
-class CategoryResource extends Resource
+class AssetCategoryResource extends Resource
 {
     protected static ?string $model = AssetCategory::class;
 
@@ -31,10 +32,26 @@ class CategoryResource extends Resource
                 Forms\Components\TextInput::make('name')
                     ->label('Name')
                     ->required()
-                    ->unique(ignoreRecord: true)
+                    ->unique(ignoreRecord: true, modifyRuleUsing: function (Unique $rule) {
+                        return $rule->where('user_id', auth()->id());
+                    })
                     ->maxLength(255),
+                Forms\Components\Select::make('color')
+                    ->label('Badge color')
+                    ->options([
+                        'primary' => 'Primary',
+                        'gray' => 'Gray',
+                        'info' => 'Info',
+                        'success' => 'Success',
+                        'warning' => 'Warning',
+                        'danger' => 'Danger',
+                    ])
+                    ->default('primary')
+                    ->required()
+                    ->native(false)
+                ,
             ])
-            ->columns(2);
+            ->columns(1);
     }
 
     public static function table(Table $table): Table
@@ -43,6 +60,8 @@ class CategoryResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('name')
                     ->label('Name')
+                    ->badge()
+                    ->color(fn ($state, $record) => $record->color ?? 'primary')
                     ->searchable()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('assets_count')
@@ -72,5 +91,11 @@ class CategoryResource extends Resource
             'create' => CategoryResource\Pages\CreateCategory::route('/create'),
             'edit' => CategoryResource\Pages\EditCategory::route('/{record}/edit'),
         ];
+    }
+
+    public static function getEloquentQuery(): \Illuminate\Database\Eloquent\Builder
+    {
+        return parent::getEloquentQuery()
+            ->where('user_id', auth()->id());
     }
 }

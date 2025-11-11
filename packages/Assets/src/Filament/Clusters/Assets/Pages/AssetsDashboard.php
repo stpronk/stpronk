@@ -6,7 +6,7 @@ use BezhanSalleh\FilamentShield\Traits\HasPageShield;
 use Filament\Pages\Page;
 use Stpronk\Assets\Filament\Clusters\Assets\AssetsCluster;
 use Stpronk\Assets\Filament\Clusters\Assets\Resources\AssetResource;
-use Stpronk\Assets\Filament\Clusters\Assets\Resources\CategoryResource;
+use Stpronk\Assets\Filament\Clusters\Assets\Resources\AssetCategoryResource;
 use Stpronk\Assets\Models\Asset;
 
 class AssetsDashboard extends Page
@@ -64,7 +64,7 @@ class AssetsDashboard extends Page
         // Quick action URLs
         $assetIndexUrl = AssetResource::getUrl();
         $assetCreateUrl = AssetResource::getUrl('create');
-        $categoryIndexUrl = CategoryResource::getUrl();
+        $categoryIndexUrl = AssetCategoryResource::getUrl();
 
         return [
             'activeAssets'        => $activeAssets,

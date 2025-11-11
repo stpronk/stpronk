@@ -7,8 +7,10 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Validation\Rule;
 use Stpronk\Assets\Filament\Clusters\Assets\AssetsCluster;
 use Stpronk\Assets\Models\Asset;
+use Stpronk\Assets\Models\AssetCategory;
 
 class AssetResource extends Resource
 {
@@ -42,9 +44,17 @@ class AssetResource extends Resource
                         Forms\Components\TextInput::make('name')
                             ->label('Name')
                             ->required()
-                            ->unique(ignoreRecord: true)
+                            ->rule(fn () => Rule::unique('asset_categories', 'name')->where('user_id', auth()->id()))
                             ->maxLength(255),
-                    ]),
+                    ])
+                    ->createOptionUsing(function (array $data) {
+                        return AssetCategory::query()
+                            ->firstOrCreate(
+                                ['name' => $data['name'], 'user_id' => auth()->id()],
+                                ['color' => 'primary']
+                            )
+                            ->getKey();
+                    }),
                 Forms\Components\TextInput::make('price_cents')
                     ->label('Price')
                     ->required()
@@ -75,6 +85,8 @@ class AssetResource extends Resource
                     ->sortable(),
                 Tables\Columns\TextColumn::make('category.name')
                     ->label('Category')
+                    ->badge()
+                    ->color(fn ($state, $record) => $record->category?->color ?? 'gray')
                     ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('price_cents')
