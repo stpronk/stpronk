@@ -16,7 +16,7 @@ class Todo extends Model
         'title',
         'priority',
         'notes',
-        'category_id',
+        'todo_category_id',
         'completed_at',
         'completed_comment',
         'user_id',
@@ -43,7 +43,7 @@ class Todo extends Model
 
     public function category(): BelongsTo
     {
-        return $this->belongsTo(TodoCategory::class, 'category_id');
+        return $this->belongsTo(TodoCategory::class, 'todo_category_id' );
     }
 
     public function user(): BelongsTo

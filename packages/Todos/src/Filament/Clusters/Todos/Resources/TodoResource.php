@@ -44,7 +44,7 @@ class TodoResource extends Resource
                     ->default('low')
                     ->required()
                     ->native(false),
-                Forms\Components\Select::make('category_id')
+                Forms\Components\Select::make('todo_category_id')
                     ->label('Category')
                     ->relationship('category', 'name')
                     ->searchable()
@@ -102,7 +102,7 @@ class TodoResource extends Resource
                     ->sortable(),
             ])
             ->filters([
-                Tables\Filters\SelectFilter::make('category_id')
+                Tables\Filters\SelectFilter::make('todo_category_id')
                     ->label('Category')
                     ->relationship('category', 'name')
                     ->native(false),

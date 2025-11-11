@@ -16,7 +16,7 @@ class Asset extends Model
     protected $fillable
         = [
             'name',
-            'category_id',
+            'asset_category_id',
             'price_cents',
             'status',
             'take_profit_cents',
@@ -48,7 +48,7 @@ class Asset extends Model
 
     public function category(): BelongsTo
     {
-        return $this->belongsTo(AssetCategory::class);
+        return $this->belongsTo(AssetCategory::class, 'asset_category_id');
     }
 
     public function user(): BelongsTo

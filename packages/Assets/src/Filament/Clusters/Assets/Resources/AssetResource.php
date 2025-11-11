@@ -32,7 +32,7 @@ class AssetResource extends Resource
                     ->label('Name')
                     ->required()
                     ->maxLength(255),
-                Forms\Components\Select::make('category_id')
+                Forms\Components\Select::make('asset_category_id')
                     ->label('Category')
                     ->relationship('category', 'name')
                     ->searchable()

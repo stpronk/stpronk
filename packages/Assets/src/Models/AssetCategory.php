@@ -17,6 +17,6 @@ class AssetCategory extends Model
 
     public function assets(): HasMany
     {
-        return $this->hasMany(Asset::class);
+        return $this->hasMany(Asset::class, 'asset_category_id');
     }
 }

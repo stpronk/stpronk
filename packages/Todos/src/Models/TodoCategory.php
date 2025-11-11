@@ -16,6 +16,6 @@ class TodoCategory extends Model
 
     public function todos(): HasMany
     {
-        return $this->hasMany(Todo::class, 'category_id');
+        return $this->hasMany(Todo::class, 'todo_category_id');
     }
 }
