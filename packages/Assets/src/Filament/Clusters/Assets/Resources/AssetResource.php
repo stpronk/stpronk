@@ -4,6 +4,7 @@ namespace Stpronk\Assets\Filament\Clusters\Assets\Resources;
 
 use Filament\Forms;
 use Filament\Resources\Resource;
+use Filament\Support\Colors\Color;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
@@ -86,7 +87,7 @@ class AssetResource extends Resource
                 Tables\Columns\TextColumn::make('category.name')
                     ->label('Category')
                     ->badge()
-                    ->color(fn ($state, $record) => $record->category?->color ?? 'gray')
+                    ->color(fn ($state, $record) => Color::{$record->category?->color ?? 'Amber'})
                     ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('price_cents')

@@ -4,6 +4,7 @@ namespace Stpronk\Todos\Filament\Clusters\Todos\Resources;
 
 use Filament\Forms;
 use Filament\Resources\Resource;
+use Filament\Support\Colors\Color;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
@@ -113,7 +114,7 @@ class TodoResource extends Resource
                 Tables\Columns\TextColumn::make('category.name')
                     ->label('Category')
                     ->badge()
-                    ->color(fn ($state, $record) => $record->category?->color ?? 'gray')
+                    ->color(fn ($state, $record) => Color::{$record->category?->color ?? 'Amber'})
                     ->toggleable(),
                 Tables\Columns\TextColumn::make('completed_at')
                     ->label('Completed')

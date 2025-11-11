@@ -62,7 +62,7 @@ class AssetCategoryResource extends Resource
                 Tables\Columns\TextColumn::make('name')
                     ->label('Name')
                     ->badge()
-                    ->color(fn ($state, $record) => Color::{$record->color ?? 'primary'})
+                    ->color(fn ($state, $record) => Color::{$record->color ?? 'Amber'})
                     ->searchable()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('assets_count')
