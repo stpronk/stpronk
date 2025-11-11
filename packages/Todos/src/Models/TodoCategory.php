@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class TodoCategory extends Model
 {
-    protected $table = 'todos_categories';
+    protected $table = 'todo_categories';
 
     protected $fillable = [
         'name',
