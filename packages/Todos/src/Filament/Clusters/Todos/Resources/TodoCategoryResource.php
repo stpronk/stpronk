@@ -66,11 +66,11 @@ class TodoCategoryResource extends Resource
                     ->searchable()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('open_todos_count')
-                    ->counts('todos as open_todos_count', fn ($query) => $query->whereNull('completed_at'))
+                    ->counts(['todos as open_todos_count' => fn ($query) => $query->whereNull('completed_at')])
                     ->label('Open')
                     ->alignRight(),
                 Tables\Columns\TextColumn::make('completed_todos_count')
-                    ->counts('todos as completed_todos_count', fn ($query) => $query->whereNotNull('completed_at'))
+                    ->counts(['todos as completed_todos_count' => fn ($query) => $query->whereNotNull('completed_at')])
                     ->label('Completed')
                     ->alignRight(),
                 Tables\Columns\TextColumn::make('created_at')
