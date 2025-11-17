@@ -2,17 +2,21 @@
 
 namespace Stpronk\Assets\Filament\Clusters\Assets;
 
-use BackedEnum;
 use Filament\Clusters\Cluster;
-use Filament\Support\Icons\Heroicon;
-use UnitEnum;
+use Stpronk\Assets\Filament\AssetsPlugin;
+use Stpronk\Essentials\Concerns\Resource as Essentials;
 
 class AssetsCluster extends Cluster
 {
-    protected static string|UnitEnum|null $navigationGroup = 'Resources';
+    use Essentials\BelongsToParent;
+    use Essentials\BelongsToTenant;
+    use Essentials\HasNavigation;
+    use Essentials\HasLabels;
+    use Essentials\HasGlobalSearch;
+    use Essentials\DelegatesToPlugin;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedCube;
-    protected static string|BackedEnum|null $activeNavigationIcon = Heroicon::Cube;
-
-    protected static ?int $navigationSort = 21;
+    public static function getEssentialsPlugin(): ?AssetsPlugin
+    {
+        return AssetsPlugin::get();
+    }
 }

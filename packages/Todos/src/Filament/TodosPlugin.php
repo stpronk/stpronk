@@ -4,9 +4,20 @@ namespace Stpronk\Todos\Filament;
 
 use Filament\Contracts\Plugin;
 use Filament\Panel;
+use Filament\Support\Concerns\EvaluatesClosures;
+use Filament\Support\Icons\Heroicon;
+use Stpronk\Essentials\Concerns\Plugin as Essentials;
 
 class TodosPlugin implements Plugin
 {
+    use Essentials\BelongsToParent;
+    use Essentials\BelongsToTenant;
+    use Essentials\HasGlobalSearch;
+    use Essentials\HasLabels;
+    use Essentials\HasNavigation;
+    use Essentials\HasPluginDefaults;
+    use EvaluatesClosures;
+
     public static function make(): static
     {
         return new static();
@@ -29,5 +40,25 @@ class TodosPlugin implements Plugin
     public function boot(Panel $panel): void
     {
         // No boot logic required for now.
+    }
+
+    public static function get(): static
+    {
+        /** @var static $plugin */
+        $plugin = filament(app(static::class)->getId());
+
+        return $plugin;
+    }
+
+    protected function getPluginDefaults(): array
+    {
+        return [
+            'modelLabel' => 'Todo',
+            'pluralModelLabel' => 'Todos',
+            'navigationGroup' => 'Resources',
+            'navigationLabel' => 'Todos',
+            'navigationIcon' => Heroicon::OutlinedClipboardDocumentCheck,
+            'activeNavigationIcon' => Heroicon::ClipboardDocumentCheck,
+        ];
     }
 }

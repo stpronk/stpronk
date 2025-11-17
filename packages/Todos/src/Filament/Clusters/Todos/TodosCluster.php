@@ -2,20 +2,19 @@
 
 namespace Stpronk\Todos\Filament\Clusters\Todos;
 
-use BackedEnum;
 use Filament\Clusters\Cluster;
-use Filament\Support\Icons\Heroicon;
+use Stpronk\Essentials\Concerns\Resource as Essentials;
+use Stpronk\Todos\Filament\TodosPlugin;
 use Stpronk\Todos\Models\Todo;
-use UnitEnum;
 
 class TodosCluster extends Cluster
 {
-    protected static string|UnitEnum|null $navigationGroup = 'Resources';
-
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedClipboardDocumentCheck;
-    protected static string|BackedEnum|null $activeNavigationIcon = Heroicon::ClipboardDocumentCheck;
-
-    protected static ?int $navigationSort = 20  ;
+    use Essentials\BelongsToParent;
+    use Essentials\BelongsToTenant;
+    use Essentials\HasNavigation;
+    use Essentials\HasLabels;
+    use Essentials\HasGlobalSearch;
+    use Essentials\DelegatesToPlugin;
 
     public static function getNavigationBadge(): ?string
     {
@@ -28,4 +27,10 @@ class TodosCluster extends Cluster
     {
         return Todo::query()->whereNull('completed_at')->exists() ? 'primary' : null;
     }
+
+    public static function getEssentialsPlugin(): ?TodosPlugin
+    {
+        return TodosPlugin::get();
+    }
+
 }
