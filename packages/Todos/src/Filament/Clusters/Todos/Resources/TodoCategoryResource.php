@@ -17,29 +17,38 @@ class TodoCategoryResource extends Resource
 {
     protected static ?string $model = TodoCategory::class;
 
-    protected static ?string $navigationLabel = 'Categories';
-
-    protected static ?string $pluralModelLabel = 'Categories';
-
-    protected static ?string $modelLabel = 'Todo Category';
-
     protected static ?string $cluster = TodosCluster::class;
 
     protected static ?int $navigationSort = 3;
+
+    public static function getNavigationLabel(): string
+    {
+        return __('stpronk-filament-todos::category.model.navigation_label');
+    }
+
+    public static function getLabel(): string
+    {
+        return __('stpronk-filament-todos::category.model.label');
+    }
+
+    public static function getPluralLabel(): string
+    {
+        return __('stpronk-filament-todos::category.model.plural_label');
+    }
 
     public static function form(\Filament\Schemas\Schema $schema): \Filament\Schemas\Schema
     {
         return $schema
             ->schema([
                 Forms\Components\TextInput::make('name')
-                    ->label('Name')
+                    ->label(__('stpronk-filament-todos::category.form.fields.name.label'))
                     ->required()
                     ->maxLength(120)
                     ->unique(ignoreRecord: true, modifyRuleUsing: function (Unique $rule) {
                         return $rule->where('user_id', auth()->id());
                     }),
                 Forms\Components\Select::make('color')
-                    ->label('Badge color')
+                    ->label(__('stpronk-filament-todos::category.form.fields.color.label'))
                     ->options([
                         'Red' => 'Red',
                         'Blue' => 'Blue',
@@ -60,21 +69,21 @@ class TodoCategoryResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('name')
-                    ->label('Name')
+                    ->label(__('stpronk-filament-todos::category.table.columns.name.label'))
                     ->badge()
                     ->color(fn ($state, $record) => Color::{$record->color ?? 'Amber'})
                     ->searchable()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('open_todos_count')
                     ->counts(['todos as open_todos_count' => fn ($query) => $query->whereNull('completed_at')])
-                    ->label('Open')
+                    ->label(__('stpronk-filament-todos::category.table.columns.open_todos_count.label'))
                     ->alignRight(),
                 Tables\Columns\TextColumn::make('completed_todos_count')
                     ->counts(['todos as completed_todos_count' => fn ($query) => $query->whereNotNull('completed_at')])
-                    ->label('Completed')
+                    ->label(__('stpronk-filament-todos::category.table.columns.complete_todos_count.label'))
                     ->alignRight(),
                 Tables\Columns\TextColumn::make('created_at')
-                    ->label('Created')
+                    ->label(__('stpronk-filament-todos::category.table.columns.created_at.label'))
                     ->dateTime()
                     ->since()
                     ->toggleable(isToggledHiddenByDefault: true)

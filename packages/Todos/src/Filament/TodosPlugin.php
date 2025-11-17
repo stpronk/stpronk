@@ -53,10 +53,10 @@ class TodosPlugin implements Plugin
     protected function getPluginDefaults(): array
     {
         return [
-            'modelLabel' => 'Todo',
-            'pluralModelLabel' => 'Todos',
-            'navigationGroup' => 'Resources',
-            'navigationLabel' => 'Todos',
+            'modelLabel' => __('stpronk-filament-todos::todos.model.label'),
+            'pluralModelLabel' => __('stpronk-filament-todos::todos.model.plural_label'),
+            'navigationGroup' => __('stpronk-filament-todos::todos.model.navigation_group'),
+            'navigationLabel' => __('stpronk-filament-todos::todos.model.navigation_label'),
             'navigationIcon' => Heroicon::OutlinedClipboardDocumentCheck,
             'activeNavigationIcon' => Heroicon::ClipboardDocumentCheck,
         ];

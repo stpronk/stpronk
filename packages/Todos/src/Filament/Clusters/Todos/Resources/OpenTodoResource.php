@@ -10,15 +10,24 @@ class OpenTodoResource extends TodoResource
 {
     protected static ?string $model = Todo::class;
 
-    protected static ?string $navigationLabel = 'Open';
-
-    protected static ?string $pluralModelLabel = 'Open Todos';
-
-    protected static ?string $modelLabel = 'Open Todo';
-
     protected static ?string $cluster = TodosCluster::class;
 
     protected static ?int $navigationSort = 1;
+
+    public static function getNavigationLabel(): string
+    {
+        return __('stpronk-filament-todos::todos.tabs.open_todos.navigation_label');
+    }
+
+    public static function getLabel(): string
+    {
+        return __('stpronk-filament-todos::todos.tabs.open_todos.label');
+    }
+
+    public static function getPluralLabel(): string
+    {
+        return __('stpronk-filament-todos::todos.tabs.open_todos.plural_label');
+    }
 
     public static function getNavigationBadge(): ?string
     {

@@ -10,15 +10,24 @@ class CompletedTodoResource extends TodoResource
 {
     protected static ?string $model = Todo::class;
 
-    protected static ?string $navigationLabel = 'Completed';
-
-    protected static ?string $pluralModelLabel = 'Completed Todos';
-
-    protected static ?string $modelLabel = 'Completed Todo';
-
     protected static ?string $cluster = TodosCluster::class;
 
     protected static ?int $navigationSort = 2;
+
+    public static function getNavigationLabel(): string
+    {
+        return __('stpronk-filament-todos::todos.tabs.completed_todos.navigation_label');
+    }
+
+    public static function getLabel(): string
+    {
+        return __('stpronk-filament-todos::todos.tabs.completed_todos.label');
+    }
+
+    public static function getPluralLabel(): string
+    {
+        return __('stpronk-filament-todos::todos.tabs.completed_todos.plural_label');
+    }
 
     public static function getPages(): array
     {

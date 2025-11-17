@@ -53,10 +53,10 @@ class AssetsPlugin implements Plugin
     protected function getPluginDefaults(): array
     {
         return [
-            'modelLabel' => 'Asset',
-            'pluralModelLabel' => 'Assets',
-            'navigationGroup' => 'Resources',
-            'navigationLabel' => 'Assets',
+            'modelLabel' => __('stpronk-filament-assets::assets.model.label'),
+            'pluralModelLabel' => __('stpronk-filament-assets::assets.model.plural_label'),
+            'navigationGroup' => __('stpronk-filament-assets::assets.model.navigation_group'),
+            'navigationLabel' => __('stpronk-filament-assets::assets.model.navigation_label'),
             'navigationIcon' => Heroicon::OutlinedCube,
             'activeNavigationIcon' => Heroicon::Cube,
         ];

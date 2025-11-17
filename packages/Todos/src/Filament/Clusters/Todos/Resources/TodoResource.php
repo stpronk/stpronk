@@ -20,55 +20,65 @@ class TodoResource extends Resource
 {
     protected static ?string $model = Todo::class;
 
-    protected static ?string $navigationLabel = 'Todos';
-
-    protected static ?string $pluralModelLabel = 'Todos';
-
-    protected static ?string $modelLabel = 'Todo';
-
     protected static ?string $cluster = TodosCluster::class;
 
     protected static ?int $navigationSort = 1;
+
+    public static function getNavigationLabel(): string
+    {
+        return __('stpronk-filament-todos::todos.model.navigation_label');
+    }
+
+    public static function getLabel(): string
+    {
+        return __('stpronk-filament-todos::todos.model.label');
+    }
+
+    public static function getPluralLabel(): string
+    {
+        return __('stpronk-filament-todos::todos.model.plural_label');
+    }
 
     public static function form(\Filament\Schemas\Schema $schema): \Filament\Schemas\Schema
     {
         return $schema
             ->schema([
                 Forms\Components\TextInput::make('title')
-                    ->label('Title')
+                    ->label(__('stpronk-filament-todos::todos.tabs.todos.form.fields.title.label'))
                     ->required()
                     ->maxLength(255),
                 Forms\Components\Select::make('priority')
-                    ->label('Priority')
+                    ->label(__('stpronk-filament-todos::todos.tabs.todos.form.fields.priority.label'))
                     ->options([
-                        'low' => 'Low',
-                        'medium' => 'Medium',
-                        'high' => 'High',
-                        'extreme' => 'Extreme',
+                        'low' => __('stpronk-filament-todos::todos.tabs.todos.priority.low'),
+                        'medium' => __('stpronk-filament-todos::todos.tabs.todos.priority.medium'),
+                        'high' => __('stpronk-filament-todos::todos.tabs.todos.priority.high'),
+                        'extreme' => __('stpronk-filament-todos::todos.tabs.todos.priority.extreme'),
                     ])
-                    ->default('low')
+                    ->default(__('stpronk-filament-todos::todos.tabs.todos.form.fields.priority.low'))
                     ->required()
                     ->native(false),
                 Forms\Components\DatePicker::make('due_date')
-                    ->label('Due date')
+                    ->label(__('stpronk-filament-todos::todos.tabs.todos.form.fields.due_date.label'))
+                    ->placeholder(__('stpronk-filament-todos::todos.tabs.todos.form.fields.due_date.placeholder'))
                     ->native(false)
                     ->displayFormat('Y-m-d')
                     ->firstDayOfWeek(1)
                     ->closeOnDateSelection()
                     ->nullable(),
                 Forms\Components\Select::make('todo_category_id')
-                    ->label('Category')
+                    ->label(__('stpronk-filament-todos::todos.tabs.todos.form.fields.category.label'))
                     ->relationship('category', 'name')
                     ->searchable()
                     ->preload()
-                    ->placeholder('No category')
+                    ->placeholder(__('stpronk-filament-todos::todos.tabs.todos.form.fields.category.placeholder'))
                     ->native(false)
                     ->nullable()
-                    ->disabled(fn($record) => ($record->category && $record->category?->user_id !== Auth::id()))
+                    ->disabled(fn($record) => ($record?->category && $record?->category?->user_id !== Auth::id()))
                     ->options(fn() => TodoCategory::query()->where('user_id', Auth::id())->pluck('name', 'id'))
                     ->createOptionForm([
                         Forms\Components\TextInput::make('name')
-                            ->label('Name')
+                            ->label(__('stpronk-filament-todos::category.form.fields.name.label'))
                             ->required()
                             ->maxLength(120)
                             ->rule(fn () => Rule::unique('todos_categories', 'name')->where('user_id', auth()->id())),
@@ -82,13 +92,13 @@ class TodoResource extends Resource
                             ->getKey();
                     }),
                 Forms\Components\Textarea::make('notes')
-                    ->label('Notes')
+                    ->label(__('stpronk-filament-todos::todos.tabs.todos.form.fields.notes.label'))
                     ->rows(4)
                     ->columnSpanFull(),
                 Forms\Components\Textarea::make('completed_comment')
-                    ->label('Completion notes')
+                    ->label(__('stpronk-filament-todos::todos.tabs.todos.form.fields.completed_comment.label'))
                     ->rows(4)
-                    ->visible(fn($record) => $record->completed_at)
+                    ->visible(fn($record) => $record?->completed_at ?? false)
                     ->columnSpanFull(),
             ])
             ->columns(2);
@@ -99,13 +109,14 @@ class TodoResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('title')
-                    ->label('Title')
+                    ->label(__('stpronk-filament-todos::todos.tabs.todos.table.columns.title.label'))
                     ->icon(fn($record) => $record->shared_with_me ? Heroicon::Share : null)
                     ->iconColor('primary')
                     ->tooltip(fn($record) => $record->shared_with_me ? "Shared with me" : null)
                     ->searchable()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('priority')
+                    ->label(__('stpronk-filament-todos::todos.tabs.todos.table.columns.priority.label'))
                     ->badge()
                     ->colors([
                         'gray' => 'low',
@@ -113,9 +124,10 @@ class TodoResource extends Resource
                         'warning' => 'high',
                         'danger' => 'extreme',
                     ])
+                    ->formatStateUsing(fn($state) => __("stpronk-filament-todos::todos.tabs.todos.priority.{$state}"))
                     ->sortable(),
                 Tables\Columns\TextColumn::make('due_date')
-                    ->label('Due')
+                    ->label(__('stpronk-filament-todos::todos.tabs.todos.table.columns.due_date.label'))
                     ->date()
                     ->toggleable()
                     ->sortable(query: function (Builder $query, string $direction): Builder {
@@ -124,12 +136,12 @@ class TodoResource extends Resource
                             ->orderBy('due_date', $direction);
                     }),
                 Tables\Columns\TextColumn::make('category.name')
-                    ->label('Category')
+                    ->label(__('stpronk-filament-todos::category.model.label'))
                     ->badge()
                     ->color(fn ($state, $record) => Color::{$record->category?->color ?? 'Amber'})
                     ->toggleable(),
                 Tables\Columns\IconColumn::make('shareables')
-                    ->label('Shared')
+                    ->label(__('stpronk-filament-essentials::shareables.relations.past_participle'))
                     ->getStateUsing(fn($record) => $record->isShared())
                     ->boolean()
                     ->default(false)
@@ -137,12 +149,12 @@ class TodoResource extends Resource
                     ->toggleable()
                     ->toggledHiddenByDefault(),
                 Tables\Columns\TextColumn::make('user.name')
-                    ->label('Owner')
+                    ->label(__('stpronk-filament-todos::todos.tabs.todos.table.columns.owner.label'))
                     ->toggleable()
                     ->toggledHiddenByDefault()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('completed_at')
-                    ->label('Completed')
+                    ->label(__('stpronk-filament-todos::todos.tabs.todos.table.columns.completed_at.label'))
                     ->dateTime()
                     ->since()
                     ->toggleable()
@@ -151,19 +163,9 @@ class TodoResource extends Resource
             ])
             ->filters([
                 Tables\Filters\SelectFilter::make('todo_category_id')
-                    ->label('Category')
+                    ->label(__('stpronk-filament-todos::todos.tabs.todos.filters.todo_category.label'))
                     ->relationship('category', 'name')
                     ->native(false),
-                Tables\Filters\TernaryFilter::make('is_completed')
-                    ->label('Status')
-                    ->trueLabel('Completed')
-                    ->falseLabel('Open')
-                    ->placeholder('All')
-                    ->queries(
-                        true: fn ($query) => $query->whereNotNull('completed_at'),
-                        false: fn ($query) => $query->whereNull('completed_at'),
-                        blank: fn ($query) => $query,
-                    ),
             ])
             ->headerActions([
                 \Filament\Actions\CreateAction::make()
@@ -171,13 +173,13 @@ class TodoResource extends Resource
             ])
             ->recordActions([
                 \Filament\Actions\Action::make('complete')
-                    ->label('Complete')
-                    ->icon('heroicon-o-check')
+                    ->label(__('stpronk-filament-todos::todos.tabs.todos.actions.complete.label'))
+                    ->icon(__('stpronk-filament-todos::todos.tabs.todos.actions.complete.icon'))
                     ->color('success')
                     ->visible(fn (Todo $record) => is_null($record->completed_at))
                     ->schema([
                         Forms\Components\Textarea::make('completed_comment')
-                            ->label('Completion comment')
+                            ->label(__('stpronk-filament-todos::todos.tabs.todos.actions.complete.form.completed_comment.label'))
                             ->rows(3)
                             ->minLength(2)
                             ->maxLength(2000),
@@ -188,10 +190,10 @@ class TodoResource extends Resource
                             'completed_at' => now(),
                         ]);
                     })
-                    ->successNotificationTitle('Todo completed.'),
+                    ->successNotificationTitle(__('stpronk-filament-todos::todos.tabs.todos.actions.complete.success_notification.title')),
                 \Filament\Actions\Action::make('reopen')
-                    ->label('Reopen')
-                    ->icon('heroicon-o-arrow-uturn-left')
+                    ->label(__('stpronk-filament-todos::todos.tabs.todos.actions.reopen.label'))
+                    ->icon(__('stpronk-filament-todos::todos.tabs.todos.actions.reopen.icon'))
                     ->color('warning')
                     ->visible(fn (Todo $record) => ! is_null($record->completed_at))
                     ->requiresConfirmation()
@@ -201,7 +203,7 @@ class TodoResource extends Resource
                             // keep the comment for history; remove if undesired
                         ]);
                     })
-                    ->successNotificationTitle('Todo reopened.'),
+                    ->successNotificationTitle(__('stpronk-filament-todos::todos.tabs.todos.actions.reopen.success_notification.title')),
                 \Filament\Actions\EditAction::make(),
                 \Filament\Actions\DeleteAction::make(),
             ])

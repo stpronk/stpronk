@@ -16,29 +16,38 @@ class AssetCategoryResource extends Resource
 {
     protected static ?string $model = AssetCategory::class;
 
-    protected static ?string $navigationLabel = 'Categories';
-
-    protected static ?string $pluralModelLabel = 'Categories';
-
-    protected static ?string $modelLabel = 'Asset Category';
-
     protected static ?string $cluster = AssetsCluster::class;
 
     protected static ?int $navigationSort = 2;
+
+    public static function getModelLabel(): string
+    {
+        return __('stpronk-filament-assets::category.model.label');
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return __('stpronk-filament-assets::category.model.plural_label');
+    }
+
+    public static function getNavigationLabel(): string
+    {
+        return __('stpronk-filament-assets::category.model.navigation_label');
+    }
 
     public static function form(\Filament\Schemas\Schema $schema): \Filament\Schemas\Schema
     {
         return $schema
             ->schema([
                 Forms\Components\TextInput::make('name')
-                    ->label('Name')
+                    ->label(__('stpronk-filament-assets::category.form.fields.name.label'))
                     ->required()
                     ->unique(ignoreRecord: true, modifyRuleUsing: function (Unique $rule) {
                         return $rule->where('user_id', auth()->id());
                     })
                     ->maxLength(255),
                 Forms\Components\Select::make('color')
-                    ->label('Badge color')
+                    ->label(__('stpronk-filament-assets::category.form.fields.color.label'))
                     ->options([
                         'Red' => 'Red',
                         'Blue' => 'Blue',
@@ -60,14 +69,14 @@ class AssetCategoryResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('name')
-                    ->label('Name')
+                    ->label(__('stpronk-filament-assets::category.table.columns.name.label'))
                     ->badge()
                     ->color(fn ($state, $record) => Color::{$record->color ?? 'Amber'})
                     ->searchable()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('assets_count')
                     ->counts('assets')
-                    ->label('Assets')
+                    ->label(__('stpronk-filament-assets::category.table.columns.assets_count.label'))
                     ->alignRight(),
             ])
             ->filters([])

@@ -22,6 +22,16 @@ class AssetsDashboard extends Page
 
     protected string $view = 'assets::filament.assets.dashboard';
 
+    public static function getNavigationLabel(): string
+    {
+        return __('stpronk-filament-assets::dashboard.model.navigation_label');
+    }
+
+    public function getTitle(): string
+    {
+        return __('stpronk-filament-assets::dashboard.model.label');
+    }
+
     public function getStyles(): array
     {
         return [

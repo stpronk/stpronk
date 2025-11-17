@@ -17,33 +17,42 @@ class AssetResource extends Resource
 {
     protected static ?string $model = Asset::class;
 
-    protected static ?string $navigationLabel = 'Assets';
-
-    protected static ?string $pluralModelLabel = 'Assets';
-
-    protected static ?string $modelLabel = 'Asset';
-
     protected static ?string $cluster = AssetsCluster::class;
 
     protected static ?int $navigationSort = 1;
+
+    public static function getModelLabel(): string
+    {
+        return __('stpronk-filament-assets::assets.model.label');
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return __('stpronk-filament-assets::assets.model.plural_label');
+    }
+
+    public static function getNavigationLabel(): string
+    {
+        return __('stpronk-filament-assets::assets.model.navigation_label');
+    }
 
     public static function form(\Filament\Schemas\Schema $schema): \Filament\Schemas\Schema
     {
         return $schema
             ->schema([
                 Forms\Components\TextInput::make('name')
-                    ->label('Name')
+                    ->label(__('stpronk-filament-assets::assets.form.fields.name.label'))
                     ->required()
                     ->maxLength(255),
                 Forms\Components\Select::make('asset_category_id')
-                    ->label('Category')
+                    ->label(__('stpronk-filament-assets::assets.form.fields.asset_category.label'))
                     ->relationship('category', 'name')
                     ->searchable()
                     ->preload()
                     ->required()
                     ->createOptionForm([
                         Forms\Components\TextInput::make('name')
-                            ->label('Name')
+                            ->label(__('stpronk-filament-assets::category.form.fields.name.label'))
                             ->required()
                             ->rule(fn () => Rule::unique('asset_categories', 'name')->where('user_id', auth()->id()))
                             ->maxLength(255),
@@ -56,7 +65,7 @@ class AssetResource extends Resource
                             )
                             ->getKey();
                     }),
-                Forms\Components\TextInput::make('price_cents')
+                Forms\Components\TextInput::make(__('stpronk-filament-assets::assets.form.fields.asset_category.label'))
                     ->label('Price')
                     ->required()
                     ->numeric()
@@ -81,26 +90,26 @@ class AssetResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('name')
-                    ->label('Name')
+                    ->label(__('stpronk-filament-assets::assets.table.columns.name.label'))
                     ->searchable()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('category.name')
-                    ->label('Category')
+                    ->label(__('stpronk-filament-assets::category.model.label'))
                     ->badge()
                     ->color(fn ($state, $record) => Color::{$record->category?->color ?? 'Amber'})
                     ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('price_cents')
-                    ->label('Price')
+                    ->label(__('stpronk-filament-assets::assets.table.columns.price_cents.label'))
                     ->formatStateUsing(fn ($state) => '€ ' . number_format(((int) $state) / 100, 2, ',', '.'))
                     ->sortable(),
             ])
             ->filters([
                 Tables\Filters\TernaryFilter::make('status')
-                    ->label('Status')
-                    ->trueLabel('Active')
-                    ->falseLabel('Closed')
-                    ->placeholder('All')
+                    ->label(__('stpronk-filament-assets::assets.table.filters.status.label'))
+                    ->trueLabel(__('stpronk-filament-assets::assets.table.filters.status.true_label'))
+                    ->falseLabel(__('stpronk-filament-assets::assets.table.filters.status.false_label'))
+                    ->placeholder(__('stpronk-filament-assets::assets.table.filters.status.placeholder'))
                     ->queries(
                         true: fn ($query) => $query->where('status', 'active'),
                         false: fn ($query) => $query->where('status', 'closed'),
@@ -112,13 +121,13 @@ class AssetResource extends Resource
             ])
             ->recordActions([
                 \Filament\Actions\Action::make('take_profit')
-                    ->label('Take Profit')
-                    ->icon('heroicon-o-banknotes')
+                    ->label(__('stpronk-filament-assets::assets.table.actions.take_profit.label'))
+                    ->icon(__('stpronk-filament-assets::assets.table.actions.take_profit.icon'))
                     ->color('success')
                     ->visible(fn (Asset $record) => $record->status !== 'closed')
                     ->schema([
                         Forms\Components\TextInput::make('take_profit_cents')
-                            ->label('Realized Amount')
+                            ->label(__('stpronk-filament-assets::assets.table.actions.take_profit.form.fields.take_profit_cents.label'))
                             ->required()
                             ->numeric()
                             ->prefix('€')
@@ -136,7 +145,7 @@ class AssetResource extends Resource
                             'closed_at' => now(),
                         ]);
                     })
-                    ->successNotificationTitle('Profit taken.'),
+                    ->successNotificationTitle(__('stpronk-filament-assets::assets.table.actions.take_profit.success_notification.title')),
                 \Filament\Actions\EditAction::make(),
                 \Filament\Actions\DeleteAction::make(),
             ])

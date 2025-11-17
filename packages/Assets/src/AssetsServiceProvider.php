@@ -10,6 +10,7 @@ class AssetsServiceProvider extends ServiceProvider
     {
         $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
         $this->loadViewsFrom(__DIR__ . '/../resources/views', 'assets');
+        $this->loadTranslationsFrom(__DIR__ . '/../resources/lang', 'stpronk-filament-assets');
 
         $this->publishes([
             __DIR__.'/../config/filament-assets.php' => config_path('filament-assets.php'),

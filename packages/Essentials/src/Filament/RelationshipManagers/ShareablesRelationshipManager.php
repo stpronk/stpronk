@@ -21,61 +21,65 @@ class ShareablesRelationshipManager extends RelationManager
 
     public function form(Schema $schema): Schema
     {
-        return $schema->schema([
-            Select::make('shared_with')
-                ->label('Share with')
-                ->relationship('sharedWith', 'name')
-                ->searchable()
-                ->preload()
-                ->options(fn() => User::query()
-                    ->whereNot('id', $this->ownerRecord->{$this->ownerRecord->getOwnerField()})
-                    ->whereNotIn('id', Shareables::query()
-                            ->where('shareable_type', $this->ownerRecord->getMorphClass())
-                            ->where('shareable_id', $this->ownerRecord->getKey())
-                            ->pluck('shared_with')
-                    )->pluck('name', 'id'))
-                ->columnSpan(2),
-        ]);
+        return $schema
+            ->schema([
+                Select::make('shared_with')
+                    ->label(__('stpronk-filament-essentials::shareables.form.fields.shared_with.label'))
+                    ->hiddenLabel()
+                    ->relationship('sharedWith', 'name')
+                    ->searchable()
+                    ->preload()
+                    ->options(fn() => User::query()
+                        ->whereNot('id', $this->ownerRecord->{$this->ownerRecord->getOwnerField()})
+                        ->whereNotIn('id', Shareables::query()
+                                ->where('shareable_type', $this->ownerRecord->getMorphClass())
+                                ->where('shareable_id', $this->ownerRecord->getKey())
+                                ->pluck('shared_with')
+                        )->pluck('name', 'id'))
+                    ->columnSpan(2),
+            ]);
     }
 
     public function table(Table $table): Table
     {
         return $table
-            ->heading('Shared with')
+            ->heading(__('stpronk-filament-essentials::shareables.table.heading'))
             ->columnManager(false)
             ->searchable(false)
             ->paginated(false)
             ->columns([
                 Tables\Columns\TextColumn::make('sharedWith.name')
-                    ->label('Shared With')
-                    ->placeholder('-')
+                    ->label(__('stpronk-filament-essentials::shareables.table.columns.shared_with.label'))
+                    ->placeholder(__('stpronk-filament-essentials::shareables.table.columns.shared_with.placeholder'))
                     ->toggleable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('sharedBy.name')
-                    ->label('Shared By')
-                    ->placeholder('-')
+                    ->label(__('stpronk-filament-essentials::shareables.table.columns.shared_by.label'))
+                    ->placeholder(__('stpronk-filament-essentials::shareables.table.columns.shared_by.placeholder'))
                     ->toggleable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('sharedBy.email')
-                    ->label('Shared By Email')
-                    ->placeholder('-')
+                    ->label(__('stpronk-filament-essentials::shareables.table.columns.shared_by_email.label'))
+                    ->placeholder(__('stpronk-filament-essentials::shareables.table.columns.shared_by_email.placeholder'))
                     ->toggleable(isToggledHiddenByDefault: true)
                     ->searchable(),
                 Tables\Columns\TextColumn::make('shared_at')
-                    ->label('Shared At')
+                    ->label(__('stpronk-filament-essentials::shareables.table.columns.shared_at.label'))
                     ->dateTime()
                     ->sortable(),
             ])
             ->headerActions([
                 Actions\CreateAction::make()
-                    ->label('Share')
+                    ->label(__('stpronk-filament-essentials::shareables.table.actions.create.label'))
+                    ->modalHeading(__('stpronk-filament-essentials::shareables.table.actions.create.modal_heading'))
                     ->visible(fn() =>
                         $this->ownerRecord->{$this->ownerRecord->getOwnerField()} === Auth::id()
                     ),
             ])
             ->recordActions([
                 Actions\DeleteAction::make()
-                    ->label('Delete')
+                    ->label(__('stpronk-filament-essentials::shareables.table.actions.delete.label'))
+                    ->modalHeading(__('stpronk-filament-essentials::shareables.table.actions.delete.modal_heading'))
                     ->visible(fn($record) => $record->shared_by === Auth::id()),
             ]);
 
