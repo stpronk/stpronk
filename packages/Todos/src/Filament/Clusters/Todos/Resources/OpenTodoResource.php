@@ -2,10 +2,6 @@
 
 namespace Stpronk\Todos\Filament\Clusters\Todos\Resources;
 
-use Filament\Forms;
-use Filament\Resources\Resource;
-use Filament\Tables;
-use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Stpronk\Todos\Filament\Clusters\Todos\TodosCluster;
 use Stpronk\Todos\Models\Todo;
@@ -40,12 +36,17 @@ class OpenTodoResource extends TodoResource
     {
         return [
             'index' => TodoResource\Pages\ListOpenTodos::route('/'),
+            'edit' => TodoResource\Pages\EditTodo::route('/{record}/edit'),
         ];
+    }
+
+    public static function shouldRegisterNavigation(): bool
+    {
+        return true;
     }
 
     public static function getEloquentQuery(): Builder
     {
-        // Start from the base TodoResource query (which scopes to the current user)
         return parent::getEloquentQuery()
             ->whereNull('completed_at');
     }

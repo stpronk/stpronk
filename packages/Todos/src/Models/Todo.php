@@ -3,13 +3,15 @@
 namespace Stpronk\Todos\Models;
 
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Facades\Auth;
+use Stpronk\Essentials\Traits\ModelHasShareable;
 
 class Todo extends Model
 {
+    use ModelHasShareable;
+
     protected $table = 'todos';
 
     protected $fillable = [
@@ -38,8 +40,9 @@ class Todo extends Model
             }
         });
 
-        static::addGlobalScope('user_id', function (Builder $builder) {
+        static::addGlobalScope('access', function (Builder $builder) {
             $builder->where('user_id', Auth::id());
+            static::searchableGlobalScopeBuilder($builder);
         });
     }
 

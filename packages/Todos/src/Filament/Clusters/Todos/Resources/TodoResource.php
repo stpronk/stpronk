@@ -5,10 +5,13 @@ namespace Stpronk\Todos\Filament\Clusters\Todos\Resources;
 use Filament\Forms;
 use Filament\Resources\Resource;
 use Filament\Support\Colors\Color;
+use Filament\Support\Icons\Heroicon;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
+use Stpronk\Essentials\Filament\RelationshipManagers\ShareablesRelationshipManager;
 use Stpronk\Todos\Filament\Clusters\Todos\TodosCluster;
 use Stpronk\Todos\Models\TodoCategory;
 use Stpronk\Todos\Models\Todo;
@@ -52,7 +55,6 @@ class TodoResource extends Resource
                     ->displayFormat('Y-m-d')
                     ->firstDayOfWeek(1)
                     ->closeOnDateSelection()
-                    ->helperText('Optional. Year–month–day.')
                     ->nullable(),
                 Forms\Components\Select::make('todo_category_id')
                     ->label('Category')
@@ -62,6 +64,8 @@ class TodoResource extends Resource
                     ->placeholder('No category')
                     ->native(false)
                     ->nullable()
+                    ->disabled(fn($record) => ($record->category && $record->category?->user_id !== Auth::id()))
+                    ->options(fn() => TodoCategory::query()->where('user_id', Auth::id())->pluck('name', 'id'))
                     ->createOptionForm([
                         Forms\Components\TextInput::make('name')
                             ->label('Name')
@@ -81,6 +85,11 @@ class TodoResource extends Resource
                     ->label('Notes')
                     ->rows(4)
                     ->columnSpanFull(),
+                Forms\Components\Textarea::make('completed_comment')
+                    ->label('Completion notes')
+                    ->rows(4)
+                    ->visible(fn($record) => $record->completed_at)
+                    ->columnSpanFull(),
             ])
             ->columns(2);
     }
@@ -91,6 +100,9 @@ class TodoResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('title')
                     ->label('Title')
+                    ->icon(fn($record) => $record->shared_with_me ? Heroicon::Share : null)
+                    ->iconColor('primary')
+                    ->tooltip(fn($record) => $record->shared_with_me ? "Shared with me" : null)
                     ->searchable()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('priority')
@@ -116,6 +128,19 @@ class TodoResource extends Resource
                     ->badge()
                     ->color(fn ($state, $record) => Color::{$record->category?->color ?? 'Amber'})
                     ->toggleable(),
+                Tables\Columns\IconColumn::make('shareables')
+                    ->label('Shared')
+                    ->getStateUsing(fn($record) => $record->isShared())
+                    ->boolean()
+                    ->default(false)
+                    ->falseIcon(Heroicon::XMark)
+                    ->toggleable()
+                    ->toggledHiddenByDefault(),
+                Tables\Columns\TextColumn::make('user.name')
+                    ->label('Owner')
+                    ->toggleable()
+                    ->toggledHiddenByDefault()
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('completed_at')
                     ->label('Completed')
                     ->dateTime()
@@ -190,22 +215,32 @@ class TodoResource extends Resource
     public static function getPages(): array
     {
         return [
-//            'index' => TodoResource\Pages\ListOpenTodos::route('/open'),
-//            'index_completed' => TodoResource\Pages\ListCompletedTodos::route('/completed'),
+            'index' => TodoResource\Pages\ListOpenTodos::route('/'),
             'create' => TodoResource\Pages\CreateTodo::route('/create'),
             'edit' => TodoResource\Pages\EditTodo::route('/{record}/edit'),
+        ];
+    }
+
+    public static function shouldRegisterNavigation(): bool
+    {
+        return false;
+    }
+
+    public static function getRelations(): array
+    {
+        return [
+            ShareablesRelationshipManager::class,
         ];
     }
 
     public static function getEloquentQuery(): Builder
     {
         $query = parent::getEloquentQuery();
-        $userId = auth()->id();
-        if ($userId) {
-            $query->where('user_id', $userId);
-        } else {
+
+        if (!Auth::id()) {
             $query->whereRaw('1 = 0');
         }
+
         return $query;
     }
 }

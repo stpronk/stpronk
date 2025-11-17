@@ -2,7 +2,6 @@
 
 namespace Stpronk\Todos\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
@@ -27,10 +26,6 @@ class TodoCategory extends Model
             if (empty($model->color)) {
                 $model->color = 'primary';
             }
-        });
-
-        static::addGlobalScope('user_id', function (\Illuminate\Database\Eloquent\Builder $builder) {
-            $builder->where('user_id', \Illuminate\Support\Facades\Auth::id());
         });
     }
 
