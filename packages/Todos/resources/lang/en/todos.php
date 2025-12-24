@@ -39,6 +39,9 @@ return [
                     'notes' => [
                         'label' => 'Notes',
                     ],
+                    'completed_at' => [
+                        'label' => 'Completed at',
+                    ],
                     'completed_comment' => [
                         'label' => 'Completed Comment',
                     ]
@@ -80,6 +83,9 @@ return [
                     'label' => 'Complete',
                     'icon' => 'heroicon-o-check',
                     'form' => [
+                        'completed_at' => [
+                            'label' => 'Completed at',
+                        ],
                         'completed_comment' => [
                             'label' => 'Completed Comment',
                         ]

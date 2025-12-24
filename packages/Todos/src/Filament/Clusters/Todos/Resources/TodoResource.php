@@ -95,6 +95,11 @@ class TodoResource extends Resource
                     ->label(__('stpronk-filament-todos::todos.tabs.todos.form.fields.notes.label'))
                     ->rows(4)
                     ->columnSpanFull(),
+                Forms\Components\DatePicker::make('completed_at')
+                    ->label(__('stpronk-filament-todos::todos.tabs.todos.form.fields.completed_at.label'))
+                    ->visible(fn($record) => $record?->completed_at ?? false)
+                    ->required()
+                    ->native(false),
                 Forms\Components\Textarea::make('completed_comment')
                     ->label(__('stpronk-filament-todos::todos.tabs.todos.form.fields.completed_comment.label'))
                     ->rows(4)
@@ -178,16 +183,21 @@ class TodoResource extends Resource
                     ->color('success')
                     ->visible(fn (Todo $record) => is_null($record->completed_at))
                     ->schema([
+                        Forms\Components\DatePicker::make('completed_at')
+                            ->label(__('stpronk-filament-todos::todos.tabs.todos.actions.complete.form.completed_at.label'))
+                            ->default(now())
+                            ->required(),
                         Forms\Components\Textarea::make('completed_comment')
                             ->label(__('stpronk-filament-todos::todos.tabs.todos.actions.complete.form.completed_comment.label'))
                             ->rows(3)
                             ->minLength(2)
-                            ->maxLength(2000),
+                            ->maxLength(2000)
+                            ->autofocus(),
                     ])
                     ->action(function (Todo $record, array $data) {
                         $record->update([
                             'completed_comment' => $data['completed_comment'] ?? null,
-                            'completed_at' => now(),
+                            'completed_at' => $data['completed_at'],
                         ]);
                     })
                     ->successNotificationTitle(__('stpronk-filament-todos::todos.tabs.todos.actions.complete.success_notification.title')),
