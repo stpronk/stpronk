@@ -7,6 +7,7 @@ use Filament\Resources\Resource;
 use Filament\Support\Colors\Color;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Illuminate\Support\Arr;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Unique;
 use Stpronk\Assets\Filament\Clusters\Assets\AssetsCluster;
@@ -48,15 +49,12 @@ class AssetCategoryResource extends Resource
                     ->maxLength(255),
                 Forms\Components\Select::make('color')
                     ->label(__('stpronk-filament-assets::category.form.fields.color.label'))
-                    ->options([
-                        'Red' => 'Red',
-                        'Blue' => 'Blue',
-                        'Yellow' => 'Yellow',
-                        'Emerald' => 'Emerald',
-                        'Amber' => 'Amber',
-                        'Zinc' => 'Zinc',
-                    ])
-                    ->default('Amber')
+                    ->options(function() {
+                        return Arr::mapWithKeys(config('filament-stpronk-essentials.colors.options'), fn ($value) => [
+                            $value => __("stpronk-filament-essentials::options.colors.{$value}")
+                        ]);
+                    })
+                    ->default(config('filament-stpronk-essentials.colors.default'))
                     ->required()
                     ->native(false)
                 ,

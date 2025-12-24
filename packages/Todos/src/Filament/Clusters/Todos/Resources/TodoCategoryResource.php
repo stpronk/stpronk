@@ -8,6 +8,7 @@ use Filament\Support\Colors\Color;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Arr;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Unique;
 use Stpronk\Todos\Filament\Clusters\Todos\TodosCluster;
@@ -49,15 +50,12 @@ class TodoCategoryResource extends Resource
                     }),
                 Forms\Components\Select::make('color')
                     ->label(__('stpronk-filament-todos::category.form.fields.color.label'))
-                    ->options([
-                        'Red' => 'Red',
-                        'Blue' => 'Blue',
-                        'Yellow' => 'Yellow',
-                        'Emerald' => 'Emerald',
-                        'Amber' => 'Amber',
-                        'Zinc' => 'Zinc',
-                    ])
-                    ->default('Amber')
+                    ->options(function() {
+                        return Arr::mapWithKeys(config('filament-stpronk-essentials.colors.options'), fn ($value) => [
+                            $value => __("stpronk-filament-essentials::options.colors.{$value}")
+                        ]);
+                    })
+                    ->default(config('filament-stpronk-essentials.colors.default'))
                     ->required()
                     ->native(false),
             ])
