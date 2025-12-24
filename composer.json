@@ -15,7 +15,9 @@
         "laravel/tinker": "^2.10.1",
         "livewire/livewire": "^3",
         "spatie/laravel-honeypot": "^4.6",
-        "tomatophp/filament-users": "^4.0"
+        "tomatophp/filament-users": "^4.0",
+        "stpronk/filamentphp-assets": "@dev",
+        "stpronk/filamentphp-todos": "@dev"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",
@@ -30,10 +32,7 @@
         "psr-4": {
             "App\\": "app/",
             "Database\\Factories\\": "database/factories/",
-            "Database\\Seeders\\": "database/seeders/",
-            "Stpronk\\Essentials\\": "packages/Essentials/src/",
-            "Stpronk\\Assets\\": "packages/Assets/src/",
-            "Stpronk\\Todos\\": "packages/Todos/src/"
+            "Database\\Seeders\\": "database/seeders/"
         }
     },
     "autoload-dev": {
@@ -83,6 +82,13 @@
             "php-http/discovery": true
         }
     },
-    "minimum-stability": "stable",
+    "repositories": [
+        {
+            "type": "path",
+            "url": "packages/*"
+        }
+    ],
+
+    "minimum-stability": "dev",
     "prefer-stable": true
 }
