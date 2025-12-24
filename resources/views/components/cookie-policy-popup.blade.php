@@ -126,7 +126,7 @@
                 </div>
 
                 <div class="flex items-center">
-                    <button @click="openPolicy = false, openBanner = false, sessionStorage.setItem('cookies', true), setTimeout(() => (openPolicy = true, openBanner = true), 1500)" type="button" class="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-b-xl border border-transparent bg-primary text-white hover:bg-emerald-600 focus:outline-hidden focus:bg-emerald-600 disabled:opacity-50 disabled:pointer-events-none cursor-pointer transition">
+                    <button @click="openPolicy = false, openBanner = false, sessionStorage.setItem('cookies', true), setTimeout(() => (openPolicy = false, openBanner = false), 1500)" type="button" class="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-b-xl border border-transparent bg-primary text-white hover:bg-emerald-600 focus:outline-hidden focus:bg-emerald-600 disabled:opacity-50 disabled:pointer-events-none cursor-pointer transition">
                         Got it
                     </button>
                 </div>
