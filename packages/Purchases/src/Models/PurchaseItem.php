@@ -1,40 +1,47 @@
 <?php
 
-namespace Stpronk\Todos\Models;
+namespace Stpronk\Purchases\Models;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Facades\Auth;
 use Stpronk\Essentials\Traits\ModelHasShareable;
+use Stpronk\Purchases\Enums\PurchaseItemPriority;
+use Stpronk\Purchases\Enums\PurchaseItemStatus;
+use Stpronk\Todos\Models\Todo;
 
-class Todo extends Model
+class PurchaseItem extends Model
 {
     use ModelHasShareable;
 
-    protected $table = 'todos';
+    protected $table = 'purchase_items';
 
     protected $fillable = [
-        'title',
+        'name',
+        'quantity',
+        'url',
+        'price',
+        'status',
         'priority',
-        'notes',
-        'todo_category_id',
-        'due_date',
-        'completed_at',
-        'completed_comment',
         'user_id',
+        'todo_id',
+        'is_wishlist',
     ];
 
     protected $casts = [
-        'completed_at' => 'datetime',
-        'due_date' => 'date',
+        'quantity' => 'integer',
+        'status' => PurchaseItemStatus::class,
+        'priority' => PurchaseItemPriority::class,
+        'price' => 'decimal:2',
+        'is_wishlist' => 'boolean',
     ];
 
     protected static function boot(): void
     {
         parent::boot();
 
-        static::creating(function (Todo $model) {
+        static::creating(function (PurchaseItem $model) {
             if (empty($model->user_id) && Auth::id()) {
                 $model->user_id = Auth::id();
             }
@@ -44,13 +51,23 @@ class Todo extends Model
             $builder->where('user_id', Auth::id());
             static::searchableGlobalScopeBuilder($builder);
 
-            if (class_exists('Stpronk\Purchases\Models\PurchaseItem')) {
-                $builder->orWhereHas('purchaseItems', function (Builder $query) {
+            if (class_exists('Stpronk\Todos\Models\Todo')) {
+                $builder->orWhereHas('todo', function (Builder $query) {
                     $query->withoutGlobalScope('access')
                         ->whereHas('shareables', fn($builder) => $builder->where('shared_with', Auth::id()));
                 });
             }
         });
+    }
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(config('auth.providers.users.model', 'App\Models\User'));
+    }
+
+    public function todo(): BelongsTo
+    {
+        return $this->belongsTo('Stpronk\Todos\Models\Todo');
     }
 
     public function isShared(): bool
@@ -59,10 +76,8 @@ class Todo extends Model
             return true;
         }
 
-        if (class_exists('Stpronk\Purchases\Models\PurchaseItem')) {
-            if ($this->purchaseItems()->withoutGlobalScope('access')->whereHas('shareables')->exists()) {
-                return true;
-            }
+        if (class_exists('Stpronk\Todos\Models\Todo') && $this->todo_id) {
+            return $this->todo()->withoutGlobalScope('access')->whereHas('shareables')->exists();
         }
 
         return false;
@@ -74,28 +89,13 @@ class Todo extends Model
             return true;
         }
 
-        if (class_exists('Stpronk\Purchases\Models\PurchaseItem')) {
-            return $this->purchaseItems()
+        if (class_exists('Stpronk\Todos\Models\Todo') && $this->todo_id) {
+            return $this->todo()
                 ->withoutGlobalScope('access')
                 ->whereHas('shareables', fn($builder) => $builder->where('shared_with', Auth::id()))
                 ->exists();
         }
 
         return false;
-    }
-
-    public function category(): BelongsTo
-    {
-        return $this->belongsTo(TodoCategory::class, 'todo_category_id' );
-    }
-
-    public function user(): BelongsTo
-    {
-        return $this->belongsTo(config('filament-todos.user_model'));
-    }
-
-    public function purchaseItems(): \Illuminate\Database\Eloquent\Relations\HasMany
-    {
-        return $this->hasMany('Stpronk\Purchases\Models\PurchaseItem');
     }
 }

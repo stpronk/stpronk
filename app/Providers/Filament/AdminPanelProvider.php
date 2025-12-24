@@ -89,6 +89,8 @@ class AdminPanelProvider extends PanelProvider
                     ->navigationSort(20),
                 \Stpronk\Assets\Filament\AssetsPlugin::make()
                     ->navigationSort(21),
+                \Stpronk\Purchases\Filament\PurchasesPlugin::make()
+                    ->navigationSort(22),
             ]);
     }
 }

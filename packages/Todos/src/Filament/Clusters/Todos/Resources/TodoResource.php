@@ -55,7 +55,7 @@ class TodoResource extends Resource
                         'high' => __('stpronk-filament-todos::todos.tabs.todos.priority.high'),
                         'extreme' => __('stpronk-filament-todos::todos.tabs.todos.priority.extreme'),
                     ])
-                    ->default(__('stpronk-filament-todos::todos.tabs.todos.form.fields.priority.low'))
+                    ->default('low')
                     ->required()
                     ->native(false),
                 Forms\Components\DatePicker::make('due_date')
@@ -240,9 +240,15 @@ class TodoResource extends Resource
 
     public static function getRelations(): array
     {
-        return [
+        $relations = [
             ShareablesRelationshipManager::class,
         ];
+
+        if (class_exists(\Stpronk\Purchases\Filament\RelationshipManagers\PurchasesRelationshipManager::class)) {
+            $relations[] = \Stpronk\Purchases\Filament\RelationshipManagers\PurchasesRelationshipManager::class;
+        }
+
+        return $relations;
     }
 
     public static function getEloquentQuery(): Builder

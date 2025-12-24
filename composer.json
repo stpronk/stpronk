@@ -17,7 +17,8 @@
         "spatie/laravel-honeypot": "^4.6",
         "tomatophp/filament-users": "^4.0",
         "stpronk/filamentphp-assets": "@dev",
-        "stpronk/filamentphp-todos": "@dev"
+        "stpronk/filamentphp-todos": "@dev",
+        "stpronk/filamentphp-purchases": "@dev"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",

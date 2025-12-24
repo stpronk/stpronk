@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ab52af579b7824416cc1a0704a251b63",
+    "content-hash": "f2331ee75ac780c5ce214c55d5f938e8",
     "packages": [
         {
             "name": "anourvalar/eloquent-serialize",
@@ -6070,6 +6070,41 @@
             }
         },
         {
+            "name": "stpronk/filamentphp-purchases",
+            "version": "dev-main",
+            "dist": {
+                "type": "path",
+                "url": "packages/Purchases",
+                "reference": "d4b1199fb38314e9c68aa95befe14c57b105a035"
+            },
+            "require": {
+                "filament/filament": "^4.0",
+                "laravel/framework": "^12.0",
+                "php": ">=8.3",
+                "stpronk/filamentphp-essentials": "@dev"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Stpronk\\Purchases\\PurchasesServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Stpronk\\Purchases\\": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "A package for tracking items that need to be purchased.",
+            "transport-options": {
+                "relative": true
+            }
+        },
+        {
             "name": "stpronk/filamentphp-todos",
             "version": "dev-main",
             "dist": {
@@ -11459,6 +11494,7 @@
     "minimum-stability": "dev",
     "stability-flags": {
         "stpronk/filamentphp-assets": 20,
+        "stpronk/filamentphp-purchases": 20,
         "stpronk/filamentphp-todos": 20
     },
     "prefer-stable": true,
