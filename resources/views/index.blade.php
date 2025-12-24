@@ -62,7 +62,7 @@
     <section id="hero" class="py-16 md:py-24">
         <div class="container mx-auto px-6 max-w-4xl flex flex-col-reverse md:flex-row items-center">
             <div class="mt-10 md:mt-0">
-                <?php /** @var \App\Models\HomepageContent|null $content */ $content = \App\Models\HomepageContent::query()->first(); ?>
+                @php(/** @var \App\Models\HomepageContent|null $content */ $content = \App\Models\HomepageContent::query()->first())
                 <h1 class="text-4xl md:text-5xl font-bold mb-4">
                     {{ $content->hero_title }}
                 </h1>
