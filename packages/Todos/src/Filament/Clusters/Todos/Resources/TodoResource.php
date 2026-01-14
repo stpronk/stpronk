@@ -240,12 +240,14 @@ class TodoResource extends Resource
 
     public static function getRelations(): array
     {
-        $relations = [
-            ShareablesRelationshipManager::class,
-        ];
+        $relations = [];
 
         if (class_exists(\Stpronk\Purchases\Filament\RelationshipManagers\PurchasesRelationshipManager::class)) {
             $relations[] = \Stpronk\Purchases\Filament\RelationshipManagers\PurchasesRelationshipManager::class;
+        }
+
+        if (class_exists( \Stpronk\Essentials\Filament\RelationshipManagers\ShareablesRelationshipManager::class)) {
+            $relations[] = \Stpronk\Essentials\Filament\RelationshipManagers\ShareablesRelationshipManager::class;
         }
 
         return $relations;

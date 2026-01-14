@@ -32,9 +32,19 @@ class AssetsPlugin implements Plugin
     {
         // Discover clusters with resources within this package
         $panel->discoverClusters(
-            in: base_path('packages/Assets/src/Filament/Clusters'),
+            in: __DIR__ . '/Clusters',
             for: 'Stpronk\\Assets\\Filament\\Clusters'
         );
+
+//        $panel->discoverResources(
+//            in: __DIR__ . '/Clusters/Assets/Resources',
+//            for: 'Stpronk\\Assets\\Filament\\Clusters\\Assets\\Resources'
+//        );
+//
+//        $panel->discoverPages(
+//            in: __DIR__ . '/Clusters/Assets/Pages',
+//            for: 'Stpronk\\Assets\\Filament\\Clusters\\Assets\\Pages'
+//        );
     }
 
     public function boot(Panel $panel): void

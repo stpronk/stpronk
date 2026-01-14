@@ -7,13 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Facades\Auth;
 use Stpronk\Essentials\Traits\ModelHasShareable;
+use Stpronk\UrlDissector\Traits\HasUrls;
 use Stpronk\Purchases\Enums\PurchaseItemPriority;
 use Stpronk\Purchases\Enums\PurchaseItemStatus;
 use Stpronk\Todos\Models\Todo;
 
 class PurchaseItem extends Model
 {
-    use ModelHasShareable;
+    use ModelHasShareable, HasUrls;
 
     protected $table = 'purchase_items';
 
@@ -44,6 +45,12 @@ class PurchaseItem extends Model
         static::creating(function (PurchaseItem $model) {
             if (empty($model->user_id) && Auth::id()) {
                 $model->user_id = Auth::id();
+            }
+        });
+
+        static::saved(function (PurchaseItem $model) {
+            if ($model->url && ($model->wasRecentlyCreated || $model->wasChanged('url'))) {
+                app(\Stpronk\UrlDissector\Services\UrlDissectorService::class)->store($model->url, $model);
             }
         });
 

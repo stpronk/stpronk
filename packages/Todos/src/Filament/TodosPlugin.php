@@ -7,6 +7,8 @@ use Filament\Panel;
 use Filament\Support\Concerns\EvaluatesClosures;
 use Filament\Support\Icons\Heroicon;
 use Stpronk\Essentials\Concerns\Plugin as Essentials;
+use Stpronk\Todos\Filament\Clusters\Todos\Resources\TodoCategoryResource;
+use Stpronk\Todos\Filament\Clusters\Todos\Resources\TodoResource;
 
 class TodosPlugin implements Plugin
 {
@@ -32,9 +34,24 @@ class TodosPlugin implements Plugin
     {
         // Discover clusters with resources within this package
         $panel->discoverClusters(
-            in: base_path('packages/Todos/src/Filament/Clusters'),
+            in: __DIR__ . '/Clusters',
             for: 'Stpronk\\Todos\\Filament\\Clusters'
         );
+
+        $panel->resources([
+            TodoResource::class,
+            TodoCategoryResource::class,
+        ]);
+
+//        $panel->discoverResources(
+//            in: __DIR__ . '/Clusters/Todos/Resources',
+//            for: 'Stpronk\\Todos\\Filament\\Clusters\\Todos\\Resources'
+//        );
+//
+//        $panel->discoverPages(
+//            in: __DIR__ . '/Clusters/Todos/Pages',
+//            for: 'Stpronk\\Todos\\Filament\\Clusters\\Todos\\Pages'
+//        );
     }
 
     public function boot(Panel $panel): void

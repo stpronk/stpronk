@@ -18,7 +18,8 @@
         "tomatophp/filament-users": "^4.0",
         "stpronk/filamentphp-assets": "@dev",
         "stpronk/filamentphp-todos": "@dev",
-        "stpronk/filamentphp-purchases": "@dev"
+        "stpronk/filamentphp-purchases": "@dev",
+        "stpronk/url-dissector": "@dev"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",
@@ -27,6 +28,9 @@
         "laravel/sail": "^1.41",
         "mockery/mockery": "^1.6",
         "nunomaduro/collision": "^8.6",
+        "orchestra/testbench": "^10.8",
+        "pestphp/pest": "^3.0",
+        "pestphp/pest-plugin-laravel": "^3.0",
         "phpunit/phpunit": "^11.5.3"
     },
     "autoload": {
@@ -38,7 +42,8 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Tests\\": "tests/"
+            "Tests\\": "tests/",
+            "Stpronk\\UrlDissector\\Tests\\": "packages/url-dissector/tests/"
         }
     },
     "scripts": {

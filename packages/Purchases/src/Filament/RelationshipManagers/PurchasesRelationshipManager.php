@@ -3,9 +3,11 @@
 namespace Stpronk\Purchases\Filament\RelationshipManagers;
 
 use Filament\Forms;
-use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Schemas\Schema;
+use Filament\Schemas\Components\Section;
+use Filament\Schemas\Components\Actions;
+use Filament\Actions\Action;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Stpronk\Purchases\Enums\PurchaseItemPriority;
@@ -36,17 +38,17 @@ class PurchasesRelationshipManager extends RelationManager
                 Forms\Components\TextInput::make('name')
                     ->required()
                     ->maxLength(255),
-                Forms\Components\TextInput::make('quantity')
-                    ->numeric()
-                    ->default(1)
-                    ->minValue(1)
-                    ->required(),
                 Forms\Components\TextInput::make('url')
                     ->url()
                     ->maxLength(255),
                 Forms\Components\TextInput::make('price')
                     ->numeric()
                     ->prefix('€'),
+                Forms\Components\TextInput::make('quantity')
+                    ->numeric()
+                    ->default(1)
+                    ->minValue(1)
+                    ->required(),
                 Forms\Components\Select::make('status')
                     ->options(PurchaseItemStatus::class)
                     ->required()
@@ -133,6 +135,14 @@ class PurchasesRelationshipManager extends RelationManager
             ->recordActions([
                 \Filament\Actions\EditAction::make(),
                 \Filament\Actions\DeleteAction::make(),
+                \Filament\Actions\Action::make('dissect')
+                    ->label('Dissect')
+                    ->icon('heroicon-o-scissors')
+                    ->url(fn($record) => $record->urls()->latest()->first()
+                        ? \Stpronk\UrlDissector\Filament\Resources\UrlResource::getUrl('view', ['record' => $record->urls()->latest()->first()->id])
+                        : null)
+                    ->visible(fn($record) => $record->urls()->exists())
+                    ->openUrlInNewTab(),
             ])
             ->toolbarActions([
                 \Filament\Actions\BulkActionGroup::make([
