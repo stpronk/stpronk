@@ -3,8 +3,11 @@
 namespace Stpronk\Purchases\Filament\Resources;
 
 use Filament\Forms;
-use Filament\Forms\Form;
 use Filament\Resources\Resource;
+use Filament\Schemas\Schema;
+use Filament\Schemas\Components\Section;
+use Filament\Schemas\Components\Actions;
+use Filament\Actions\Action;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
@@ -31,24 +34,24 @@ class PurchaseItemResource extends Resource
         return \Stpronk\Purchases\Filament\PurchasesPlugin::get();
     }
 
-    public static function form(\Filament\Schemas\Schema $schema): \Filament\Schemas\Schema
+    public static function form(Schema $schema): Schema
     {
         return $schema
             ->schema([
                 Forms\Components\TextInput::make('name')
                     ->required()
                     ->maxLength(255),
-                Forms\Components\TextInput::make('quantity')
-                    ->numeric()
-                    ->default(1)
-                    ->minValue(1)
-                    ->required(),
                 Forms\Components\TextInput::make('url')
                     ->url()
                     ->maxLength(255),
                 Forms\Components\TextInput::make('price')
                     ->numeric()
                     ->prefix('€'),
+                Forms\Components\TextInput::make('quantity')
+                    ->numeric()
+                    ->default(1)
+                    ->minValue(1)
+                    ->required(),
                 Forms\Components\Select::make('status')
                     ->options(PurchaseItemStatus::class)
                     ->required()
