@@ -14,10 +14,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        $this->call([
-            ShieldSeeder::class,
-        ]);
-
         if (env('APP_ENV') === 'local') {
             User::create([
                 'name'     => 'Admin User',
