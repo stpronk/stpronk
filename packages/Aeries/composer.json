@@ -1,0 +1,25 @@
+{
+  "$schema": "https://getcomposer.org/schema.json",
+  "name": "stpronk/filamentphp-aeries",
+  "description": "Aeries package.",
+  "type": "library",
+  "license": "MIT",
+  "autoload": {
+    "psr-4": {
+      "Stpronk\\Aeries\\": "src/"
+    }
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Stpronk\\Aeries\\AeriesServiceProvider"
+      ]
+    }
+  },
+  "require": {
+    "php": ">=8.3",
+    "laravel/framework": "^12.0",
+    "filament/filament": "^4.0",
+    "stpronk/filamentphp-essentials": "@dev"
+  }
+}

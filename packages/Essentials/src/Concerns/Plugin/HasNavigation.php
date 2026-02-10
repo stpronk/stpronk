@@ -197,7 +197,7 @@ trait HasNavigation
         return $this->getPropertyWithDefaults('navigationBadgeColor', $resourceClass);
     }
 
-    public function getNavigationGroup(?string $resourceClass = null): ?string
+    public function getNavigationGroup(?string $resourceClass = null): Closure | null | string | UnitEnum
     {
         return $this->getPropertyWithDefaults('navigationGroup', $resourceClass);
     }
@@ -217,9 +217,9 @@ trait HasNavigation
         return $this->getPropertyWithDefaults('activeNavigationIcon', $resourceClass);
     }
 
-    public function getNavigationLabel(?string $resourceClass = null): string
+    public function getNavigationLabel(?string $resourceClass = null): Closure | null | string
     {
-        return (string) $this->getPropertyWithDefaults('navigationLabel', $resourceClass);
+        return $this->getPropertyWithDefaults('navigationLabel', $resourceClass);
     }
 
     public function getNavigationSort(?string $resourceClass = null): ?int
