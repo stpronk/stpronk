@@ -1,0 +1,181 @@
+AERIES_PRINT_PROFILE
+- id (PK)
+- aeries_goods_entity_id (FK → AERIES_GOODS_ENTITY.id)
+- aeries_print_machine_model_id (FK → AERIES_PRINT_MACHINE_MODEL.id)
+- version
+- is_active
+- parent_aeries_print_profile_id (nullable, FK to AERIES_PRINT_PROFILE.id)
+- name
+- file_path
+- file_hash
+- output_quantity
+- layer_height_mm
+- infill_percentage
+- supports_enabled
+- created_by_user_id (FK → USER.id)
+- created_at
+- updated_at
+- deleted_at
+
+AERIES_PRINT_PROFILE_PLATE
+- id (PK)
+- aeries_print_profile_id (FK → AERIES_PRINT_PROFILE.id)
+- plate_name
+- plate_number (aeries_print_profile_id, plate_number) → UNIQUE
+- estimated_print_time_minutes
+- notes
+- created_at
+- updated_at
+- deleted_at
+
+AERIES_PRINT_PROFILE_PLATE_FILAMENT
+- id (PK)
+- aeries_print_profile_plate_id (FK → AERIES_PRINT_PROFILE_PLATE.id)
+- aeries_filament_id (FK → AERIES_FILAMENT.id)
+- estimated_weight_grams
+- created_at
+- updated_at
+- deleted_at
+
+AERIES_FILAMENT
+- id (PK)
+- aeries_filament_brand_id (FK → AERIES_FILAMENT_BRAND.id)
+- aeries_filament_type_id (FK → AERIES_FILAMENT_TYPE.id)
+- aeries_filament_color_id (FK → AERIES_FILAMENT_COLOR.id)
+- created_at
+- updated_at
+
+AERIES_FILAMENT_BRAND
+- id (PK)
+- name
+- created_at
+- updated_at
+
+AERIES_FILAMENT_TYPE
+- id (PK)
+- name
+- created_at
+- updated_at
+
+AERIES_FILAMENT_COLOR
+- id (PK)
+- name
+- hex_color
+- created_at
+- updated_at
+
+AERIES_PRINT_MACHINE_MODEL
+- id (PK)
+- name
+- manufacturer
+- build_volume_x_mm
+- build_volume_y_mm
+- build_volume_z_mm
+- created_at
+- updated_at
+- deleted_at
+
+AERIES_PRINT_MACHINE
+- id (PK)
+- aeries_print_machine_model_id (FK → AERIES_PRINT_MACHINE_MODEL.id)
+- name
+- status ENUM('idle', 'printing', 'maintenance', 'offline')
+- in_service_at
+- last_maintenance_at
+- created_at
+- updated_at
+- deleted_at
+
+AERIES_PRINT_JOB
+- id (PK)
+- aeries_print_profile_id (FK → AERIES_PRINT_PROFILE.id)
+- run_quantity
+- type ENUM('request', 'stock_refill', 'decorative', 'testing', 'Personal')
+- status ENUM('draft', 'queued', 'printing', 'paused', 'completed', 'failed', 'canceled')
+- notes
+- scheduled_at
+- started_at
+- finished_at
+- created_by_user_id (FK → USER.id)
+- created_at
+- updated_at
+- deleted_at
+
+AERIES_PRINT_PLATE_JOB
+- id (PK)
+- aeries_print_job_id (FK → AERIES_PRINT_JOB.id)
+- aeries_print_profile_plate_id (FK → AERIES_PRINT_PROFILE_PLATE.id)
+- status ENUM('draft', 'queued', 'printing', 'paused', 'completed', 'failed', 'canceled')
+- started_at
+- finished_at
+- created_at
+- updated_at
+- deleted_at
+
+AERIES_PRINT_PLATE_JOB_RESULT
+- id
+- aeries_print_plate_job_id (FK → AERIES_PRINT_PLATE_JOB.id)
+- result ENUM('success', 'failed', 'canceled')
+- failure_reason
+- quantity_completed
+- quantity_failed
+- material_wasted_grams
+- notes
+- created_at
+- updated_at
+
+AERIES_PRINT_JOB_STATUS_HISTORY
+- id
+- aeries_print_job_id (FK → AERIES_PRINT_JOB.id)
+- old_status ENUM('draft', 'queued', 'printing', 'paused', 'completed', 'failed', 'canceled')
+- new_status ENUM('draft', 'queued', 'printing', 'paused', 'completed', 'failed', 'canceled')
+- new_status_notes
+- comment
+- changed_by_user_id (FK → USER.id)
+- changed_at
+- created_at
+- updated_at
+
+AERIES_PRINT_PLATE_JOB_STATUS_HISTORY
+- id
+- aeries_print_plate_job_id (FK → AERIES_PRINT_PLATE_JOB.id)
+- old_status ENUM('draft', 'queued', 'printing', 'paused', 'completed', 'failed', 'canceled')
+- new_status ENUM('draft', 'queued', 'printing', 'paused', 'completed', 'failed', 'canceled')
+- new_status_notes
+- comment
+- changed_by_user_id (FK → USER.id)
+- changed_at
+- created_at
+- updated_at
+- deleted_at
+
+AERIES_PRINT_PLATE_JOB_USES_PRINT_MACHINE
+- id
+- aeries_print_plate_job_id (FK → AERIES_PRINT_PLATE_JOB.id)
+- aeries_print_machine_id (FK → AERIES_PRINT_MACHINE.id)
+- status ENUM('assigned','printing','completed','canceled')
+- started_at
+- finished_at
+- created_at
+- updated_at
+- deleted_at
+
+AERIES_PRINT_PLATE_QUEUE
+- id (PK)
+- aeries_print_plate_job_id (FK → AERIES_PRINT_PLATE_JOB.id)
+- status ENUM('waiting', 'printing', 'paused', 'completed', 'removed')
+- queued_at
+- created_at
+- updated_at
+- deleted_at
+
+AERIES_PRINT_PLATE_QUEUE_STATUS_HISTORY
+- id (PK)
+- aeries_print_plate_queue_id (FK → AERIES_PRINT_PLATE_QUEUE.id)
+- aeries_print_plate_job_id (FK → AERIES_PRINT_PLATE_JOB.id)
+- new_status ENUM('waiting', 'printing', 'paused', 'completed', 'removed')
+- old_status ENUM('waiting', 'printing', 'paused', 'completed', 'removed')
+- queued_at
+- created_at
+- updated_at
+- deleted_at
