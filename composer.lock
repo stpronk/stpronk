@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "bd2013cf296c7230fcc7816c3f7a3d1e",
+    "content-hash": "d5a676dcebdb66cef3dac7a36b368b80",
     "packages": [
         {
             "name": "anourvalar/eloquent-serialize",
@@ -1163,7 +1163,7 @@
         },
         {
             "name": "filament/actions",
-            "version": "v5.3.0",
+            "version": "v5.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/filamentphp/actions.git",
@@ -1212,16 +1212,16 @@
         },
         {
             "name": "filament/filament",
-            "version": "v5.3.0",
+            "version": "v5.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/filamentphp/panels.git",
-                "reference": "eb404cafc48131d387c634c072f5bb441cdb9d67"
+                "reference": "412d902ab770caddbbc60c79166d8163058da471"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/filamentphp/panels/zipball/eb404cafc48131d387c634c072f5bb441cdb9d67",
-                "reference": "eb404cafc48131d387c634c072f5bb441cdb9d67",
+                "url": "https://api.github.com/repos/filamentphp/panels/zipball/412d902ab770caddbbc60c79166d8163058da471",
+                "reference": "412d902ab770caddbbc60c79166d8163058da471",
                 "shasum": ""
             },
             "require": {
@@ -1265,11 +1265,11 @@
                 "issues": "https://github.com/filamentphp/filament/issues",
                 "source": "https://github.com/filamentphp/filament"
             },
-            "time": "2026-02-28T22:52:21+00:00"
+            "time": "2026-03-03T09:26:16+00:00"
         },
         {
             "name": "filament/forms",
-            "version": "v5.3.0",
+            "version": "v5.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/filamentphp/forms.git",
@@ -1319,7 +1319,7 @@
         },
         {
             "name": "filament/infolists",
-            "version": "v5.3.0",
+            "version": "v5.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/filamentphp/infolists.git",
@@ -1364,7 +1364,7 @@
         },
         {
             "name": "filament/notifications",
-            "version": "v5.3.0",
+            "version": "v5.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/filamentphp/notifications.git",
@@ -1411,7 +1411,7 @@
         },
         {
             "name": "filament/query-builder",
-            "version": "v5.3.0",
+            "version": "v5.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/filamentphp/query-builder.git",
@@ -1457,7 +1457,7 @@
         },
         {
             "name": "filament/schemas",
-            "version": "v5.3.0",
+            "version": "v5.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/filamentphp/schemas.git",
@@ -1502,7 +1502,7 @@
         },
         {
             "name": "filament/support",
-            "version": "v5.3.0",
+            "version": "v5.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/filamentphp/support.git",
@@ -1560,7 +1560,7 @@
         },
         {
             "name": "filament/tables",
-            "version": "v5.3.0",
+            "version": "v5.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/filamentphp/tables.git",
@@ -1606,7 +1606,7 @@
         },
         {
             "name": "filament/widgets",
-            "version": "v5.3.0",
+            "version": "v5.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/filamentphp/widgets.git",
@@ -2329,20 +2329,20 @@
         },
         {
             "name": "joaopaulolndev/filament-edit-profile",
-            "version": "v3.0.1",
+            "version": "v3.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/joaopaulolndev/filament-edit-profile.git",
-                "reference": "4afc54be49d6a05fffd4e70e85f4758959514314"
+                "reference": "88f2a7e9b5cc3ac4279ded6bcbe70c2fd9a965e7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/joaopaulolndev/filament-edit-profile/zipball/4afc54be49d6a05fffd4e70e85f4758959514314",
-                "reference": "4afc54be49d6a05fffd4e70e85f4758959514314",
+                "url": "https://api.github.com/repos/joaopaulolndev/filament-edit-profile/zipball/88f2a7e9b5cc3ac4279ded6bcbe70c2fd9a965e7",
+                "reference": "88f2a7e9b5cc3ac4279ded6bcbe70c2fd9a965e7",
                 "shasum": ""
             },
             "require": {
-                "filament/filament": "^5.0",
+                "filament/filament": "^5.3",
                 "jenssegers/agent": "^2.6",
                 "php": "^8.2",
                 "spatie/laravel-package-tools": "^1.15.0"
@@ -2399,7 +2399,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-02-27T23:01:06+00:00"
+            "time": "2026-03-04T02:40:49+00:00"
         },
         {
             "name": "kirschbaum-development/eloquent-power-joins",
@@ -5942,43 +5942,8 @@
             "time": "2026-02-01T09:30:04+00:00"
         },
         {
-            "name": "stpronk/filamentphp-aeries",
-            "version": "dev-inventory-management",
-            "dist": {
-                "type": "path",
-                "url": "packages/Aeries",
-                "reference": "aadc29db69824f17039200ea8a9f25e0f53acffd"
-            },
-            "require": {
-                "filament/filament": "^5.0",
-                "laravel/framework": "^12.0",
-                "php": ">=8.4",
-                "sytatsu/filamentphp-essentials": "@dev"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Stpronk\\Aeries\\AeriesServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Stpronk\\Aeries\\": "src/"
-                }
-            },
-            "license": [
-                "MIT"
-            ],
-            "description": "Aeries package.",
-            "transport-options": {
-                "relative": true
-            }
-        },
-        {
             "name": "stpronk/filamentphp-assets",
-            "version": "dev-inventory-management",
+            "version": "dev-main",
             "dist": {
                 "type": "path",
                 "url": "packages/Assets",
@@ -6013,7 +5978,7 @@
         },
         {
             "name": "stpronk/filamentphp-purchases",
-            "version": "dev-inventory-management",
+            "version": "dev-main",
             "dist": {
                 "type": "path",
                 "url": "packages/Purchases",
@@ -6048,7 +6013,7 @@
         },
         {
             "name": "stpronk/filamentphp-todos",
-            "version": "dev-inventory-management",
+            "version": "dev-main",
             "dist": {
                 "type": "path",
                 "url": "packages/Todos",
@@ -8650,7 +8615,7 @@
             "dist": {
                 "type": "path",
                 "url": "packages/Boskos",
-                "reference": "50c8dfbeff27a7dc61682f935d400a19f5339074"
+                "reference": "e8099a0f13b1b27e4a5db679cc8506403d3fb3cb"
             },
             "require": {
                 "filament/filament": "^5.0",
@@ -8684,7 +8649,7 @@
             "dist": {
                 "type": "path",
                 "url": "packages/Essentials",
-                "reference": "3e681ec043477a43557a7342bc06b52bead9260c"
+                "reference": "09a622d5d33bc99d185b1d4a3aa943da0127e73d"
             },
             "require": {
                 "filament/filament": "^5.0",
@@ -11507,7 +11472,6 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "stpronk/filamentphp-aeries": 20,
         "stpronk/filamentphp-assets": 20,
         "stpronk/filamentphp-purchases": 20,
         "stpronk/filamentphp-todos": 20,

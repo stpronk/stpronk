@@ -91,8 +91,8 @@ class AdminPanelProvider extends PanelProvider
                     ->navigationSort(21),
                 \Stpronk\Purchases\Filament\PurchasesPlugin::make()
                     ->navigationSort(22),
-                \Stpronk\Aeries\Filament\AeriesPlugin::make()
-                    ->navigationSort(23),
+//                \Stpronk\Aeries\Filament\AeriesPlugin::make()
+//                    ->navigationSort(23),
                 \Sytatsu\Boskos\Filament\BoskosPlugin::make()
                     ->navigationSort(24),
             ]);
