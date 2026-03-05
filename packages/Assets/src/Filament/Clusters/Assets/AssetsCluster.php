@@ -4,7 +4,7 @@ namespace Stpronk\Assets\Filament\Clusters\Assets;
 
 use Filament\Clusters\Cluster;
 use Stpronk\Assets\Filament\AssetsPlugin;
-use Stpronk\Essentials\Concerns\Resource as Essentials;
+use Sytatsu\Essentials\Concerns\Resource as Essentials;
 
 class AssetsCluster extends Cluster
 {

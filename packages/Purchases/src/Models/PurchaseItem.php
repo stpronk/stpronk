@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Facades\Auth;
-use Stpronk\Essentials\Traits\ModelHasShareable;
+use Sytatsu\Essentials\Traits\ModelHasShareable;
 use Stpronk\Purchases\Enums\PurchaseItemPriority;
 use Stpronk\Purchases\Enums\PurchaseItemStatus;
 use Stpronk\Todos\Models\Todo;

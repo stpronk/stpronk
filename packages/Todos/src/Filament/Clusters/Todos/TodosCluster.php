@@ -3,7 +3,7 @@
 namespace Stpronk\Todos\Filament\Clusters\Todos;
 
 use Filament\Clusters\Cluster;
-use Stpronk\Essentials\Concerns\Resource as Essentials;
+use Sytatsu\Essentials\Concerns\Resource as Essentials;
 use Stpronk\Todos\Filament\TodosPlugin;
 use Stpronk\Todos\Models\Todo;
 

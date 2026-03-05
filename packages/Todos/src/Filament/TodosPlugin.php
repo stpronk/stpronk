@@ -6,7 +6,7 @@ use Filament\Contracts\Plugin;
 use Filament\Panel;
 use Filament\Support\Concerns\EvaluatesClosures;
 use Filament\Support\Icons\Heroicon;
-use Stpronk\Essentials\Concerns\Plugin as Essentials;
+use Sytatsu\Essentials\Concerns\Plugin as Essentials;
 
 class TodosPlugin implements Plugin
 {

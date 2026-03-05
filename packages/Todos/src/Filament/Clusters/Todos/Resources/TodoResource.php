@@ -11,7 +11,7 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
-use Stpronk\Essentials\Filament\RelationshipManagers\ShareablesRelationshipManager;
+use Sytatsu\Essentials\Filament\RelationshipManagers\ShareablesRelationshipManager;
 use Stpronk\Todos\Filament\Clusters\Todos\TodosCluster;
 use Stpronk\Todos\Models\TodoCategory;
 use Stpronk\Todos\Models\Todo;

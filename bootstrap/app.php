@@ -11,7 +11,7 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withProviders([
-        \Stpronk\Essentials\EssentialsServiceProvider::class,
+        \Sytatsu\Essentials\EssentialsServiceProvider::class,
         \Stpronk\Assets\AssetsServiceProvider::class,
         \Stpronk\Todos\TodosServiceProvider::class,
     ])
