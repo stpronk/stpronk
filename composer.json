@@ -15,7 +15,6 @@
         "laravel/tinker": "^2.10.1",
         "livewire/livewire": "^4",
         "spatie/laravel-honeypot": "^4.6",
-        "stpronk/filamentphp-aeries": "@dev",
         "stpronk/filamentphp-assets": "@dev",
         "sytatsu/filamentphp-boskos": "@dev",
         "stpronk/filamentphp-purchases": "@dev",
