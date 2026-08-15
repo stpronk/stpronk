@@ -35,8 +35,8 @@ services:
             target: nginx
         image: stpronk-nginx:latest
         restart: unless-stopped
-        ports:
-            - '${APP_PORT:-8081}:80'
+        # No published host port: the shared Caddy proxy on the `proxy`
+        # network reaches this container directly at stpronk-nginx-prod:80.
         # Same volume as php-fpm, mounted directly at the public URL path so
         # nginx serves uploads without needing the public/storage symlink to
         # resolve across containers (it can't -- separate filesystems).
