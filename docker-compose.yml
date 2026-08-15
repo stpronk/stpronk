@@ -1,0 +1,72 @@
+services:
+    nginx:
+        container_name: stpronk-nginx
+        image: nginx:alpine
+        ports:
+            - '${SAIL_APP_PORT:-80}:80'
+        volumes:
+            - "./.docker/nginx/default.conf:/etc/nginx/conf.d/default.conf"
+            - ".:/var/www/html"
+        networks:
+            - stpronk-bridge
+
+    php-fpm:
+        container_name: stpronk-php-fpm
+        build:
+            context: ./.docker/php-fpm
+            dockerfile: Dockerfile
+            args:
+                WWWGROUP: '${WWWGROUP}'
+        extra_hosts:
+            - 'host.docker.internal:host-gateway'
+        ports:
+            - '${PHP_PORT}:9000'
+            - '${SAIL_VITE_PORT:-5173}:${VITE_PORT:-5173}'
+        environment:
+            WWWUSER: '${WWWUSER}'
+            LARAVEL_SAIL: 1
+            XDEBUG_MODE: '${SAIL_XDEBUG_MODE:-off}'
+            XDEBUG_CONFIG: '${SAIL_XDEBUG_CONFIG:-client_host=host.docker.internal}'
+        volumes:
+            - '.:/var/www/html'
+            - './.docker/php-fpm/configs/php.ini:/usr/local/etc/php/php.ini'
+        networks:
+            - stpronk-bridge
+
+    mysql:
+        container_name: stpronk-mysql
+        image: 'mysql/mysql-server:8.0'
+        ports:
+            - '${SAIL_DB_PORT:-3306}:3306'
+        environment:
+            MYSQL_ROOT_PASSWORD: '${DB_PASSWORD}'
+            MYSQL_ROOT_HOST: '%'
+            MYSQL_DATABASE: '${DB_DATABASE}'
+            MYSQL_USER: '${DB_USERNAME}'
+            MYSQL_PASSWORD: '${DB_PASSWORD}'
+            MYSQL_ALLOW_EMPTY_PASSWORD: 1
+        volumes:
+            - 'data-mysql:/var/lib/mysql'
+        networks:
+            - stpronk-bridge
+        healthcheck:
+            test: 'CMD mysqladmin ping -p${DB_PASSWORD}'
+            retries: 3
+            timeout: 5s
+
+    mailpit:
+        container_name: stpronk-mailpit
+        image: 'axllent/mailpit:latest'
+        ports:
+            - '${FORWARD_MAILPIT_PORT:-1025}:1025'
+            - '${FORWARD_MAILPIT_DASHBOARD_PORT:-8025}:8025'
+        networks:
+            - stpronk-bridge
+
+networks:
+    stpronk-bridge:
+        driver: bridge
+
+volumes:
+    data-mysql:
+        driver: local
