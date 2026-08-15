@@ -85,16 +85,16 @@ class AdminPanelProvider extends PanelProvider
                     ->shouldShowEmailForm()
                     ->shouldShowDeleteAccountForm(false)
                     ->shouldShowBrowserSessionsForm(),
-                \Stpronk\Todos\Filament\TodosPlugin::make()
-                    ->navigationSort(20),
-                \Stpronk\Assets\Filament\AssetsPlugin::make()
-                    ->navigationSort(21),
-                \Stpronk\Purchases\Filament\PurchasesPlugin::make()
-                    ->navigationSort(22),
+//                \Stpronk\Todos\Filament\TodosPlugin::make()
+//                    ->navigationSort(20),
+//                \Stpronk\Assets\Filament\AssetsPlugin::make()
+//                    ->navigationSort(21),
+//                \Stpronk\Purchases\Filament\PurchasesPlugin::make()
+//                    ->navigationSort(22),
 //                \Stpronk\Aeries\Filament\AeriesPlugin::make()
 //                    ->navigationSort(23),
-                \Sytatsu\Boskos\Filament\BoskosPlugin::make()
-                    ->navigationSort(24),
+//                \Sytatsu\Boskos\Filament\BoskosPlugin::make()
+//                    ->navigationSort(24),
             ]);
     }
 }

@@ -11,9 +11,9 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withProviders([
-        \Sytatsu\Essentials\EssentialsServiceProvider::class,
-        \Stpronk\Assets\AssetsServiceProvider::class,
-        \Stpronk\Todos\TodosServiceProvider::class,
+//        \Sytatsu\Essentials\EssentialsServiceProvider::class,
+//        \Stpronk\Assets\AssetsServiceProvider::class,
+//        \Stpronk\Todos\TodosServiceProvider::class,
     ])
     ->withMiddleware(function (Middleware $middleware): void {
         //
