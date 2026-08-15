@@ -16,7 +16,13 @@ return Application::configure(basePath: dirname(__DIR__))
 //        \Stpronk\Todos\TodosServiceProvider::class,
     ])
     ->withMiddleware(function (Middleware $middleware): void {
-        //
+        // Caddy terminates TLS and forwards plain HTTP to nginx/php-fpm over
+        // the internal `proxy` docker network (see docker-compose.prod.yml) --
+        // without this, Laravel never sees the request as HTTPS and generates
+        // http:// asset/stylesheet URLs on an https:// page, which browsers
+        // block as mixed content. Trusting '*' is safe here because nginx/
+        // php-fpm publish no host ports; the proxy network is the only way in.
+        $middleware->trustProxies(at: '*');
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //
