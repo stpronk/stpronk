@@ -1,0 +1,61 @@
+# Pinned so this stack never shares a Compose project namespace with
+# docker-compose.yml (which defaults to the directory name) -- without this,
+# running both from the same directory can make Compose treat same-named
+# services here as updates to the dev containers and destroy them.
+name: stpronk-prod
+
+services:
+    php-fpm:
+        container_name: stpronk-php-fpm-prod
+        build:
+            context: .
+            dockerfile: .docker/prod/Dockerfile
+            target: php-fpm
+        image: stpronk-app:latest
+        restart: unless-stopped
+        env_file:
+            - .env.production
+        # Lets the container reach a database (or any service) running on the
+        # Docker host itself when it isn't part of this compose stack.
+        extra_hosts:
+            - 'host.docker.internal:host-gateway'
+        # FILESYSTEM_DISK=local writes here; shared with nginx below so
+        # uploads are visible without going through this container.
+        volumes:
+            - storage-app-public:/var/www/html/storage/app/public
+        networks:
+            - stpronk-prod
+            - dbnet
+
+    nginx:
+        container_name: stpronk-nginx-prod
+        build:
+            context: .
+            dockerfile: .docker/prod/Dockerfile
+            target: nginx
+        image: stpronk-nginx:latest
+        restart: unless-stopped
+        ports:
+            - '${APP_PORT:-8081}:80'
+        # Same volume as php-fpm, mounted directly at the public URL path so
+        # nginx serves uploads without needing the public/storage symlink to
+        # resolve across containers (it can't -- separate filesystems).
+        volumes:
+            - storage-app-public:/var/www/html/public/storage:ro
+        depends_on:
+            - php-fpm
+        networks:
+            - stpronk-prod
+            - proxy
+
+networks:
+    stpronk-prod:
+        driver: bridge
+    proxy:
+      external: true
+    dbnet:
+      external: true
+
+volumes:
+    storage-app-public:
+        driver: local

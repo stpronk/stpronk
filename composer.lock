@@ -11473,15 +11473,15 @@
     "minimum-stability": "dev",
     "stability-flags": {
         "stpronk/filamentphp-assets": 20,
+        "sytatsu/filamentphp-boskos": 20,
         "stpronk/filamentphp-purchases": 20,
-        "stpronk/filamentphp-todos": 20,
-        "sytatsu/filamentphp-boskos": 20
+        "stpronk/filamentphp-todos": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
         "php": "^8.4"
     },
-    "platform-dev": {},
-    "plugin-api-version": "2.9.0"
+    "platform-dev": [],
+    "plugin-api-version": "2.3.0"
 }
