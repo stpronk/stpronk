@@ -7,6 +7,7 @@ use Livewire\Component;
 use App\Models\ContactMessage;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\ContactSubmitted;
+use App\Support\ContactSpamDetector;
 use Spatie\Honeypot\Http\Livewire\Concerns\HoneypotData;
 use Spatie\Honeypot\Http\Livewire\Concerns\UsesSpamProtection;
 
@@ -32,36 +33,44 @@ class ContactForm extends Component
         $this->extraFields = new HoneypotData();
     }
 
-    /**
-     * @throws \Exception
-     */
     public function submit(): void
     {
         $this->validate();
+
+        $detector = app(ContactSpamDetector::class);
+
         try {
             $this->protectAgainstSpam();
+            $reasons = $detector->isSpam($this->name, $this->email, $this->message)
+                ? $detector->reasons($this->name, $this->email, $this->message)
+                : [];
         } catch (\Exception $exception) {
-            Log::notice('Contact form protected from spam', [
-                'name' => $this->name ?: null,
-                'email' => $this->email,
-                'message' => $this->message,
-            ]);
-            $this->sent = true;
-            $this->clear();
-            return;
+            $reasons = ['honeypot'];
         }
 
         $contact = ContactMessage::create([
             'name' => $this->name ?: null,
             'email' => $this->email,
             'message' => $this->message,
+            'is_spam' => ! empty($reasons),
+            'spam_reason' => $reasons ? implode(', ', $reasons) : null,
+            'ip_address' => request()->ip(),
+            'user_agent' => request()->userAgent(),
         ]);
 
-        $to = env('MAIL_TO_ADDRESS', config('mail.from.address'));
-        if (! empty($to)) {
-            Mail::to($to)
-                ->cc($this->email)
-                ->send((new ContactSubmitted($contact))->replyTo($this->email));
+        if ($contact->is_spam) {
+            // Pretend everything worked so bots get no signal, but don't send any mail.
+            Log::notice('Contact form spam stored without sending mail', [
+                'id' => $contact->id,
+                'reason' => $contact->spam_reason,
+            ]);
+        } else {
+            $to = env('MAIL_TO_ADDRESS', config('mail.from.address'));
+            if (! empty($to)) {
+                Mail::to($to)
+                    ->cc($this->email)
+                    ->send((new ContactSubmitted($contact))->replyTo($this->email));
+            }
         }
 
         $this->reset(['name', 'email', 'message']);
